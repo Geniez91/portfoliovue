@@ -1,0 +1,1 @@
+export type TItemNavBar = 'Qui-suis-je ?'|'Mes compétences'|'Mon parcours académique'|'Mes expériences professionnelles'|'Mes projets'|'Contact'
