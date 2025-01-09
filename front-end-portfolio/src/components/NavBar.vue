@@ -2,7 +2,7 @@
     <v-card>
       <v-tabs bg-color="white" class="d-flex flex-column align-center">
         <v-tab
-          v-for="(item, index) in itemsNavBar"
+          v-for="(item) in itemsNavBar"
           :key="item"
           :value="item"
         >

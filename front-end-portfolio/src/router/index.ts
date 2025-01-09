@@ -5,8 +5,13 @@
  */
 
 // Composables
-import { createRouter, createWebHistory } from 'vue-router/auto'
-import { routes } from 'vue-router/auto-routes'
+import Welcome from '@/components/Welcome.vue'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/auto'
+
+const routes:Array<RouteRecordRaw>=[{
+  path:'/',
+  component:Welcome,
+}]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

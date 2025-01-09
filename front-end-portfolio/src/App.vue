@@ -11,3 +11,9 @@
 import NavBar from './components/NavBar.vue';
 
 </script>
+
+<style lang="css" scoped>
+.v-application{
+  background: linear-gradient( #F5F5F5, #0E67ED);;
+}
+</style>
