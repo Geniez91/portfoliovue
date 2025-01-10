@@ -7,10 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CircleImage: typeof import('./src/components/CircleImage.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Welcome: typeof import('./src/components/Welcome.vue')['default']
+    WelcomeDescription: typeof import('./src/components/WelcomeDescription.vue')['default']
+    WelcomeLinks: typeof import('./src/components/WelcomeLinks.vue')['default']
+    WelcomePresentation: typeof import('./src/components/WelcomePresentation.vue')['default']
   }
 }

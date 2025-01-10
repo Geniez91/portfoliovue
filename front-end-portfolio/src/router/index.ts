@@ -5,7 +5,7 @@
  */
 
 // Composables
-import Welcome from '@/components/Welcome.vue'
+import Welcome from '@/pages/Welcome.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/auto'
 
 const routes:Array<RouteRecordRaw>=[{
