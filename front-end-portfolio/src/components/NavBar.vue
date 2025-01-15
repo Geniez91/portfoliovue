@@ -3,24 +3,42 @@
       <v-tabs bg-color="white" class="d-flex flex-column align-center">
         <v-tab
           v-for="(item) in itemsNavBar"
-          :key="item"
-          :value="item"
+          :key="item.name"
+          :value="item.name"
+          :to="item.to"
         >
-          {{ item }}
+          {{ item.name }}
+        
         </v-tab>
       </v-tabs>
     </v-card>
   </template>
   
   <script lang="ts" setup>
-  import type { TItemNavBar } from '@/interfaces/interfaces';
-  const itemsNavBar: TItemNavBar[] = [
-    'Qui-suis-je ?',
-    'Mes compétences',
-    'Mon parcours académique',
-    'Mes expériences professionnelles',
-    'Mes projets',
-    'Contact',
-  ];
+  import type { IItemNavBar } from '@/interfaces/interfaces';
+  const itemsNavBar: IItemNavBar[]=[{
+     name:'Qui-suis-je ?',
+     to:'/'
+  },{
+    name:'Mes compétences',
+    to:'/skills'
+  },
+  {
+    name:'Mon parcours académique',
+    to:'/'
+  },
+  {
+    name:'Mes expériences professionnelles',
+    to:"/"
+  },
+  {
+    name:'Mes projets',
+    to:'/'
+  },
+  {
+    name:'Contact',
+    to:'/'
+  }
+]
   </script>
   

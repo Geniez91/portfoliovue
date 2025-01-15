@@ -14,13 +14,14 @@
     <WelcomeLinks></WelcomeLinks>
   </div>
   <div class="d-flex flex-column align-center mt-16">
-    <v-btn v-tooltip:bottom="'Mes Compétences'" variant="text" icon="mdi-arrow-down" size="32"/>
+    <ButtonArrowTo :tooltip="'Mes Compétences'" to="/skills"></ButtonArrowTo>
   </div>
   
 </template>
 
 <script setup lang="ts">
 import ProgrammingImage from '@/assets/programming.png';
+import ButtonArrowTo from '@/components/ButtonArrowTo.vue';
 import CircleImage from '@/components/CircleImage.vue';
 import WelcomeDescription from '@/components/WelcomeDescription.vue';
 import WelcomeLinks from '@/components/WelcomeLinks.vue';

@@ -7,11 +7,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ButtonArrowTo: typeof import('./src/components/ButtonArrowTo.vue')['default']
     CircleImage: typeof import('./src/components/CircleImage.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    LanguageExperience: typeof import('./src/components/LanguageExperience.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SkillsButtonTabs: typeof import('./src/components/SkillsButtonTabs.vue')['default']
+    SkillsCard: typeof import('./src/components/SkillsCard.vue')['default']
+    SkillsExperience: typeof import('./src/components/SkillsExperience.vue')['default']
+    SoftSkills: typeof import('./src/components/SoftSkills.vue')['default']
     Welcome: typeof import('./src/components/Welcome.vue')['default']
     WelcomeDescription: typeof import('./src/components/WelcomeDescription.vue')['default']
     WelcomeLinks: typeof import('./src/components/WelcomeLinks.vue')['default']
