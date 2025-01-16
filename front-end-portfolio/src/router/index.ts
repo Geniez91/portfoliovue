@@ -5,6 +5,7 @@
  */
 
 // Composables
+import AcademicPath from '@/pages/AcademicPath.vue'
 import Skills from '@/pages/Skills.vue'
 import Welcome from '@/pages/Welcome.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/auto'
@@ -16,7 +17,11 @@ const routes:Array<RouteRecordRaw>=[{
 {
   path:'/skills',
   component:Skills
-}
+},
+{
+  path:'/academic',
+  component:AcademicPath
+},
 ]
 
 const router = createRouter({

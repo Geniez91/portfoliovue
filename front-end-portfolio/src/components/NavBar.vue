@@ -25,7 +25,7 @@
   },
   {
     name:'Mon parcours académique',
-    to:'/'
+    to:'/academic'
   },
   {
     name:'Mes expériences professionnelles',

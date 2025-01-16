@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "core-js": "^3.37.1",
+    "radix-vue": "^1.9.12",
     "roboto-fontface": "*",
     "vue": "^3.4.31",
     "vuetify": "^3.6.14"
