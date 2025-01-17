@@ -23,5 +23,22 @@ export interface ISkillsLanguage{
     TOIEC?:number
 }
 
+export interface IAcademic{
+    year:string,
+    title:string,
+    description?:string,
+    logo:any,
+    name:string,
+    website:string
+}
+
+export interface IWorkExperience{
+    period:string,
+    name:string,
+    entreprise:string,
+    description:string[],
+    stackImg:any[];
+    entrepriseImg:any;
+}
 
 

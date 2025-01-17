@@ -29,7 +29,7 @@
   },
   {
     name:'Mes expériences professionnelles',
-    to:"/"
+    to:"/workExperience"
   },
   {
     name:'Mes projets',
