@@ -33,7 +33,7 @@
   },
   {
     name:'Mes projets',
-    to:'/'
+    to:'/projects'
   },
   {
     name:'Contact',

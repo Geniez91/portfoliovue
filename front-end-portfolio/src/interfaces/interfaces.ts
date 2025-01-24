@@ -3,6 +3,7 @@ export type TSkillsExperience='VueJS'|'TypeScript'|'HTML'|'CSS'|'Javascript'|'An
 export type TSkillsShow='Développement Web'|'Base de donnees'|'Savoir être'|'Langues'
 export type TSkillsLanguage='Français'|'Anglais'
 export type TLanguageLevel='Débutant'|'Intermédiaire'|'Bi-lingue'|'Langue Maternelle'
+export type TNameStack='JavaScript'|'TypeScript'|'VueJS'|'HTML'|'CSS'|'Python'|'SKlearn'|'Pandas'|'Angular'|'Nest'|'React Native'|'React'|'PHP'|'C#'|'Go'|'Redis'|'Flutter'|'Firebase'
 
 export interface IItemNavBar{
     name:TItemNavBar,
@@ -40,5 +41,21 @@ export interface IWorkExperience{
     stackImg:any[];
     entrepriseImg:any;
 }
+
+export interface IProject{
+    name:string,
+    thumbnail:any[],
+    description: string,
+    nbCollaborator:number,
+    stackImg:IStack[];
+    linkGithub:string;
+    year:Date;
+}
+
+export interface IStack{
+    img:any,
+    name:TNameStack
+}
+
 
 

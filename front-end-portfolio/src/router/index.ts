@@ -9,6 +9,7 @@ import AcademicPath from '@/pages/AcademicPath.vue'
 import Skills from '@/pages/Skills.vue'
 import Welcome from '@/pages/Welcome.vue'
 import WorkExperience from '@/pages/WorkExperience.vue'
+import Project from '@/pages/Project.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/auto'
 
 const routes:Array<RouteRecordRaw>=[{
@@ -26,6 +27,10 @@ const routes:Array<RouteRecordRaw>=[{
 {
   path:'/workExperience',
   component:WorkExperience
+},
+{
+  path:'/projects',
+  component:Project
 }
 ]
 
