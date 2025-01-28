@@ -37,7 +37,7 @@
   },
   {
     name:'Contact',
-    to:'/'
+    to:'/contact'
   }
 ]
   </script>

@@ -11,6 +11,7 @@ import Welcome from '@/pages/Welcome.vue'
 import WorkExperience from '@/pages/WorkExperience.vue'
 import Project from '@/pages/Project.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/auto'
+import Contact from '@/pages/Contact.vue'
 
 const routes:Array<RouteRecordRaw>=[{
   path:'/',
@@ -31,6 +32,10 @@ const routes:Array<RouteRecordRaw>=[{
 {
   path:'/projects',
   component:Project
+},
+{
+  path:'/contact',
+  component:Contact
 }
 ]
 

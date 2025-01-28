@@ -12,10 +12,13 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@mdi/font": "7.4.47",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "core-js": "^3.37.1",
+    "dotenv": "^16.4.7",
+    "emailjs": "^4.0.3",
     "radix-vue": "^1.9.12",
     "roboto-fontface": "*",
     "vue": "^3.4.31",

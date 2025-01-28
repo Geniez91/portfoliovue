@@ -57,5 +57,12 @@ export interface IStack{
     name:TNameStack
 }
 
+export interface IEmailSend {
+    name:string,
+    email:string,
+    subject:string,
+    message:string,
+}
+
 
 
