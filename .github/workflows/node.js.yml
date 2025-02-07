@@ -33,5 +33,5 @@ jobs:
         working-directory: front-end-portfolio
 
       - name: Run tests
-        run: npm test -- --verbose
+        run: npm test
         working-directory: front-end-portfolio
