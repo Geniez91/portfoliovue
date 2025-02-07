@@ -35,7 +35,7 @@
                    
                     </div>
                     <div class="d-flex flex-column align-center my-2">
-                        <v-btn>En savoir plus ?</v-btn>
+                        <router-link :to="`workExperience/${experience.entreprise}`"><v-btn>En savoir plus ?</v-btn></router-link>
                     </div>
                  
                 </v-card>

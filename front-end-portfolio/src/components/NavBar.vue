@@ -6,6 +6,7 @@
           :key="item.name"
           :value="item.name"
           :to="item.to"
+          :href="item?.href"
         >
           {{ item.name }}
         
@@ -16,6 +17,7 @@
   
   <script lang="ts" setup>
   import type { IItemNavBar } from '@/interfaces/interfaces';
+  import MonCV from '../assets/CV_WELTMANN_JEREMY_2025.pdf'
   const itemsNavBar: IItemNavBar[]=[{
      name:'Qui-suis-je ?',
      to:'/'
@@ -36,9 +38,15 @@
     to:'/projects'
   },
   {
+    name:'Mon CV',
+    href:MonCV
+  },
+  {
     name:'Contact',
     to:'/contact'
-  }
+  },
+
+
 ]
   </script>
   

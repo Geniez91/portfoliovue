@@ -6,7 +6,7 @@
             autofocus
           prepend-inner-icon="mdi-magnify"
   placeholder="Nom du projet"
-  :items="projetsTitle()"
+  :items="projetsTitle(projets)"
   variant="solo"
   rounded
   clearable
@@ -18,7 +18,7 @@
             <v-chip
             v-for="tag in tagStack"
       class="ma-2"
-      @click="toggleTag(tag)"
+      @click=" selectTag = toggleTag(tag, selectTag);"
        :color="selectTag.includes(tag) ? 'secondary' : 'silver'"
       variant="flat"
 
@@ -81,7 +81,10 @@ import Facebook from '../assets/facebook-logo.jpg'
 import pointNews from '../assets/pointnews.png'
 import { computed, ref } from 'vue';
 import { ANGULAR, C, CSS, FIREBASE, FLUTTER, Go, HTML, JAVASCRIPT, NEST, PANDAS, PHP, PYTHON, REACT, REACT_NATIVE, REDIS, SKLEARN, TYPESCRIPT, VUE } from '@/constant/constant';
+import {filterProjet, getTagsFilter, getTagStack, projetsTitle, searchProjetFilter, sortProjetByYear, toggleTag} from '../services/project.service'
 
+const selectTag=ref<string[]>([])
+const nameProjet=ref<string>('')
 const projets=ref<IProject[]>([
     {
     name:'PortFolio',
@@ -205,66 +208,27 @@ const projets=ref<IProject[]>([
 ])
 
 const projetbyYear = computed(() => {
-  return filtersProjet.value.reduce((acc, projet) => {
-    const year = projet.year.getFullYear().toString();
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-    acc[year].push(projet);
-    return acc;
-  }, {} as Record<string, IProject[]>);
+  return sortProjetByYear(filtersProjet.value)
 });
 
 const tagsFilter=computed<IProject[]>(()=>{
-    if (selectTag.value.length === 0) {
-    return projets.value;
-  }
-  return projets.value.filter((projet) => 
-    projet.stackImg.some(stack => selectTag.value.includes(stack.name))
-  );
+  return getTagsFilter(selectTag.value,projets.value)
 })
 
 const searchFilter=computed<IProject[]>(()=>{
-    return projets.value.filter((projet)=>{
-        return projet.name.startsWith(nameProjet.value);
-    })
+    return searchProjetFilter(projets.value,nameProjet.value)
 })
 
 const filtersProjet=computed<IProject[]>(()=>{
-   return tagsFilter.value.filter((projet)=>searchFilter.value.includes(projet))
+   return filterProjet(tagsFilter.value,searchFilter.value)
 })
 
 const tagStack=computed<string[]>(()=>{
-    const uniqueStack=new Set<string>();
-    projets.value.map(projet=>projet.stackImg.map(stack=>uniqueStack.add(stack.name)))
-    return Array.from(uniqueStack);
+    return getTagStack(projets.value)
 })
-
-
-const selectTag=ref<string[]>([])
-const nameProjet=ref<string>('')
-
-function toggleTag(tag:string):void{
-if(selectTag.value.includes(tag))
-{
-    selectTag.value=selectTag.value.filter(t=>t!==tag);
-}
-else{
-    selectTag.value.push(tag)
-}
-}
 
 function searchNameProjet(value:string):void{
     nameProjet.value=value;
 }
-
-
-function projetsTitle():string[]{
-    return projets.value.map((projet => {
-        return projet.name;
-    }));
-}
-
-
 </script>
 

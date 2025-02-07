@@ -1,4 +1,4 @@
-export type TItemNavBar = 'Qui-suis-je ?'|'Mes compétences'|'Mon parcours académique'|'Mes expériences professionnelles'|'Mes projets'|'Contact'
+export type TItemNavBar = 'Qui-suis-je ?'|'Mes compétences'|'Mon parcours académique'|'Mes expériences professionnelles'|'Mes projets'|'Contact'|'Mon CV'
 export type TSkillsExperience='VueJS'|'TypeScript'|'HTML'|'CSS'|'Javascript'|'Angular'|'PHP'|'React'|'Node.Js'|'Nest'|'Mysql'|'PostgreSQL'|'OracleSQL'|'Modelisation Base de données (MCD/MLD)'|'UML'|'Travail en équipe'|'Collaboratif'|'Sérieux'|`A l'écoute`
 export type TSkillsShow='Développement Web'|'Base de donnees'|'Savoir être'|'Langues'
 export type TSkillsLanguage='Français'|'Anglais'
@@ -7,7 +7,8 @@ export type TNameStack='JavaScript'|'TypeScript'|'VueJS'|'HTML'|'CSS'|'Python'|'
 
 export interface IItemNavBar{
     name:TItemNavBar,
-    to:string
+    to?:string,
+    href?:string
 }
 
 export interface ISkillsExperience{

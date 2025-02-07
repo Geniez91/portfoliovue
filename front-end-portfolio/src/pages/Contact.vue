@@ -38,6 +38,7 @@ import { ref } from 'vue';
 import WelcomeLinks from '@/components/WelcomeLinks.vue';
 import type { IEmailSend } from '@/interfaces/interfaces';
 import emailjs from '@emailjs/browser';
+import {emailRules,emptyRules} from '../services/contact.service'
 
 const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -52,19 +53,10 @@ const maxCharacterSubjet=ref(75)
 const isFormValid=ref(false);
 const alertSuccess=ref(false)
 
-function emailRules(value:string):any {
-    const emailRegex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(value)||'Veuillez entrer une adresse mail valide !';
-}
 
 function subjectRules(value:string):any{
     if(value.length<=maxCharacterSubjet.value) return true
     return `L'objet d'un mail ne peux pas dépasser plus de 75 caractère`
-}
-
-function emptyRules(value:string):any{
-    if(value.length>0)return true
-    return `Le champ n'est pas complété`
 }
 
 async function sendEmail():Promise<void>{
