@@ -32,7 +32,7 @@ const Breadcrumbs = ref([
     href: '/workExperience',
   },
   {
-    title: route.params.name,
+    title:  typeof route.params.name === 'string' ? route.params.name : '',
     disabled: false,
     href: '',
   },

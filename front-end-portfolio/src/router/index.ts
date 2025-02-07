@@ -12,7 +12,7 @@ import WorkExperience from '@/pages/WorkExperience.vue'
 import Project from '@/pages/Project.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/auto'
 import Contact from '@/pages/Contact.vue'
-import ExperienceDetailCarbonscore from '@/pages/ExperienceDetailCarbonscore.vue'
+import ExperienceDetail from '@/pages/ExperienceDetail.vue'
 
 const routes:Array<RouteRecordRaw>=[{
   path:'/',
@@ -32,7 +32,7 @@ const routes:Array<RouteRecordRaw>=[{
 },
 {
   path:'/workExperience/:name',
-  component:ExperienceDetailCarbonscore
+  component:ExperienceDetail
 },
 
 
