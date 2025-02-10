@@ -1,8 +1,8 @@
 <template>
             <v-row class="mt-1">
             <v-col v-for="(expériences) in typeLanguage">
-                <div class="d-flex">
-                <div class="d-flex flex-column align-center mr-8">
+                <div class="d-flex" :class="smAndDown ?'d-flex flex-column mb-2':'d-flex'">
+                <div class="d-flex flex-column align-center mr-8" >
                 <v-img :src="expériences.srcImg" :width="150" :height="100"></v-img>
                     <p class="text-body-1 text-black font-weight-bold text-center">{{ expériences.language }}</p>
                 </div>
@@ -26,7 +26,9 @@
 
 <script lang="ts" setup>
 import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import { useDisplay } from 'vuetify';
 
+const {smAndDown}=useDisplay()
 const props = defineProps<{
   typeLanguage: ISkillsExperience[];
   withoutCard?:boolean

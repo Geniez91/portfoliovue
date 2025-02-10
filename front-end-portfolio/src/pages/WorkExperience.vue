@@ -7,7 +7,7 @@
                     <div class="mb-3">
                     <p class="text-black text-body-2" style="font-style: italic;">{{ experience.period }}</p>
                 </div>
-                <v-card color="#39B8B1" hover >
+                <v-card color="#39B8B1" hover :to="`workExperience/${experience.entreprise}`" >
                     <div class="d-flex">
                         <v-img :src="experience.entrepriseImg" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
                         <div class="d-flex flex-column justify-center ml-3">
@@ -27,11 +27,11 @@
                     <div class="ml-3 mt-2">
                         <p class="text-black text-subtitle-1" style="text-decoration: underline;">Stack Technique : </p>
                        
-                        <div class="d-flex  my-2">
-                           <div v-for="img in experience.stackImg" class="mr-4">
+                        <v-row class="my-3">
+                            <v-col md="1" sm="3" v-for="img in experience.stackImg">
                                 <v-img :src="img" style="width: 60px; height: 60px;"></v-img>
-                           </div>
-                        </div>
+                            </v-col>
+                        </v-row>
                    
                     </div>
                     <div class="d-flex flex-column align-center my-2">
@@ -63,6 +63,9 @@ import C2RMF from '../assets/C2RMF.png'
 import PHP from '../assets/php.png'
 import FruityIce from '../assets/fruityIce.png'
 import Wordpress from '../assets/wordpress.png'
+import { useDisplay } from 'vuetify';
+
+const {smAndDown}=useDisplay()
 
 const workExperience:IWorkExperience[]=[{
     period:'Octobre 2022 - Novembre 2024 (2 ans)',

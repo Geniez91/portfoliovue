@@ -53,7 +53,8 @@ onMounted(async () => {
   padding: 5px;
   margin-left: 5px;
   margin-right: 5px;
-  background-color:lightgray
+  background-color:lightgray;
+  width:fit-content
 }
 
 .col4{
@@ -66,6 +67,31 @@ onMounted(async () => {
     flex-wrap: wrap;
     flex: 1 1 auto;
     margin: -12px;
+}
+
+.bigImgDetail{
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+}
+
+.flexChip{
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .col4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .flexChip {
+   display: flex;
+   flex-direction: column;
+   padding-bottom: 10px;
+  }
 }
 
 </style>

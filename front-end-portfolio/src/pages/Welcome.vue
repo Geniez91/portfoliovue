@@ -37,6 +37,7 @@ import WelcomePresentation from '@/components/WelcomePresentation.vue';
   animation: 
     typing 3s steps(47, end) forwards,
     cursor .10s step-end  alternate;
+  /* text-wrap: auto; */
 }
 
 .text-slide-in {

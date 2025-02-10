@@ -3,8 +3,8 @@
         <div class="mt-5">
             <p class="text-h6 text-black">Mes Compétences</p>
         </div>
-        <div class="d-flex mt-3">
-            <v-btn v-for="skills in skillstabs" class="mr-3" color="white" :active="skillsShow===skills" active-color="#39B8B1"  :style="{ border: skillsShow !== skills ? '2px solid' : '' }"  @click="changeSkillsMode(skills as TSkillsShow)">{{ skills }}</v-btn>
+        <div class="mt-3" :class="smAndDown ? 'd-flex flex-column':'d-flex'">
+            <v-btn :class="smAndDown ? 'mb-3':''" v-for="skills in skillstabs" class="mr-3" color="white" :active="skillsShow===skills" active-color="#39B8B1"  :style="{ border: skillsShow !== skills ? '2px solid' : '' }"  @click="changeSkillsMode(skills as TSkillsShow)">{{ skills }}</v-btn>
         </div>
      </div>
      <div v-if="skillsShow==='Développement Web'">
@@ -18,7 +18,7 @@
       
         <div class="mt-5 ml-3">
         <p class="text-h6 text-black">Développement Back-end</p>
-        <div class="d-flex" style="width: fit-content;">
+        <div class="d-flex mb-5" style="width: fit-content;">
             <SkillsCard :type-language="backLanguageExperience"></SkillsCard>
     </div>
      </div>
@@ -26,14 +26,14 @@
     <div class="mt-5" v-if="skillsShow==='Base de donnees'">
         <div class="ml-3">
         <p class="text-h6 text-black">Base de données</p>
-        <div class="d-flex" style="width: fit-content;">
+        <div class="d-flex mb-5" style="width: fit-content;">
             <SkillsCard :type-language="bddLanguageExperience"></SkillsCard>
     </div>
     </div>
     <v-divider class="border-opacity-75 mt-12" color="black"></v-divider>
     <div class="ml-3 mt-5">
         <p class="text-h6 text-black">Modélisation</p>
-        <div class="d-flex" style="width: fit-content;">
+        <div class="d-flex mb-5" style="width: fit-content;">
         <SkillsCard :type-language="modelisationExperience"></SkillsCard>
     </div>
     </div>
@@ -41,7 +41,7 @@
     <div v-if="skillsShow==='Savoir être'">
         <div class="ml-3 mt-5">
         <p class="text-h6 text-black">Soft Skills</p>
-        <div class="d-flex" style="width: fit-content;">
+        <div class="d-flex mb-5" style="width: fit-content;">
             <SkillsCard :type-language="softSkillsExperience" :without-card="true"></SkillsCard>
     </div>
     </div>
@@ -84,6 +84,9 @@ import {  ref } from 'vue'
 import SkillsCard from '@/components/SkillsCard.vue'
 import LanguageExperience from '@/components/LanguageExperience.vue'
 import ButtonArrowTo from '@/components/ButtonArrowTo.vue'
+import { useDisplay } from 'vuetify'
+
+const {smAndDown}= useDisplay()
 
 const skillsShow=ref<TSkillsShow>('Développement Web')
 

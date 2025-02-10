@@ -1,5 +1,5 @@
 <template>
-            <div class="d-flex">
+            <div class="mb-3" :class="smAndDown ? 'd-flex flex-column':'d-flex'">
             <div v-for="(expériences) in languageExperience" class="mt-4">
                 <div class="d-flex">
                 <div class="d-flex flex-column align-center mr-8">
@@ -22,6 +22,9 @@
 
 <script lang="ts" setup>
 import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import { useDisplay } from 'vuetify';
+
+const {smAndDown}=useDisplay()
 
 const props = defineProps<{
 languageExperience: ISkillsLanguage[];

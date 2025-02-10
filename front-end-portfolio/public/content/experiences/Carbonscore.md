@@ -30,25 +30,19 @@
 <div class="d-flex flex-column align-center mt-3" id="Contexte">
         <p class="text-h6 text-black font-weight-bold">Contexte</p>
         <div class="mt-6">
-          <img src="../../src/assets/impactenvironnemental.jpg" width="800"></v-img>
+          <img src="../../src/assets/impactenvironnemental.jpg" class="bigImgDetail"></v-img>
         </div>
         <p class="my-6 text-black text-body-1 text-center">TechupClimate est une entreprise spécialisée dans une solution logicielle qui se nomme « CarbonScore » dont l’objectif est de sensibiliser les collaborateurs des entreprises sur l’impact environnemental du numérique. Cette solution vise à leur faire prendre conscience que leurs usages du numérique peuvent entraîner des répercussions sur notre planète.</p>
         <div>
         <a href='../../src/assets/dashboardrefonte.png' target='_blank'>
-          <img src="../../src/assets/dashboardrefonte.png" width="800"></v-img>
+          <img src="../../src/assets/dashboardrefonte.png" class="bigImgDetail"></v-img>
         </a>
         </div>
         <p class="text-center text-black text-body-1 my-6">La solution logicielle CarbonScore permet aux collaborateurs des entreprises d’obtenir un indicateur, le « CarbonScore » qui évalue si leur performance en termes de consommation numérique est respectueuse de l’environnement ou non.
 Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mises en place, telles que des suggestions, des quizz, ainsi qu’un système de badges pour récompenser les utilisateurs qui prennent conscience de leur impact et le réduisent. Un très grand nombre de statistiques sur les usages numériques du quotidien a également été mis en place sous la forme d’un tableau de bord, permettant de déterminer quelles utilisations numériques doivent être réduites.
 </p>
       </div>
-
-
-
 <hr class='my-2'>
-
-
-
 <div class="d-flex flex-column align-center my-5" id="ServiceAffectation">
         <p class="text-h6 text-black font-weight-bold">Service d’affectation </p>
         <p class="text-center text-black text-body-1 my-6">J’ai été intégré à l’équipe de développement, responsable du développement du logiciel « CarbonScore » ainsi que du site vitrine qui permet aux clients de découvrir les différents services proposés par ce logiciel.</p>
@@ -79,13 +73,13 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
           <div class='col4'>
             <div>
               <p>Développement Front-end : </p>
-         <div class='d-flex my-3'>
-            <div class='chip'>VueJS</div>
-            <div class='chip' >TypeScript</div>
-            <div class='chip'>Javascript</div>
-            <div class='chip'>CSS</div>
-            <div class='chip'>HTML</div>
-            <div class='chip'>Vitest</div>
+         <div class='flexChip my-3'>
+            <div class='chip mb-2'>VueJS</div>
+            <div class='chip mb-2' >TypeScript</div>
+            <div class='chip mb-2'>Javascript</div>
+            <div class='chip mb-2'>CSS</div>
+            <div class='chip mb-2'>HTML</div>
+            <div class='chip mb-2'>Vitest</div>
           </div>
         </div>
           </div>
@@ -119,19 +113,11 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
             </div>
           </div>
         </div>
-
-
-
 <hr class='my-2'>
-
-
-
-
      
 <div class="d-flex flex-column align-center mt-3 mx-3" id="Projet">
         <p class="mb-8 text-h6 text-black font-weight-bold">Exemple de réalisation d'un projet : </p>
         <p class="text-black" style="text-decoration: underline;">Projet de refonte du tableau de bord de la plateforme Carbonscore : </p>
-     <div>
       <p class="text-black text-center text-subtitle-1 font-weight-bold mt-4">1) Introduction du projet : </p>
 <p class="my-2 text-black text-body-1">Le projet que j’ai décidé de vous présenter est la refonte du tableau de bord de la plateforme Carbonscore. J’ai choisi de parler de ce projet, car il s’agit d’un projet de grande taille pour l’entreprise nécessitant 4 mois de développement sur lequel je suis intervenu, ainsi que plusieurs autres membres de l’équipe de développement.
 J’ai aussi décidé de parler de ce projet car il a nécessité des tâches impliquant du front-end et du back-end. Un exemple de projet représentant toute la complexité du métier de développeur web full stack en jonglant sur de nombreuses compétences : développement, web design, gestion de projet.
@@ -143,7 +129,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
   <p class="text-black text-center  text-subtitle-1 font-weight-bold">2) Objectifs du projet : </p>
   <p class="my-2 text-body-1">Le principal objectif de cette refonte du tableau de bord était de créer un tableau de bord plus simple à comprendre et à prendre en main.</p>
 <a href='../../src/assets/olddashboard.png' target='_blank'>
-<img src="../../src/assets/olddashboard.png" width="800"></img>
+<img src="../../src/assets/olddashboard.png" class='bigImgDetail'></img>
 </a>
 <p class="my-2">Figure : Ancien tableau de bord</p>
 </div>
@@ -165,7 +151,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="text-body-1">Pour gérer les différents projets, deux tableaux de gestion de projet ont été créés :</p>
 
 <a href='../../src/assets/Backlog.png' target='_blank'>
-<img src="../../src/assets/Backlog.png" width="800"></img>
+<img src="../../src/assets/Backlog.png" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Tableau Backlog</strong></p>
 
@@ -175,7 +161,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="mt-2 text-body-1">Un tableau Backlog regroupe tous les projets qui n’ont pas encore débuté. On y retrouve aussi des idées non concrètes de projet qui sont encore sujet à débat.</p>
 
 <a href='../../src/assets/tableaudebord.png' target='_blank'>
-<img src="../../src/assets/tableaudebord.png" width="800"></img>
+<img src="../../src/assets/tableaudebord.png" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Tableau de bord Jira</strong></p>
 <p class="my-2 text-body-1">Un tableau de bord Jira qui va regrouper les projets en cours. Il permet de suivre l’avancée des différents projets. Ce tableau est basé sur le modèle de ticketing.</p>
@@ -198,7 +184,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p>Au lancement d’un projet, les différentes tâches sont transférées du tableau de backlog au tableau de bord, et ont le statut <strong>TODO</strong>. Ensuite, celui qui est affecté à cette tâche va mettre à jour le statut du ticket selon l’avancée du ticket, ce qui permet d’améliorer le suivi global de l’entreprise sur un projet.</p>
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/Ticket.png' target='_blank'>
-<img src="../../src/assets/Ticket.png" width="800"></img>
+<img src="../../src/assets/Ticket.png" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Un ticket sur Jira</strong></p>
 </div>
@@ -230,7 +216,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <div class="d-flex flex-column align-center my-4">
 
 <a href='../../src/assets/epic_refonte_dashboard.png' target='_blank'>
-<img src="../../src/assets/epic_refonte_dashboard.png" width="800"></img>
+<img src="../../src/assets/epic_refonte_dashboard.png" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Décomposition des tâches sous l’épic « Refonte du dashboard »</strong></p>
 </div>
@@ -284,7 +270,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
   
   
 <a href='../../src/assets/discussionTeams.png' target='_blank'>
-  <img class="mt-4" src="../../src/assets/discussionTeams.png" width="800"></img>
+  <img class="mt-4" src="../../src/assets/discussionTeams.png" class='bigImgDetail'></img>
 </a>
   
 </div>
@@ -305,7 +291,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/mermaidSchema.jpg' target='_blank'>
-<img src="../../src/assets/mermaidSchema.jpg" width="800"></img>
+<img src="../../src/assets/mermaidSchema.jpg" class='bigImgDetail'></img>
 </a>
 <p>Figure : Schéma d’architecture de base de données réalisées avec MERMAID</p>
 
@@ -315,7 +301,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/route.png' target='_blank'>
-  <img src="../../src/assets/route.png" width="800"></img>
+  <img src="../../src/assets/route.png" class='bigImgDetail'></img>
 </a>
   <p>Figure : Exemple de schéma d’architecture des routes d’un autre projet</p>
 </div>
@@ -325,7 +311,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/figma_design.jpg' target='_blank'>
-<img src="../../src/assets/figma_design.jpg" width="800"></img>
+<img src="../../src/assets/figma_design.jpg" class='bigImgDetail'></img>
 </a>
 <p>Figure : Maquette du tableau de bord réalisée sur Figma</p>
 </div>
@@ -338,14 +324,14 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/TableaudebordVueEnsemble.jpg' target='_blank'>
-  <img src="../../src/assets/TableaudebordVueEnsemble.jpg" width="800"></img>
+  <img src="../../src/assets/TableaudebordVueEnsemble.jpg" class='bigImgDetail'></img>
 </a>
   <p>Figure : Tableau de bord « Vue d’ensemble »</p>
 </div>
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/TableaudebordMesusages.png' target='_blank'>
-  <img src="../../src/assets/TableaudebordMesusages.png" width="800"></img>
+  <img src="../../src/assets/TableaudebordMesusages.png" class='bigImgDetail'></img>
   </a>
   <p>Figure : Tableau de bord « Mes usages »</p>
 </div>
@@ -359,7 +345,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/postman.jpg' target='_blank'>
-  <img src="../../src/assets/postman.jpg" width="800"></img>
+  <img src="../../src/assets/postman.jpg" class='bigImgDetail'></img>
 </a>
   <p>Figure : Postman, un outil de test des routes API</p>
 </div>

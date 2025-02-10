@@ -3,9 +3,9 @@
         <div class="mt-5 ml-3">
             <p class="text-h6 text-black">Contact</p>
         </div>
-        <hr class="my-6" style="width: 500px; border: 1px solid black;">
+        <hr class="my-6" style="border: 1px solid black;" :width="smAndDown ? '300px': '500px'" >
         <v-alert v-if="alertSuccess" prominent color="success" icon="mdi-check-circle" width="500px" class="mb-6">Votre message a bien été transmis par mail ! Je vous recontacterais par la suite.</v-alert>
-        <v-form style="width: 500px" @submit.prevent v-model="isFormValid">
+        <v-form  :style="smAndDown? 'width:300px;':'width:500px;'" @submit.prevent v-model="isFormValid">
             <v-card color="white" class="pa-5">
                 <div >
                 <p class="text-black text-body-1 font-weight-bold mb-5">Nom : </p>
@@ -39,6 +39,9 @@ import WelcomeLinks from '@/components/WelcomeLinks.vue';
 import type { IEmailSend } from '@/interfaces/interfaces';
 import emailjs from '@emailjs/browser';
 import {emailRules,emptyRules} from '../services/contact.service'
+import { useDisplay } from 'vuetify';
+
+const {smAndDown}= useDisplay()
 
 const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
