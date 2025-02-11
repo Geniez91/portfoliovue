@@ -55,11 +55,11 @@
             <div class="mx-3 mt-2">
                 <p class="text-black text-subtitle-1" style="text-decoration: underline;">Stack Technique :</p>
             </div>
-            <div class="d-flex my-2 mx-3">
-                <div v-for="img in projet.stackImg" :key="img.name" class="mr-4">
-                    <v-img :src="img.img" style="width: 60px; height: 60px;"></v-img>
-                </div>
-            </div>
+            <v-row class="my-2 mx-3">
+                <v-col v-for="img in projet.stackImg" :key="img.name" class="mr-4">
+                    <v-img :src="img.img" style="width: 60px; height: 60px;" :key="img.name"></v-img>
+                </v-col>
+            </v-row>
             <div class="d-flex flex-column  mt-2">
                 <v-btn>En savoir plus ?</v-btn>
             </div>

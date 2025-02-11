@@ -23,6 +23,11 @@
     </v-tabs>
 
     <v-spacer class="d-none d-md-flex"></v-spacer>
+  
+    <v-btn icon="mdi mdi-moon-warning-crescent" >
+      <v-icon icon="mdi-white-balance-sunny" size="32"></v-icon>
+    </v-btn>
+    
   </v-app-bar>
   <v-navigation-drawer v-model="drawer" temporary class="d-md-none">
     <v-list>
