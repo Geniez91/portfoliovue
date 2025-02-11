@@ -1,6 +1,6 @@
 <template>
     <div class="mx-3 my-5">
-        <p class="text-h6 text-black">Mes Projets</p>
+        <p class="text-h6 text-primary">Mes Projets</p>
         <div class="mt-5">
             <v-autocomplete
             autofocus
@@ -30,13 +30,13 @@
         <div >
             <div v-for="(item,year) in projetbyYear" :key="year">
                 <div class="d-flex flex-column align-center mt-8">
-                    <p class="text-black text-h6" style="text-decoration: underline;">{{ year }}</p>
+                    <p class="text-primary text-h6" style="text-decoration: underline;">{{ year }}</p>
                 </div>
                 <v-row class="mt-3">
-    <v-col cols="12" sm="4" md="4" lg="4" v-for="projet in item" :key="projet.name">
-        <v-card color="#39B8B1" class="d-flex flex-column justify-space-between fill-height " hover>
+    <v-col cols="12" sm="12" md="6" lg="4" v-for="projet in item" :key="projet.name">
+        <v-card color="secondary" class="d-flex flex-column justify-space-between fill-height " hover>
             <div class="d-flex align-center flex-column mt-8">
-                <p class="text-black font-weight-bold text-subtitle-1">{{ projet.name }}</p>
+                <p class="text-primary font-weight-bold text-subtitle-1">{{ projet.name }}</p>
             </div>
             <div class="my-6">
                 <v-carousel hide-delimiters show-arrows="hover" style="border-radius: 5px; border: 2px solid black; width: 100%; height: 300px; z-index: 5;   box-shadow: 0 4px 4px 0 black "
@@ -47,21 +47,21 @@
                 </v-carousel>
             </div>
             <div class="mx-3">
-                <p class="text-black text-body-1 font-weight-medium">{{ projet.description }}</p>
+                <p class="text-primary text-body-1 font-weight-medium">{{ projet.description }}</p>
             </div>
             <div class="mx-3 mt-2">
-                <p class="text-black text-body-1 font-weight-medium">Nombre de personnes ayant réalisée le projet : {{ projet.nbCollaborator }}</p>
+                <p class="text-primary text-body-1 font-weight-medium">Nombre de personnes ayant réalisée le projet : {{ projet.nbCollaborator }}</p>
             </div>
             <div class="mx-3 mt-2">
-                <p class="text-black text-subtitle-1" style="text-decoration: underline;">Stack Technique :</p>
+                <p class="text-primary text-subtitle-1" style="text-decoration: underline;">Stack Technique :</p>
             </div>
-            <v-row class="my-2 mx-3">
+            <v-row class="my-2 mx-3" style="width: fit-content;">
                 <v-col v-for="img in projet.stackImg" :key="img.name" class="mr-4">
                     <v-img :src="img.img" style="width: 60px; height: 60px;" :key="img.name"></v-img>
                 </v-col>
             </v-row>
             <div class="d-flex flex-column  mt-2">
-                <v-btn>En savoir plus ?</v-btn>
+                <v-btn color="navbar">En savoir plus ?</v-btn>
             </div>
         </v-card>
     </v-col>

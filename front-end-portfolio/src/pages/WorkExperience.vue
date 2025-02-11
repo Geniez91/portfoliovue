@@ -1,31 +1,31 @@
 <template>
     <div class="mx-3 my-5">
-        <p class="text-h6 text-black">Mes Expériences professionnelles</p>
+        <p class="text-h6 text-primary">Mes Expériences professionnelles</p>
         <div class="mt-7">
-            <v-row>
+            <v-row style="width: fit-content;">
                 <v-col v-for="experience in workExperience" cols="12">
                     <div class="mb-3">
-                    <p class="text-black text-body-2" style="font-style: italic;">{{ experience.period }}</p>
+                    <p class="text-primary text-body-2" style="font-style: italic;">{{ experience.period }}</p>
                 </div>
-                <v-card color="#39B8B1" hover :to="`workExperience/${experience.entreprise}`" >
+                <v-card color="secondary" hover :to="`workExperience/${experience.entreprise}`" >
                     <div class="d-flex">
                         <v-img :src="experience.entrepriseImg" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
                         <div class="d-flex flex-column justify-center ml-3">
-                            <p class="mb-2 text-black font-weight-bold text-subtitle-1">{{ experience.name }}</p>
-                            <p class="text-subtitle-1 text-black">{{ experience.entreprise }}</p>
+                            <p class="mb-2 text-primary font-weight-bold text-subtitle-1">{{ experience.name }}</p>
+                            <p class="text-subtitle-1 text-primary">{{ experience.entreprise }}</p>
                         </div>
                     </div>
                     <v-divider class="border-opacity-75" color="black"></v-divider>
                     <div class="ml-3 mt-2">
-                        <p class="text-black text-subtitle-1" style="text-decoration: underline;">Taches Effectués : </p>
+                        <p class="text-primary text-subtitle-1" style="text-decoration: underline;">Taches Effectués : </p>
                         <ul>
                             <li v-for="description in experience.description" class="mb-2 ml-3">
-                                <p v-html="description" class="text-black text-body-1"></p>
+                                <p v-html="description" class="text-primary text-body-1"></p>
                             </li>
                         </ul>
                        </div>
                     <div class="ml-3 mt-2">
-                        <p class="text-black text-subtitle-1" style="text-decoration: underline;">Stack Technique : </p>
+                        <p class="text-primary text-subtitle-1" style="text-decoration: underline;">Stack Technique : </p>
                        
                         <v-row class="my-3">
                             <v-col md="1" sm="3" v-for="img in experience.stackImg">
@@ -35,7 +35,7 @@
                    
                     </div>
                     <div class="d-flex flex-column align-center my-2">
-                        <router-link :to="`workExperience/${experience.entreprise}`"><v-btn>En savoir plus ?</v-btn></router-link>
+                        <router-link :to="`workExperience/${experience.entreprise}`"><v-btn color="navbar">En savoir plus ?</v-btn></router-link>
                     </div>
                  
                 </v-card>

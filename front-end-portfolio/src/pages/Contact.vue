@@ -1,26 +1,30 @@
 <template>
     <div class="d-flex flex-column align-center">
         <div class="mt-5 ml-3">
-            <p class="text-h6 text-black">Contact</p>
+            <p class="text-h6 text-primary">Contact</p>
         </div>
-        <hr class="my-6" style="border: 1px solid black;" :width="smAndDown ? '300px': '500px'" >
+        <hr 
+  class="my-6"
+  :style="{ borderColor: 'var(--v-theme-primary)' }"
+  :width="smAndDown ? '300px' : '500px'"
+>
         <v-alert v-if="alertSuccess" prominent color="success" icon="mdi-check-circle" width="500px" class="mb-6">Votre message a bien été transmis par mail ! Je vous recontacterais par la suite.</v-alert>
         <v-form  :style="smAndDown? 'width:300px;':'width:500px;'" @submit.prevent v-model="isFormValid">
-            <v-card color="white" class="pa-5">
+            <v-card color="card" class="pa-5">
                 <div >
-                <p class="text-black text-body-1 font-weight-bold mb-5">Nom : </p>
+                <p class="text-primary text-body-1 font-weight-bold mb-5">Nom : </p>
                 <v-text-field v-model="name" :rules="[emptyRules]" @update:model-value="name=$event" ></v-text-field>
             </div>
             <div>
-                <p class="text-black text-body-1 font-weight-bold mb-5">Mail : </p>
+                <p class="text-primary text-body-1 font-weight-bold mb-5">Mail : </p>
                 <v-text-field prepend-inner-icon="mdi-gmail" :rules="[emailRules,emptyRules]"  v-model="email"  @update:model-value="email=$event"></v-text-field>
             </div>
             <div>
-                <p class="text-black text-body-1 font-weight-bold mb-5">Objet : </p>
+                <p class="text-primary text-body-1 font-weight-bold mb-5">Objet : </p>
                 <v-text-field :rules="[subjectRules,emptyRules]" v-model="subject"  @update:model-value="subject=$event" :counter="maxCharacterSubjet" :persistent-counter="true"></v-text-field>
             </div>
             <div>
-                <p class="text-black text-body-1 font-weight-bold mb-5">Message : </p>
+                <p class="text-primary text-body-1 font-weight-bold mb-5">Message : </p>
                 <v-textarea v-model="message" label="Label" :rules="[emptyRules]" @update:model-value="message=$event"></v-textarea>
             </div>
             <div class="d-flex flex-column align-center">
@@ -28,7 +32,11 @@
             </div>
             </v-card>
         </v-form>
-        <hr class="my-6" style="width: 500px; border: 1px solid black;">
+        <hr 
+  class="my-6"
+  :style="{ borderColor: 'var(--v-theme-primary)' }"
+  :width="smAndDown ? '300px' : '500px'"
+>
        <WelcomeLinks class="mb-9"></WelcomeLinks>
     </div>
 </template>

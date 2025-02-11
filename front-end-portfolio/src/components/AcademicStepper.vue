@@ -3,7 +3,7 @@
       <div v-for="(formation, index) in formations" :key="index" class="timeline-item">
         <div class="circle"></div>
         <div class="line" v-if="index < formations.length - 1"></div>
-        <div class="content text-black">
+        <div class="content text-primary">
           <p class="text-subtitle-1 font-weight-bold">{{ formation.year }}</p>
           <p class="text-subtitle-1 font-weight-medium">{{ formation.title }}</p>
           <p class="text-subtitle-1 " style="text-decoration: underline;">{{ formation.name }}</p>

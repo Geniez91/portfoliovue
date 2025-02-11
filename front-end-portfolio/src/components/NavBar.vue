@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app absolute color="white" >
+  <v-app-bar app absolute color="navbar" >
     <v-btn icon @click="drawer = !drawer" class="d-md-none">
       <v-icon>mdi-menu</v-icon>
     </v-btn>
@@ -7,7 +7,7 @@
     <v-spacer class="d-none d-md-flex"></v-spacer>
     <v-tabs
       v-if="mdAndUp"
-      bg-color="white"
+      bg-color="navbar"
       centered
       class="d-none d-md-flex"
     >
@@ -24,12 +24,12 @@
 
     <v-spacer class="d-none d-md-flex"></v-spacer>
   
-    <v-btn icon="mdi mdi-moon-warning-crescent" >
-      <v-icon icon="mdi-white-balance-sunny" size="32"></v-icon>
+    <v-btn icon="mdi mdi-moon-warning-crescent" @click="ChangeTheme()">
+      <v-icon :icon=" theme.global.name.value === 'light' ? 'mdi-white-balance-sunny':'mdi-moon-waxing-crescent'" size="32"></v-icon>
     </v-btn>
     
   </v-app-bar>
-  <v-navigation-drawer v-model="drawer" temporary class="d-md-none">
+  <v-navigation-drawer color="navbar" v-model="drawer" temporary class="d-md-none">
     <v-list>
       <v-list-item
         v-for="item in itemsNavBar"
@@ -47,8 +47,10 @@
   <script lang="ts" setup>
   import type { IItemNavBar } from '@/interfaces/interfaces';
   import MonCV from '../assets/CV_WELTMANN_JEREMY_2025.pdf'
-import { useDisplay } from 'vuetify';
+import { useDisplay, useTheme } from 'vuetify';
 import { ref } from 'vue';
+
+const theme = useTheme()
 
   const {mdAndUp}=useDisplay()
 
@@ -84,5 +86,9 @@ import { ref } from 'vue';
 
 
 ]
+
+function ChangeTheme(){
+   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
   </script>
   

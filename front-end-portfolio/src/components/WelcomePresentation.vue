@@ -1,10 +1,10 @@
 <template>
 <div class="container">
-    <p class="text-write text-h5 text-black font-weight-bold" :class="smAndDown ? 'text-center mb-3 text-wrap':''">
+    <p class="text-write text-primary text-h5 font-weight-bold" :class="smAndDown ? 'text-center mb-3 text-wrap':''">
       Bonjour à tous et Bienvenue sur mon portfolio ! 
     </p>
   </div>
-  <p class="text-h5 text-black font-weight-bold text-slide-in":class="smAndDown ? 'text-center':''"  >
+  <p class="text-h5 text-primary font-weight-bold text-slide-in":class="smAndDown ? 'text-center':''"  >
      Je m'appelle Jérémy Weltmann et je suis Développeur Web Full Stack.
     </p>
 </template>

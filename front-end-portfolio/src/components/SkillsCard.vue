@@ -4,9 +4,9 @@
                 <div class="d-flex" :class="smAndDown ?'d-flex flex-column mb-2':'d-flex'">
                 <div class="d-flex flex-column align-center mr-8" >
                 <v-img :src="expériences.srcImg" :width="150" :height="100"></v-img>
-                    <p class="text-body-1 text-black font-weight-bold text-center">{{ expériences.language }}</p>
+                    <p class="text-body-1 text-primary font-weight-bold text-center">{{ expériences.language }}</p>
                 </div>
-                <v-card color="white" class="mr-9 pa-2" style="border: 2px solid;" v-if="withoutCard===false" >
+                <v-card color="card" class="mr-9 pa-2" style="border: 2px solid;" v-if="withoutCard===false" >
                     <div class="d-flex align-center">
                         <v-icon icon="mdi-briefcase" color="black" size="38" class="mr-2"></v-icon>
                         <p class="font-weight-bold text-body-1">{{ expériences.yearsExperience }} ans d'expériences</p>

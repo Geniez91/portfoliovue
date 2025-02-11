@@ -15,9 +15,15 @@ import NavBar from './components/NavBar.vue';
 <style lang="css" scoped>
 .v-application{
   background: linear-gradient( #F5F5F5, #0E67ED);;
-  /* background: linear-gradient(#0D0D0D, #1F2937); * Theme Dark/
-
-*/
 }
+
+.v-application.v-theme--light {
+  background: linear-gradient(#F5F5F5, #0E67ED);
+}
+
+.v-application.v-theme--dark {
+  background: linear-gradient( #121212, #1E1E1E);
+}
+
   
 </style>

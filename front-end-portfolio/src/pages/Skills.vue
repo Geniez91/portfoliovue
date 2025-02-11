@@ -1,23 +1,23 @@
 <template>
      <div class="ml-3">
         <div class="mt-5">
-            <p class="text-h6 text-black">Mes Compétences</p>
+            <p class="text-h6 text-primary">Mes Compétences</p>
         </div>
         <div class="mt-3" :class="smAndDown ? 'd-flex flex-column':'d-flex'">
-            <v-btn :class="smAndDown ? 'mb-3':''" v-for="skills in skillstabs" class="mr-3" color="white" :active="skillsShow===skills" active-color="#39B8B1"  :style="{ border: skillsShow !== skills ? '2px solid' : '' }"  @click="changeSkillsMode(skills as TSkillsShow)">{{ skills }}</v-btn>
+            <v-btn :class="smAndDown ? 'mb-3':''" v-for="skills in skillstabs" class="mr-3" color="white" :active="skillsShow===skills" active-color="secondary"  :style="{ border: skillsShow !== skills ? '2px solid' : '' }"  @click="changeSkillsMode(skills as TSkillsShow)">{{ skills }}</v-btn>
         </div>
      </div>
      <div v-if="skillsShow==='Développement Web'">
         <div class="ml-3">
         <div class="mt-5">
-            <p class="text-h6 text-black">Développement Front-end</p>
+            <p class="text-h6 text-primary">Développement Front-end</p>
         </div>
         <SkillsCard :type-language="frontLanguageExperience"/>
         </div>
-        <v-divider class="border-opacity-75 mt-12" color="black"></v-divider>
+        <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
       
         <div class="mt-5 ml-3">
-        <p class="text-h6 text-black">Développement Back-end</p>
+        <p class="text-h6 text-primary">Développement Back-end</p>
         <div class="d-flex mb-5" style="width: fit-content;">
             <SkillsCard :type-language="backLanguageExperience"></SkillsCard>
     </div>
@@ -25,14 +25,14 @@
     </div>
     <div class="mt-5" v-if="skillsShow==='Base de donnees'">
         <div class="ml-3">
-        <p class="text-h6 text-black">Base de données</p>
+        <p class="text-h6 text-primary">Base de données</p>
         <div class="d-flex mb-5" style="width: fit-content;">
             <SkillsCard :type-language="bddLanguageExperience"></SkillsCard>
     </div>
     </div>
-    <v-divider class="border-opacity-75 mt-12" color="black"></v-divider>
+    <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
     <div class="ml-3 mt-5">
-        <p class="text-h6 text-black">Modélisation</p>
+        <p class="text-h6 text-primary">Modélisation</p>
         <div class="d-flex mb-5" style="width: fit-content;">
         <SkillsCard :type-language="modelisationExperience"></SkillsCard>
     </div>
@@ -40,7 +40,7 @@
     </div>
     <div v-if="skillsShow==='Savoir être'">
         <div class="ml-3 mt-5">
-        <p class="text-h6 text-black">Soft Skills</p>
+        <p class="text-h6 text-primary">Soft Skills</p>
         <div class="d-flex mb-5" style="width: fit-content;">
             <SkillsCard :type-language="softSkillsExperience" :without-card="true"></SkillsCard>
     </div>
@@ -48,7 +48,7 @@
     </div>
     <div v-if="skillsShow==='Langues'">
         <div class="ml-3 mt-5">
-        <p class="text-h6 text-black">Langues</p>
+        <p class="text-h6 text-primary">Langues</p>
         <LanguageExperience :language-experience="languageExperience"></LanguageExperience>
     </div>
 </div>
