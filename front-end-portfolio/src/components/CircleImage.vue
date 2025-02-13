@@ -8,6 +8,7 @@
         class="circle-image"
         :width="props.width"
         :height="props.height"
+        alt="Image en cercle d'ordinateur portable"
       />
     </div>
   </template>

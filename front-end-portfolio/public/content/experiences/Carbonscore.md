@@ -1,13 +1,13 @@
  <div class="d-flex flex-column align-center mt-16">
-        <p class="text-black font-weight-bold text-h4">Apprenti Développeur Full Stack</p>
+        <p class="primary font-weight-bold text-h4">Apprenti Développeur Full Stack</p>
         <div class="mt-7">
-          <img src="../../src/assets/carbonscore.jpg" alt="drawing" width="120"/>
+          <img src="../../src/assets/carbonscore.jpg" alt="Carbonscore logo" width="120"/>
         </div>
         <div class="mt-5">
-          <p class="text-black text-h6">TechupClimate/Carbonscore</p>
+          <p class="primary text-h6">TechupClimate/Carbonscore</p>
         </div>
         <div class="mt-7">
-          <p class="text-subtitle-1 text-black">Novembre 2022 - Novembre 2024</p>
+          <p class="text-subtitle-1 primary">Novembre 2022 - Novembre 2024</p>
         </div>
       </div>
 
@@ -16,9 +16,9 @@
 
    <div class="d-flex flex-column align-center mt-3">
         <div class="mt-2">
-          <p class="text-h6 text-black font-weight-bold">Sommaire</p>
+          <p class="text-h6 primary font-weight-bold">Sommaire</p>
         </div>
-        <ul class="mt-3 text-black">
+        <ul class="mt-3 primary">
           <li class="mb-3"><a href="#Contexte"  style="color: blue;">Contexte</a></li>
         <li class="mb-3" ><a href="#ServiceAffectation" style="color: blue;">Service d'affectation</a> </li>
           <li class="mb-3"><a href="#Role" style="color: blue;">Mon rôle</a></li>
@@ -28,25 +28,25 @@
       </div>
 <hr class='my-2'> 
 <div class="d-flex flex-column align-center mt-3" id="Contexte">
-        <p class="text-h6 text-black font-weight-bold">Contexte</p>
+        <p class="text-h6 primary font-weight-bold">Contexte</p>
         <div class="mt-6">
-          <img src="../../src/assets/impactenvironnemental.jpg" class="bigImgDetail"></v-img>
+          <img src="../../src/assets/impactenvironnemental.jpg" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
         </div>
-        <p class="my-6 text-black text-body-1 text-center">TechupClimate est une entreprise spécialisée dans une solution logicielle qui se nomme « CarbonScore » dont l’objectif est de sensibiliser les collaborateurs des entreprises sur l’impact environnemental du numérique. Cette solution vise à leur faire prendre conscience que leurs usages du numérique peuvent entraîner des répercussions sur notre planète.</p>
+        <p class="my-6 primary text-body-1 text-center">TechupClimate est une entreprise spécialisée dans une solution logicielle qui se nomme « CarbonScore » dont l’objectif est de sensibiliser les collaborateurs des entreprises sur l’impact environnemental du numérique. Cette solution vise à leur faire prendre conscience que leurs usages du numérique peuvent entraîner des répercussions sur notre planète.</p>
         <div>
         <a href='../../src/assets/dashboardrefonte.png' target='_blank'>
-          <img src="../../src/assets/dashboardrefonte.png" class="bigImgDetail"></v-img>
+          <img src="../../src/assets/dashboardrefonte.png" alt="Image Refonte du tableau de bord" class="bigImgDetail"></v-img>
         </a>
         </div>
-        <p class="text-center text-black text-body-1 my-6">La solution logicielle CarbonScore permet aux collaborateurs des entreprises d’obtenir un indicateur, le « CarbonScore » qui évalue si leur performance en termes de consommation numérique est respectueuse de l’environnement ou non.
+        <p class="text-center primary text-body-1 my-6">La solution logicielle CarbonScore permet aux collaborateurs des entreprises d’obtenir un indicateur, le « CarbonScore » qui évalue si leur performance en termes de consommation numérique est respectueuse de l’environnement ou non.
 Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mises en place, telles que des suggestions, des quizz, ainsi qu’un système de badges pour récompenser les utilisateurs qui prennent conscience de leur impact et le réduisent. Un très grand nombre de statistiques sur les usages numériques du quotidien a également été mis en place sous la forme d’un tableau de bord, permettant de déterminer quelles utilisations numériques doivent être réduites.
 </p>
       </div>
 <hr class='my-2'>
 <div class="d-flex flex-column align-center my-5" id="ServiceAffectation">
-        <p class="text-h6 text-black font-weight-bold">Service d’affectation </p>
-        <p class="text-center text-black text-body-1 my-6">J’ai été intégré à l’équipe de développement, responsable du développement du logiciel « CarbonScore » ainsi que du site vitrine qui permet aux clients de découvrir les différents services proposés par ce logiciel.</p>
-         <p class="text-center text-black text-body-1"> En tant qu’apprenti Développeur Full Stack, je suis amené à travailler avec tous les membres de l’entreprise. Je collabore principalement avec l’équipe de développement, avec laquelle nous travaillons sur de nombreuses tâches. Ils m’aident également à résoudre les problèmes techniques que je peux rencontrer et à améliorer ma manière de développer, afin qu’elle corresponde aux attentes de l’entreprise et permettre de délivrer un logiciel de qualité. Je collabore également avec l’équipe Commerciale/Markéting, qui peut remonter des idées ou contenus qu’ils souhaiteraient intégrer dans le logiciel.</p>
+        <p class="text-h6 primary font-weight-bold">Service d’affectation </p>
+        <p class="text-center primary text-body-1 my-6">J’ai été intégré à l’équipe de développement, responsable du développement du logiciel « CarbonScore » ainsi que du site vitrine qui permet aux clients de découvrir les différents services proposés par ce logiciel.</p>
+         <p class="text-center primary text-body-1"> En tant qu’apprenti Développeur Full Stack, je suis amené à travailler avec tous les membres de l’entreprise. Je collabore principalement avec l’équipe de développement, avec laquelle nous travaillons sur de nombreuses tâches. Ils m’aident également à résoudre les problèmes techniques que je peux rencontrer et à améliorer ma manière de développer, afin qu’elle corresponde aux attentes de l’entreprise et permettre de délivrer un logiciel de qualité. Je collabore également avec l’équipe Commerciale/Markéting, qui peut remonter des idées ou contenus qu’ils souhaiteraient intégrer dans le logiciel.</p>
 </div>
 
 <hr class='my-2'>
@@ -54,32 +54,32 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
 
 
 <div class="d-flex flex-column align-center mt-3" id="Role">
-        <p class="text-h6 text-black font-weight-bold">Mon rôle </p>
-        <p class="text-center text-black text-body-1 my-6">J’ai été intégré à l’équipe de développement, responsable du développement du logiciel « CarbonScore » ainsi que du site vitrine qui permet aux clients de découvrir les différents services proposés par ce logiciel.</p>
-         <p class="text-center text-black text-body-1 mb-6">Mon rôle comporte également des tâches consistant à corriger les bogues qui pourraient être remontés, afin de garantir un logiciel fiable. Je suis aussi chargé de modifier des fonctionnalités existantes pour les améliorer, afin qu’elles répondent aux nouvelles attentes des clients, et de migrer certains éléments du logiciel vers une nouvelle version.</p>
-         <p class="text-center text-black text-body-1 mb-6">En tant que Développeur Full Stack, je suis impliqué dans toutes les phases de développement. Tout d’abord, je participe à la réunion de backlog où sont discutées des nouvelles fonctionnalités à développer. Ensuite, je commence par la maquette de la fonctionnalité en respectant les spécifications demandées lors de la réunion du backlog.</p>
-         <p class="text-center text-black text-body-1 mb-6">Après avoir réalisé ma maquette, je la soumets à mon équipe pour obtenir des retours, ce qui me permet de faire des ajustements si nécessaire pour qu’elle corresponde aux attentes. Une fois la maquette acceptée, je passe au développement de la partie back-end de la fonctionnalité, c’est-à-dire la partie qui va récupérer ou insérer des données dans la base de données et créer des routes API REST afin de pouvoir y accéder ensuite dans ma partie front-end.</p>
-         <p class="text-center text-black text-body-1 mb-6">Après avoir terminé la partie back-end, je peux utiliser les fonctionnalités créées pour afficher les données pertinentes dans ma partie front-end, où je me charge de développer l’interface utilisateur en suivant la maquette.</p>
-         <p class="text-center text-black text-body-1 mb-6">Que ce soit pour la partie front-end ou le back-end, chaque fois que je crée une nouvelle fonction, je dois réaliser des tests unitaires afin de vérifier que toutes les fonctionnalités couvrent tous les scénarios possibles et d’éviter certains bogues.</p>
+        <p class="text-h6 primary font-weight-bold">Mon rôle </p>
+        <p class="text-center primary text-body-1 my-6">J’ai été intégré à l’équipe de développement, responsable du développement du logiciel « CarbonScore » ainsi que du site vitrine qui permet aux clients de découvrir les différents services proposés par ce logiciel.</p>
+         <p class="text-center primary text-body-1 mb-6">Mon rôle comporte également des tâches consistant à corriger les bogues qui pourraient être remontés, afin de garantir un logiciel fiable. Je suis aussi chargé de modifier des fonctionnalités existantes pour les améliorer, afin qu’elles répondent aux nouvelles attentes des clients, et de migrer certains éléments du logiciel vers une nouvelle version.</p>
+         <p class="text-center primary text-body-1 mb-6">En tant que Développeur Full Stack, je suis impliqué dans toutes les phases de développement. Tout d’abord, je participe à la réunion de backlog où sont discutées des nouvelles fonctionnalités à développer. Ensuite, je commence par la maquette de la fonctionnalité en respectant les spécifications demandées lors de la réunion du backlog.</p>
+         <p class="text-center primary text-body-1 mb-6">Après avoir réalisé ma maquette, je la soumets à mon équipe pour obtenir des retours, ce qui me permet de faire des ajustements si nécessaire pour qu’elle corresponde aux attentes. Une fois la maquette acceptée, je passe au développement de la partie back-end de la fonctionnalité, c’est-à-dire la partie qui va récupérer ou insérer des données dans la base de données et créer des routes API REST afin de pouvoir y accéder ensuite dans ma partie front-end.</p>
+         <p class="text-center primary text-body-1 mb-6">Après avoir terminé la partie back-end, je peux utiliser les fonctionnalités créées pour afficher les données pertinentes dans ma partie front-end, où je me charge de développer l’interface utilisateur en suivant la maquette.</p>
+         <p class="text-center primary text-body-1 mb-6">Que ce soit pour la partie front-end ou le back-end, chaque fois que je crée une nouvelle fonction, je dois réaliser des tests unitaires afin de vérifier que toutes les fonctionnalités couvrent tous les scénarios possibles et d’éviter certains bogues.</p>
       </div>
 
 <hr class='my-2'>
 
 
 <div class="d-flex flex-column align-center mt-3">
-        <p class="mb-6 text-h6 text-black font-weight-bold">Outils utilisées</p>
+        <p class="mb-6 text-h6 primary font-weight-bold">Outils utilisées</p>
         </div>
-        <div class="row mx-6 my-3 text-black">
+        <div class="row mx-6 my-3 primary">
           <div class='col4'>
             <div>
               <p>Développement Front-end : </p>
          <div class='flexChip my-3'>
-            <div class='chip mb-2'>VueJS</div>
-            <div class='chip mb-2' >TypeScript</div>
-            <div class='chip mb-2'>Javascript</div>
-            <div class='chip mb-2'>CSS</div>
-            <div class='chip mb-2'>HTML</div>
-            <div class='chip mb-2'>Vitest</div>
+            <div class='chip mb-2 text-black'>VueJS</div>
+            <div class='chip mb-2 text-black' >TypeScript</div>
+            <div class='chip mb-2 text-black'>Javascript</div>
+            <div class='chip mb-2 text-black'>CSS</div>
+            <div class='chip mb-2 text-black'>HTML</div>
+            <div class='chip mb-2 text-black'>Vitest</div>
           </div>
         </div>
           </div>
@@ -87,8 +87,8 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
             <div>
               <p>Développement back-end : </p>
             <div class='d-flex my-3'>
-              <div class='chip'>PostgreSQL</div>
-              <div class="chip">NestJs</div>
+              <div class='chip text-black'>PostgreSQL</div>
+              <div class="chip text-black">NestJs</div>
             </div>
         </div>
           </div>
@@ -96,9 +96,9 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
             <div>
               Outils de Gestion de projet
           <div class='d-flex my-3'>
-            <div class='chip'>Microsoft Teams</div>
-            <div class='chip'>Jira</div>
-            <div class='chip'>Confluence</div>
+            <div class='chip text-black'>Microsoft Teams</div>
+            <div class='chip text-black'>Jira</div>
+            <div class='chip text-black'>Confluence</div>
           </div>
             </div>
         </div>
@@ -106,9 +106,9 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
             <div>
               Outils de Développement
           <div class='d-flex my-3'>
-            <div class='chip'>Docker</div>
-            <div class='chip'>PgAdmin</div>
-            <div class='chip'>Visual Studio Code</div>
+            <div class='chip text-black'>Docker</div>
+            <div class='chip text-black'>PgAdmin</div>
+            <div class='chip text-black'>Visual Studio Code</div>
           </div>
             </div>
           </div>
@@ -116,20 +116,20 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
 <hr class='my-2'>
      
 <div class="d-flex flex-column align-center mt-3 mx-3" id="Projet">
-        <p class="mb-8 text-h6 text-black font-weight-bold">Exemple de réalisation d'un projet : </p>
-        <p class="text-black" style="text-decoration: underline;">Projet de refonte du tableau de bord de la plateforme Carbonscore : </p>
-      <p class="text-black text-center text-subtitle-1 font-weight-bold mt-4">1) Introduction du projet : </p>
-<p class="my-2 text-black text-body-1">Le projet que j’ai décidé de vous présenter est la refonte du tableau de bord de la plateforme Carbonscore. J’ai choisi de parler de ce projet, car il s’agit d’un projet de grande taille pour l’entreprise nécessitant 4 mois de développement sur lequel je suis intervenu, ainsi que plusieurs autres membres de l’équipe de développement.
+        <p class="mb-8 text-h6 primary font-weight-bold">Exemple de réalisation d'un projet : </p>
+        <p class="primary" style="text-decoration: underline;">Projet de refonte du tableau de bord de la plateforme Carbonscore : </p>
+      <p class="primary text-center text-subtitle-1 font-weight-bold mt-4">1) Introduction du projet : </p>
+<p class="my-2 primary text-body-1">Le projet que j’ai décidé de vous présenter est la refonte du tableau de bord de la plateforme Carbonscore. J’ai choisi de parler de ce projet, car il s’agit d’un projet de grande taille pour l’entreprise nécessitant 4 mois de développement sur lequel je suis intervenu, ainsi que plusieurs autres membres de l’équipe de développement.
 J’ai aussi décidé de parler de ce projet car il a nécessité des tâches impliquant du front-end et du back-end. Un exemple de projet représentant toute la complexité du métier de développeur web full stack en jonglant sur de nombreuses compétences : développement, web design, gestion de projet.
 Le développement de ce projet a été initialisé à la suite de retours de certains clients utilisant la plateforme, qui trouvaient le tableau de bord difficile à prendre en main et qui a été remonté à l’équipe de développement par l’équipe de communication lors des réunions hebdomadaires avec l’ensemble de l’équipe.
 Le tableau de bord de la plateforme Carbonscore est une des pages les plus essentielles de la plateforme permettant d’avoir un récapitulatif quotidien sur les consommations des données des outils Microsoft 365. Nous retrouvons aussi, l’indicateur Carbonscore, qui permet de savoir si un utilisateur a un usage respectueux de l'environnement. De plus, des équivalences sont fournies pour traduire les données de consommation en termes concrets pour les utilisateurs, facilitant ainsi leur compréhension.
 Le tableau de bord était difficile à prendre en main en raison de la grande quantité d’informations affichée à l’écran, ce qui rendait la navigation et la compréhension des données complexes pour les utilisateurs. La refonte a donc visé à améliorer la présentation et l’organisation de ces informations pour améliorer l’expérience utilisateur.
 Mettre en place cette refonte du tableau de bord était essentiel pour garder une base solide d’utilisateurs sur l’application.</p>
-<div class="d-flex flex-column align-center text-black">
-  <p class="text-black text-center  text-subtitle-1 font-weight-bold">2) Objectifs du projet : </p>
+<div class="d-flex flex-column align-center primary">
+  <p class="primary text-center  text-subtitle-1 font-weight-bold">2) Objectifs du projet : </p>
   <p class="my-2 text-body-1">Le principal objectif de cette refonte du tableau de bord était de créer un tableau de bord plus simple à comprendre et à prendre en main.</p>
 <a href='../../src/assets/olddashboard.png' target='_blank'>
-<img src="../../src/assets/olddashboard.png" class='bigImgDetail'></img>
+<img src="../../src/assets/olddashboard.png" alt="Image de l'anciene tableua de bord" class='bigImgDetail'></img>
 </a>
 <p class="my-2">Figure : Ancien tableau de bord</p>
 </div>
@@ -138,7 +138,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="text-body-1 mt-2">Une fonctionnalité très demandée parmi nos clients qui souhaitaient avoir un récapitulatif plus poussé en comparant les consommations des utilisateurs par mois et par année afin de voir l’évolution des consommations des utilisateurs et voir si la plateforme avait un impact sur leurs usages de leurs outils informatiques.</p>
 <p class="text-body-1 mt-2">La refonte du tableau de bord a également nécessité des ajustements au niveau de l'affichage des graphiques GraphJS. Il a fallu non seulement repositionner les légendes à l'extérieur de certains graphiques pour améliorer leur lisibilité, mais aussi modifier la manière dont certains éléments étaient affichés au centre des graphiques, comme dans le cas des graphiques en forme de donut. Ces modifications ont permis d'optimiser l'espace disponible et d'améliorer la présentation visuelle des données.</p>
 
-<p class="text-black text-center text-subtitle-1 font-weight-bold">3) Gestion de Projet : </p>
+<p class="primary text-center text-subtitle-1 font-weight-bold">3) Gestion de Projet : </p>
 <p class="mt-2 text-body-1">Sur ce projet comme dans tous les autres projets, nous travaillons avec la méthode de gestion agile Kanban, qui vise à s’adapter aux demandes changeantes du client afin que le produit corresponde aux nouvelles attentes du client. Cette approche est commune à toutes les méthodes de gestion agile, mais Kanban a comme principal atout de prôner une visualisation graphique des tâches à l’aide de tableaux de bord.</p>
 
 <p class="text-body-1">Cette visualisation permet de hiérarchiser la priorité des tâches et de suivre l’avancement d’un projet ainsi que d’améliorer la collaboration entre les différents membres de l’équipe, par exemple, si on remarque qu’une tâche est en cours depuis longtemps sur le tableau de bord, on peut lui proposer de l’aide sur ce projet complexe.</p>
@@ -151,7 +151,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="text-body-1">Pour gérer les différents projets, deux tableaux de gestion de projet ont été créés :</p>
 
 <a href='../../src/assets/Backlog.png' target='_blank'>
-<img src="../../src/assets/Backlog.png" class='bigImgDetail'></img>
+<img src="../../src/assets/Backlog.png" alt="Backlog" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Tableau Backlog</strong></p>
 
@@ -161,7 +161,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="mt-2 text-body-1">Un tableau Backlog regroupe tous les projets qui n’ont pas encore débuté. On y retrouve aussi des idées non concrètes de projet qui sont encore sujet à débat.</p>
 
 <a href='../../src/assets/tableaudebord.png' target='_blank'>
-<img src="../../src/assets/tableaudebord.png" class='bigImgDetail'></img>
+<img src="../../src/assets/tableaudebord.png" alt="Tableau de bord Jira" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Tableau de bord Jira</strong></p>
 <p class="my-2 text-body-1">Un tableau de bord Jira qui va regrouper les projets en cours. Il permet de suivre l’avancée des différents projets. Ce tableau est basé sur le modèle de ticketing.</p>
@@ -184,7 +184,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p>Au lancement d’un projet, les différentes tâches sont transférées du tableau de backlog au tableau de bord, et ont le statut <strong>TODO</strong>. Ensuite, celui qui est affecté à cette tâche va mettre à jour le statut du ticket selon l’avancée du ticket, ce qui permet d’améliorer le suivi global de l’entreprise sur un projet.</p>
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/Ticket.png' target='_blank'>
-<img src="../../src/assets/Ticket.png" class='bigImgDetail'></img>
+<img src="../../src/assets/Ticket.png" alt="Ticket Jira" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Un ticket sur Jira</strong></p>
 </div>
@@ -216,14 +216,14 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <div class="d-flex flex-column align-center my-4">
 
 <a href='../../src/assets/epic_refonte_dashboard.png' target='_blank'>
-<img src="../../src/assets/epic_refonte_dashboard.png" class='bigImgDetail'></img>
+<img src="../../src/assets/epic_refonte_dashboard.png" alt="Epic Refonte du tableau de bord" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Décomposition des tâches sous l’épic « Refonte du dashboard »</strong></p>
 </div>
 
 <p>Les tâches ont été décomposées sous forme de <strong>users stories</strong> pour les fonctionnalités à implémenter sur le tableau de bord. Les users stories sont des phrases simples qui décrivent le besoin d’un utilisateur. Pour les fonctionnalités techniques, de simples phrases décrivent l’ajout technique à implémenter dans la plateforme.</p>
 
-<p class="text-black text-center  text-subtitle-1 font-weight-bold my-2">4) Cycle de vie d'un projet</p>
+<p class="primary text-center  text-subtitle-1 font-weight-bold my-2">4) Cycle de vie d'un projet</p>
 <div class='my-2'>
 <h2 class="text-subtitle-1" style="text-decoration:underline">1) Initialisation du projet : </h2>
 <p>Le développement commence par une demande spécifique d’un client ou par une fonctionnalité souhaitée par l’équipe de développement. Ces demandes spécifiques sont formulées par le biais de mails envoyés à l’organisation ou lors de réunions dédiées, où les discussions portent sur le logiciel et les améliorations potentielles.</p>
@@ -270,7 +270,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
   
   
 <a href='../../src/assets/discussionTeams.png' target='_blank'>
-  <img class="mt-4" src="../../src/assets/discussionTeams.png" class='bigImgDetail'></img>
+  <img class="mt-4" src="../../src/assets/discussionTeams.png" alt="Discussions Teams" class='bigImgDetail'></img>
 </a>
   
 </div>
@@ -284,14 +284,14 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 
 
-<p class="text-black text-center  text-subtitle-1 font-weight-bold mt-2">5) Réalisation : </p>
+<p class="primary text-center  text-subtitle-1 font-weight-bold mt-2">5) Réalisation : </p>
 <p>Ce projet a sollicité 3 développeurs pour l’ensemble du projet.</p>
 
 <p>Un développeur s’est occupé de préparer le terrain en découpant les besoins des utilisateurs en une épic et en décomposant les besoins en plusieurs tâches. Il a ensuite rédigé une documentation technique sous le logiciel Confluence pour décrire les fonctionnalités à mettre en place pour répondre au besoin des utilisateurs. Il a également intégré différents schémas d’architecture de base de données avec l’outil MERMAID dans Confluence et a mis en place une architecture pour la partie back-end avec la définition des différentes routes et la définition des retours de ces différentes routes, ainsi que la création d’interfaces, permettant ainsi de garantir un développement et une maintenance plus facile de la fonctionnalité mise en place.</p>
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/mermaidSchema.jpg' target='_blank'>
-<img src="../../src/assets/mermaidSchema.jpg" class='bigImgDetail'></img>
+<img src="../../src/assets/mermaidSchema.jpg" alt="Schèma de base de données MERMAID"class='bigImgDetail'></img>
 </a>
 <p>Figure : Schéma d’architecture de base de données réalisées avec MERMAID</p>
 
@@ -301,7 +301,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/route.png' target='_blank'>
-  <img src="../../src/assets/route.png" class='bigImgDetail'></img>
+  <img src="../../src/assets/route.png" alt="Schéma d’architecture des routes API" class='bigImgDetail'></img>
 </a>
   <p>Figure : Exemple de schéma d’architecture des routes d’un autre projet</p>
 </div>
@@ -311,7 +311,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/figma_design.jpg' target='_blank'>
-<img src="../../src/assets/figma_design.jpg" class='bigImgDetail'></img>
+<img src="../../src/assets/figma_design.jpg" alt="Maquette du tableau de bord" class='bigImgDetail'></img>
 </a>
 <p>Figure : Maquette du tableau de bord réalisée sur Figma</p>
 </div>
@@ -324,14 +324,14 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/TableaudebordVueEnsemble.jpg' target='_blank'>
-  <img src="../../src/assets/TableaudebordVueEnsemble.jpg" class='bigImgDetail'></img>
+  <img src="../../src/assets/TableaudebordVueEnsemble.jpg" alt="Page Tableau de bord Vue d'ensemble" class='bigImgDetail'></img>
 </a>
   <p>Figure : Tableau de bord « Vue d’ensemble »</p>
 </div>
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/TableaudebordMesusages.png' target='_blank'>
-  <img src="../../src/assets/TableaudebordMesusages.png" class='bigImgDetail'></img>
+  <img src="../../src/assets/TableaudebordMesusages.png" alt="Page Tableau de bord Mes usages" class='bigImgDetail'></img>
   </a>
   <p>Figure : Tableau de bord « Mes usages »</p>
 </div>
@@ -345,7 +345,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 <a href='../../src/assets/postman.jpg' target='_blank'>
-  <img src="../../src/assets/postman.jpg" class='bigImgDetail'></img>
+  <img src="../../src/assets/postman.jpg" alt="Postman" class='bigImgDetail'></img>
 </a>
   <p>Figure : Postman, un outil de test des routes API</p>
 </div>
@@ -384,7 +384,7 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
       </div>
       <div class="d-flex flex-column align-center mt-5" style="cursor: pointer;">
         <a href="../../src/assets/rapportAlternance.pdf" style="text-decoration: none;">
-          <img src="../../src/assets/rapportAlternance.png" width="150" ></v-img>
-          <p class="text-black text-center text-body-1 font-weight-bold">Rapport d'alternance</p>
+          <img src="../../src/assets/rapportAlternance.png" alt="Rapport d'alternance Image" width="150" ></v-img>
+          <p class="primary text-center text-body-1 font-weight-bold">Rapport d'alternance</p>
         </a>
       </div>

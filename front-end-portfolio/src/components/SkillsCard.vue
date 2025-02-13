@@ -3,7 +3,7 @@
             <v-col v-for="(expériences) in typeLanguage">
                 <div class="d-flex" :class="smAndDown ?'d-flex flex-column mb-2':'d-flex'">
                 <div class="d-flex flex-column align-center mr-8" >
-                <v-img :src="expériences.srcImg" :width="150" :height="100"></v-img>
+                <v-img :src="expériences.srcImg" :width="150" :height="100" :alt="`${expériences.language} logo`"></v-img>
                     <p class="text-body-1 text-primary font-weight-bold text-center">{{ expériences.language }}</p>
                 </div>
                 <v-card color="card" class="mr-9 pa-2" style="border: 2px solid;" v-if="withoutCard===false" >

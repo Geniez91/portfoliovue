@@ -1,7 +1,7 @@
  <div class="d-flex flex-column align-center mt-16">
         <p class="text-black font-weight-bold text-h4">Apprenti Développeur Full Stack</p>
         <div class="mt-7">
-          <img src="../../src/assets/carbonscore.jpg" alt="drawing" width="120"/>
+          <img src="../../src/assets/carbonscore.jpg" alt="Carbonscore Logo" alt="drawing" width="120"/>
         </div>
         <div class="mt-5">
           <p class="text-black text-h6">Fruity-Ice</p>

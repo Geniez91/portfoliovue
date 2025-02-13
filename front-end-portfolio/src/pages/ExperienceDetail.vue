@@ -1,7 +1,7 @@
 <template>
     <v-breadcrumbs divider=">" bg-color="info" class="text-black" :items="Breadcrumbs"></v-breadcrumbs>
   <div class="m-0">
-    <v-card class="text-black pb-10" color="#39B8B1"height="fit-content">
+    <v-card class="text-primary pb-10" color="secondary"height="fit-content">
         <vue-markdown-render class='ma-7':source="markdownContent" :options="{ html: true }"></vue-markdown-render>
     </v-card>
 

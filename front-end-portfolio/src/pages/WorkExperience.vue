@@ -9,13 +9,13 @@
                 </div>
                 <v-card color="secondary" hover :to="`workExperience/${experience.entreprise}`" >
                     <div class="d-flex">
-                        <v-img :src="experience.entrepriseImg" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
+                        <v-img :src="experience.entrepriseImg" :alt="`${experience.entreprise} logo`" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
                         <div class="d-flex flex-column justify-center ml-3">
                             <p class="mb-2 text-primary font-weight-bold text-subtitle-1">{{ experience.name }}</p>
                             <p class="text-subtitle-1 text-primary">{{ experience.entreprise }}</p>
                         </div>
                     </div>
-                    <v-divider class="border-opacity-75" color="black"></v-divider>
+                    <v-divider class="border-opacity-75" color="primary"></v-divider>
                     <div class="ml-3 mt-2">
                         <p class="text-primary text-subtitle-1" style="text-decoration: underline;">Taches Effectués : </p>
                         <ul>
@@ -29,7 +29,7 @@
                        
                         <v-row class="my-3">
                             <v-col md="1" sm="3" v-for="img in experience.stackImg">
-                                <v-img :src="img" style="width: 60px; height: 60px;"></v-img>
+                                <v-img :src="img" :alt="`${experience.stackImg} logo`" style="width: 60px; height: 60px;"></v-img>
                             </v-col>
                         </v-row>
                    

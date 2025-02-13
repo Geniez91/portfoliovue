@@ -3,7 +3,7 @@
             <div v-for="(expériences) in languageExperience" class="mt-4">
                 <div class="d-flex">
                 <div class="d-flex flex-column align-center mr-8">
-                <v-img :src="expériences.srcImg" :width="130" :height="100"></v-img>
+                <v-img :src="expériences.srcImg" :width="130" :height="100" :alt="`${expériences.language} logo`"></v-img>
                     <p class="text-body-1 text-primary font-weight-bold">{{ expériences.language }}</p>
                 </div>
                 <div class="d-flex align-center">

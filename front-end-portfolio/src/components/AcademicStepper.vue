@@ -11,7 +11,7 @@
             <v-btn prepend-icon="mdi-earth" variant="text" class="text-subtitle-1 font-weight-medium pa-0" :href="formation.website">Site web</v-btn>
         </div>
           <p style="max-width: 500px;" v-if="formation.description" class="text-body-1" >{{ formation.description }}</p>
-          <v-img class="mt-3" :src="formation.logo" :width="80"></v-img>
+          <v-img class="mt-3" :alt="`${formation.name} logo`" :src="formation.logo" :width="80"></v-img>
      
         </div>
 

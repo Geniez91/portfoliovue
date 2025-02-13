@@ -57,7 +57,7 @@
             </div>
             <v-row class="my-2 mx-3" style="width: fit-content;">
                 <v-col v-for="img in projet.stackImg" :key="img.name" class="mr-4">
-                    <v-img :src="img.img" style="width: 60px; height: 60px;" :key="img.name"></v-img>
+                    <v-img :src="img.img" :alt="`${img.name} image`" style="width: 60px; height: 60px;" :key="img.name"></v-img>
                 </v-col>
             </v-row>
             <div class="d-flex flex-column  mt-2">
@@ -66,7 +66,7 @@
         </v-card>
     </v-col>
 </v-row> 
-            <v-divider class="border-opacity-100 mt-10" color="black"></v-divider>
+            <v-divider class="border-opacity-100 mt-10" color="primary"></v-divider>
             </div>
         </div>
 
