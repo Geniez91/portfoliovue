@@ -74,11 +74,11 @@
 </template>
 <script lang="ts" setup>
 import type { IProject } from '@/interfaces/interfaces';
-import Portfolio from '../assets/portfolio.png'
-import Experience from '../assets/experience.png'
-import Formations from '../assets/formations.png'
-import Facebook from '../assets/facebook-logo.jpg'
-import pointNews from '../assets/pointnews.png'
+import Portfolio from '/assets/portfolio.png'
+import Experience from '/assets/experience.png'
+import Formations from '/assets/formations.png'
+import Facebook from '/assets/facebook-logo.jpg'
+import pointNews from '/assets/pointnews.png'
 import { computed, ref } from 'vue';
 import { ANGULAR, C, CSS, FIREBASE, FLUTTER, Go, HTML, JAVASCRIPT, NEST, PANDAS, PHP, PYTHON, REACT, REACT_NATIVE, REDIS, SKLEARN, TYPESCRIPT, VUE } from '@/constant/constant';
 import {filterProjet, getTagsFilter, getTagStack, projetsTitle, searchProjetFilter, sortProjetByYear, toggleTag} from '../services/project.service'

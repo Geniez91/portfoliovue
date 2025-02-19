@@ -1,10 +1,10 @@
 <template>
 <div class="d-flex">
     <a href="https://github.com/Geniez91?tab=repositories" class="cardLinks mr-12">
-      <v-img src="../assets/github.jpg" alt="GitHub" />
+      <v-img src="/assets/github.jpg" alt="GitHub" />
     </a>
       <a href="https://www.linkedin.com/in/jeremy-weltmann/" class="cardLinks">
-          <v-img  src="../assets//linkedin.png" alt="Mon LinkedIn" />
+          <v-img  src="/assets/linkedin.png" alt="Mon LinkedIn" />
         </a>
     </div>
 </template>

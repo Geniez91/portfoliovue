@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import ProgrammingImage from '@/assets/programming.png';
+import ProgrammingImage from '/assets/programming.png';
 import ButtonArrowTo from '@/components/ButtonArrowTo.vue';
 import CircleImage from '@/components/CircleImage.vue';
 import WelcomeDescription from '@/components/WelcomeDescription.vue';

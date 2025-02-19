@@ -46,7 +46,7 @@
   
   <script lang="ts" setup>
   import type { IItemNavBar } from '@/interfaces/interfaces';
-  import MonCV from '../assets/CV_WELTMANN_JEREMY_2025.pdf'
+  import MonCV from '/assets/CV_WELTMANN_JEREMY_2025.pdf'
 import { useDisplay, useTheme } from 'vuetify';
 import { ref } from 'vue';
 

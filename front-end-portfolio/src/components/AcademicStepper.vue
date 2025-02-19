@@ -20,10 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import Efrei from '../assets/efrei.jpg'
-import IUTParis from '../assets/iutParis.png'
-import LyceeParcVilgenis from '../assets/lyceeparcvilgenis.png'
-import LyceeJulesVerne from '../assets/julesverne.jpeg'
+import Efrei from '/assets/efrei.jpg'
+import IUTParis from '/assets/iutParis.png'
+import LyceeParcVilgenis from '/assets/lyceeparcvilgenis.png'
+import LyceeJulesVerne from '/assets/julesverne.jpeg'
 import type { IAcademic } from '@/interfaces/interfaces';
 
 const formations:IAcademic[] = [

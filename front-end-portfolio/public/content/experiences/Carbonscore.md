@@ -1,7 +1,8 @@
- <div class="d-flex flex-column align-center mt-16">
+
+  <div class="d-flex flex-column align-center mt-16">
         <p class="primary font-weight-bold text-h4">Apprenti Développeur Full Stack</p>
         <div class="mt-7">
-          <img src="../../src/assets/carbonscore.jpg" alt="Carbonscore logo" width="120"/>
+          <img src="/assets/carbonscore.jpg" alt="Carbonscore logo" width="120"/>
         </div>
         <div class="mt-5">
           <p class="primary text-h6">TechupClimate/Carbonscore</p>
@@ -30,12 +31,12 @@
 <div class="d-flex flex-column align-center mt-3" id="Contexte">
         <p class="text-h6 primary font-weight-bold">Contexte</p>
         <div class="mt-6">
-          <img src="../../src/assets/impactenvironnemental.jpg" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
+          <img src="/assets/impactenvironnemental.jpg" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
         </div>
         <p class="my-6 primary text-body-1 text-center">TechupClimate est une entreprise spécialisée dans une solution logicielle qui se nomme « CarbonScore » dont l’objectif est de sensibiliser les collaborateurs des entreprises sur l’impact environnemental du numérique. Cette solution vise à leur faire prendre conscience que leurs usages du numérique peuvent entraîner des répercussions sur notre planète.</p>
         <div>
-        <a href='../../src/assets/dashboardrefonte.png' target='_blank'>
-          <img src="../../src/assets/dashboardrefonte.png" alt="Image Refonte du tableau de bord" class="bigImgDetail"></v-img>
+        <a href='/assets/dashboardrefonte.png' target='_blank'>
+          <img src="/assets/dashboardrefonte.png" alt="Image Refonte du tableau de bord" class="bigImgDetail"></v-img>
         </a>
         </div>
         <p class="text-center primary text-body-1 my-6">La solution logicielle CarbonScore permet aux collaborateurs des entreprises d’obtenir un indicateur, le « CarbonScore » qui évalue si leur performance en termes de consommation numérique est respectueuse de l’environnement ou non.
@@ -128,8 +129,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <div class="d-flex flex-column align-center primary">
   <p class="primary text-center  text-subtitle-1 font-weight-bold">2) Objectifs du projet : </p>
   <p class="my-2 text-body-1">Le principal objectif de cette refonte du tableau de bord était de créer un tableau de bord plus simple à comprendre et à prendre en main.</p>
-<a href='../../src/assets/olddashboard.png' target='_blank'>
-<img src="../../src/assets/olddashboard.png" alt="Image de l'anciene tableua de bord" class='bigImgDetail'></img>
+<a href='/assets/olddashboard.png' target='_blank'>
+<img src="/assets/olddashboard.png" alt="Image de l'anciene tableua de bord" class='bigImgDetail'></img>
 </a>
 <p class="my-2">Figure : Ancien tableau de bord</p>
 </div>
@@ -150,8 +151,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <div class="d-flex flex-column align-center my-3">
 <p class="text-body-1">Pour gérer les différents projets, deux tableaux de gestion de projet ont été créés :</p>
 
-<a href='../../src/assets/Backlog.png' target='_blank'>
-<img src="../../src/assets/Backlog.png" alt="Backlog" class='bigImgDetail'></img>
+<a href='/assets/Backlog.png' target='_blank'>
+<img src="/assets/Backlog.png" alt="Backlog" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Tableau Backlog</strong></p>
 
@@ -160,8 +161,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <div class="d-flex flex-column align-center mt-3">
 <p class="mt-2 text-body-1">Un tableau Backlog regroupe tous les projets qui n’ont pas encore débuté. On y retrouve aussi des idées non concrètes de projet qui sont encore sujet à débat.</p>
 
-<a href='../../src/assets/tableaudebord.png' target='_blank'>
-<img src="../../src/assets/tableaudebord.png" alt="Tableau de bord Jira" class='bigImgDetail'></img>
+<a href='/assets/tableaudebord.png' target='_blank'>
+<img src="/assets/tableaudebord.png" alt="Tableau de bord Jira" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Tableau de bord Jira</strong></p>
 <p class="my-2 text-body-1">Un tableau de bord Jira qui va regrouper les projets en cours. Il permet de suivre l’avancée des différents projets. Ce tableau est basé sur le modèle de ticketing.</p>
@@ -183,8 +184,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <p>Au lancement d’un projet, les différentes tâches sont transférées du tableau de backlog au tableau de bord, et ont le statut <strong>TODO</strong>. Ensuite, celui qui est affecté à cette tâche va mettre à jour le statut du ticket selon l’avancée du ticket, ce qui permet d’améliorer le suivi global de l’entreprise sur un projet.</p>
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/Ticket.png' target='_blank'>
-<img src="../../src/assets/Ticket.png" alt="Ticket Jira" class='bigImgDetail'></img>
+<a href='/assets/Ticket.png' target='_blank'>
+<img src="/assets/Ticket.png" alt="Ticket Jira" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Un ticket sur Jira</strong></p>
 </div>
@@ -215,8 +216,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <div class="d-flex flex-column align-center my-4">
 
-<a href='../../src/assets/epic_refonte_dashboard.png' target='_blank'>
-<img src="../../src/assets/epic_refonte_dashboard.png" alt="Epic Refonte du tableau de bord" class='bigImgDetail'></img>
+<a href='/assets/epic_refonte_dashboard.png' target='_blank'>
+<img src="/assets/epic_refonte_dashboard.png" alt="Epic Refonte du tableau de bord" class='bigImgDetail'></img>
 </a>
 <p><strong>Figure : Décomposition des tâches sous l’épic « Refonte du dashboard »</strong></p>
 </div>
@@ -269,8 +270,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
   <p>Une discussion est créée sur Teams à chaque fois qu’une fonctionnalité est terminée, nous permettant d’obtenir des retours et des conseils sur certains éléments. Si les retours sont positifs et que les tests sont réussis, la fonctionnalité est mise en production. Si des remarques négatives sont émises, elles permettent d’identifier les problèmes et de mettre en place des actions correctrices.</p>
   
   
-<a href='../../src/assets/discussionTeams.png' target='_blank'>
-  <img class="mt-4" src="../../src/assets/discussionTeams.png" alt="Discussions Teams" class='bigImgDetail'></img>
+<a href='/assets/discussionTeams.png' target='_blank'>
+  <img class="mt-4" src="/assets/discussionTeams.png" alt="Discussions Teams" class='bigImgDetail'></img>
 </a>
   
 </div>
@@ -290,8 +291,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p>Un développeur s’est occupé de préparer le terrain en découpant les besoins des utilisateurs en une épic et en décomposant les besoins en plusieurs tâches. Il a ensuite rédigé une documentation technique sous le logiciel Confluence pour décrire les fonctionnalités à mettre en place pour répondre au besoin des utilisateurs. Il a également intégré différents schémas d’architecture de base de données avec l’outil MERMAID dans Confluence et a mis en place une architecture pour la partie back-end avec la définition des différentes routes et la définition des retours de ces différentes routes, ainsi que la création d’interfaces, permettant ainsi de garantir un développement et une maintenance plus facile de la fonctionnalité mise en place.</p>
 
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/mermaidSchema.jpg' target='_blank'>
-<img src="../../src/assets/mermaidSchema.jpg" alt="Schèma de base de données MERMAID"class='bigImgDetail'></img>
+<a href='/assets/mermaidSchema.jpg' target='_blank'>
+<img src="/assets/mermaidSchema.jpg" alt="Schèma de base de données MERMAID"class='bigImgDetail'></img>
 </a>
 <p>Figure : Schéma d’architecture de base de données réalisées avec MERMAID</p>
 
@@ -300,8 +301,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="mt-2">Le design de ces différents schémas et architectures a été mûrement réfléchi lors de réunions spécifiques entre les différents membres de l’équipe de développement pour que tout le monde soit bien d’accord avec ce qui allait être mis en place.</p>
 
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/route.png' target='_blank'>
-  <img src="../../src/assets/route.png" alt="Schéma d’architecture des routes API" class='bigImgDetail'></img>
+<a href='/assets/route.png' target='_blank'>
+  <img src="/assets/route.png" alt="Schéma d’architecture des routes API" class='bigImgDetail'></img>
 </a>
   <p>Figure : Exemple de schéma d’architecture des routes d’un autre projet</p>
 </div>
@@ -310,8 +311,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p class="mt-2">Enfin, il a maquetté les interfaces du nouveau tableau de bord grâce au logiciel Figma en suivant les spécifications définies dans la documentation technique.</p>
 
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/figma_design.jpg' target='_blank'>
-<img src="../../src/assets/figma_design.jpg" alt="Maquette du tableau de bord" class='bigImgDetail'></img>
+<a href='/assets/figma_design.jpg' target='_blank'>
+<img src="/assets/figma_design.jpg" alt="Maquette du tableau de bord" class='bigImgDetail'></img>
 </a>
 <p>Figure : Maquette du tableau de bord réalisée sur Figma</p>
 </div>
@@ -323,15 +324,15 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p>La refonte du tableau de bord a inclus l'ajout d'un système d'onglets pour améliorer la navigation et l'organisation des informations. Deux onglets principaux ont été créés : un onglet "Vue d'ensemble" présentant l’impact environnemental des outils ainsi que l’indicateur Carbonscore, et un onglet « Mes usages » offrant une analyse détaillée de la consommation des utilisateurs par type d'usage. Ce système d'onglets, conçu comme un composant réutilisable, facilite la navigation et l'accès aux informations pertinentes, tout en optimisant le développement futur en évitant la duplication de code. Alors qu’auparavant, toutes ces informations étaient toutes sur la même page, ce qui limitait sa lisibilité et sa compréhension.</p>
 
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/TableaudebordVueEnsemble.jpg' target='_blank'>
-  <img src="../../src/assets/TableaudebordVueEnsemble.jpg" alt="Page Tableau de bord Vue d'ensemble" class='bigImgDetail'></img>
+<a href='/assets/TableaudebordVueEnsemble.jpg' target='_blank'>
+  <img src="/assets/TableaudebordVueEnsemble.jpg" alt="Page Tableau de bord Vue d'ensemble" class='bigImgDetail'></img>
 </a>
   <p>Figure : Tableau de bord « Vue d’ensemble »</p>
 </div>
 
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/TableaudebordMesusages.png' target='_blank'>
-  <img src="../../src/assets/TableaudebordMesusages.png" alt="Page Tableau de bord Mes usages" class='bigImgDetail'></img>
+<a href='/assets/TableaudebordMesusages.png' target='_blank'>
+  <img src="/assets/TableaudebordMesusages.png" alt="Page Tableau de bord Mes usages" class='bigImgDetail'></img>
   </a>
   <p>Figure : Tableau de bord « Mes usages »</p>
 </div>
@@ -344,8 +345,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <p>Toutes ces routes respectent l’architecture REST. Il s’agit d’un style d'architecture pour concevoir des services web qui s'appuie sur les protocoles HTTP et des méthodes HTTP standards telles que GET, POST, PUT, DELETE afin d’effectuer des opérations CRUD (Create, Read, Update, Delete). Ces opérations permettent de manipuler des ressources identifiées par des URL uniques. Les données sont échangées dans un format standardisé, comme JSON, ce qui facilite l'interopérabilité entre différents systèmes.</p>
 
 <div class="d-flex flex-column align-center my-4">
-<a href='../../src/assets/postman.jpg' target='_blank'>
-  <img src="../../src/assets/postman.jpg" alt="Postman" class='bigImgDetail'></img>
+<a href='assets/postman.jpg' target='_blank'>
+  <img src="/assets/postman.jpg" alt="Postman" class='bigImgDetail'></img>
 </a>
   <p>Figure : Postman, un outil de test des routes API</p>
 </div>
@@ -383,8 +384,8 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
      </div>
       </div>
       <div class="d-flex flex-column align-center mt-5" style="cursor: pointer;">
-        <a href="../../src/assets/rapportAlternance.pdf" style="text-decoration: none;">
-          <img src="../../src/assets/rapportAlternance.png" alt="Rapport d'alternance Image" width="150" ></v-img>
+        <a href="/assets/rapportAlternance.pdf" style="text-decoration: none;">
+          <img src="/assets/rapportAlternance.png" alt="Rapport d'alternance Image" width="150" ></v-img>
           <p class="primary text-center text-body-1 font-weight-bold">Rapport d'alternance</p>
         </a>
       </div>
