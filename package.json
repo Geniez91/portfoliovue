@@ -1,0 +1,17 @@
+{
+  "name": "monorepo-project",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "front-end-portfolio",
+    "back-end-portfolio"
+  ],
+  "scripts": {
+    "dev:frontend": "npm --workspace front-end-portfolio run dev",
+    "dev:backend": "npm --workspace back-end-portfolio run start:dev",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
