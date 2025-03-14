@@ -30,6 +30,9 @@
     <v-btn v-if="token" @click="connexionStore.logOut()" >
       <v-icon icon="mdi-logout" size="32" ></v-icon>
     </v-btn>
+    <v-btn v-else @click="connexionStore.logOut()" to="admin-login" >
+      <v-icon icon="mdi-account-circle" size="32" ></v-icon>
+    </v-btn>
     
   </v-app-bar>
   <v-navigation-drawer color="navbar" v-model="drawer" temporary class="d-md-none">
