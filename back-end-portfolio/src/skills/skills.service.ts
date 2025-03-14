@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from "@/prisma/prisma.service"
+import { PrismaService } from "../prisma/prisma.service"
 import {  AddSkills, Skills } from './skills.interface';
 import { plainToInstance } from 'class-transformer';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
