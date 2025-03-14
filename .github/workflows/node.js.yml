@@ -39,6 +39,10 @@ jobs:
         run: npm test
         working-directory: front-end-portfolio
 
+      - name: Check TypeScript Version
+        run: npx tsc -v
+        working-directory: back-end-portfolio  
+
       - name: Install dependencies back-end
         run: npm ci
         working-directory: back-end-portfolio
