@@ -18,7 +18,8 @@ export class SkillsService {
 
     async getAllSkills(): Promise<Skills[]> {
         const result = await this.prisma.skills.findMany();
-        return plainToInstance(Skills, result, { excludeExtraneousValues: true }) as Skills[];
+        const resultArray = Array.isArray(result) ? result : [result];  // Si c'est un objet, le transformer en tableau
+return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
     }
     
 
