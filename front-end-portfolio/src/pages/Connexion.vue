@@ -18,10 +18,10 @@
             </div>
             <div >
                 <p class="text-primary text-body-1 font-weight-bold mb-5">Mot de passe : </p>
-                <v-text-field v-model="name" :rules="[emptyRules]" @update:model-value="name=$event" ></v-text-field>
+                <v-text-field v-model="password" :rules="[emptyRules]" @update:model-value="password=$event" ></v-text-field>
             </div>
             <div class="d-flex flex-column align-center">
-                <v-btn type="submit" :disabled="!isFormValid" @Click="">Valider</v-btn>
+                <v-btn type="submit" :disabled="!isFormValid" @Click="login(email,password)">Valider</v-btn>
             </div>
             </v-card>
         </v-form>
@@ -32,9 +32,13 @@
 import { useDisplay } from 'vuetify';
 import {emailRules,emptyRules} from '../services/contact.service'
 import { ref } from 'vue';
+import {Connexion} from '../services/connexion.service'
+import { useConnexionStore } from '@/store/connexion.store';
 const {smAndDown}=useDisplay()
 
-const name=ref('');
+const password=ref('');
 const email=ref('');
 const isFormValid=ref(false);
+
+const {login,token}=useConnexionStore()
 </script>

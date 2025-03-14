@@ -24,8 +24,11 @@
 
     <v-spacer class="d-none d-md-flex"></v-spacer>
   
-    <v-btn icon="mdi mdi-moon-warning-crescent" @click="ChangeTheme()">
+    <v-btn @click="ChangeTheme()">
       <v-icon :icon=" theme.global.name.value === 'light' ? 'mdi-white-balance-sunny':'mdi-moon-waxing-crescent'" size="32"></v-icon>
+    </v-btn>
+    <v-btn v-if="token" @click="connexionStore.logOut()" >
+      <v-icon icon="mdi-logout" size="32" ></v-icon>
     </v-btn>
     
   </v-app-bar>
@@ -48,9 +51,12 @@
   import type { IItemNavBar } from '@/interfaces/interfaces';
   import MonCV from '/assets/CV_WELTMANN_JEREMY_2025.pdf'
 import { useDisplay, useTheme } from 'vuetify';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useConnexionStore } from '@/store/connexion.store';
 
 const theme = useTheme()
+const connexionStore = useConnexionStore();
+const token = computed(() => connexionStore.token);
 
   const {mdAndUp}=useDisplay()
 

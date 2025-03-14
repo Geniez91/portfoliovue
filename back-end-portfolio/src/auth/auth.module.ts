@@ -8,7 +8,7 @@ import { JWT_CONSTANT } from './auth.constant';
   imports:[    JwtModule.register({
     global:true,
     secret:JWT_CONSTANT.secret,
-    signOptions:{expiresIn:'60s'}
+    signOptions:{expiresIn:'3h'}
   })],
   providers: [AuthService],
   controllers: [AuthController]

@@ -27,7 +27,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: front-end-portfolio/package-lock.json
 
-      - name: Install dependencies
+      - name: Install dependencies front-end
         run: npm ci
         working-directory: front-end-portfolio
 
@@ -38,6 +38,15 @@ jobs:
       - name: Run tests
         run: npm test
         working-directory: front-end-portfolio
+
+      - name: Install dependencies back-end
+        run: npm ci
+        working-directory: back-end-portfolio
+
+      - name: Build project
+        run: npm run build --if-present
+        working-directory: back-end-portfolio
+
 
       - name: Create and push tag
         if: success()

@@ -18,6 +18,14 @@
                         </p>
                     </div>      
                 </v-card>
+                <div class="d-flex flex-column justify-space-evenly" v-if="token">
+                <v-btn color="warning">
+                    <v-icon icon="mdi-pencil"></v-icon>
+                </v-btn>
+                <v-btn color="red">
+                    <v-icon icon="mdi-delete"></v-icon>
+                </v-btn>
+            </div>
             </div>
 
             </v-col>
@@ -26,7 +34,12 @@
 
 <script lang="ts" setup>
 import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import { useConnexionStore } from '@/store/connexion.store';
+import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
+
+const connexionStore = useConnexionStore();
+const token = computed(() => connexionStore.token);
 
 const {smAndDown}=useDisplay()
 const props = defineProps<{

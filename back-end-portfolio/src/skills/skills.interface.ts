@@ -11,8 +11,8 @@ language:string;
 @Type(()=>Number)
 yearsExperience:number;
 @Expose()
-@Type(()=>Number)
-usageExperience:number;
+@Type(()=>Date)
+usageExperience:Date;
 @Expose()
 srcImage:string;
 @Expose()
@@ -26,10 +26,8 @@ language:string;
 @Type(()=>Number)
 yearsExperience:number;
 @Expose()
-@Type(()=>Number)
-usageExperience:number;
-@Expose()
-srcImage:string;
+@Type(()=>Date)
+usageExperience:Date;
 @Expose()
 idType:string
 }

@@ -7,6 +7,106 @@
             <v-btn :class="smAndDown ? 'mb-3':''" v-for="skills in skillstabs" class="mr-3" color="white" :active="skillsShow===skills" active-color="secondary"  :style="{ border: skillsShow !== skills ? '2px solid' : '' }"  @click="changeSkillsMode(skills as TSkillsShow)">{{ skills }}</v-btn>
         </div>
      </div>
+     <v-dialog v-if="dialogAdd" activator="parent" max-width="500">
+        
+            <v-card rounded="lg">
+              <v-card-title class="d-flex justify-space-between align-center">
+                <div class="text-h5 text-medium-emphasis ps-2">
+                  Ajouter une Compétence
+                </div>
+
+                <v-btn
+                  icon="mdi-close"
+                  variant="text"
+                  @click="dialogAdd = false"
+                ></v-btn>
+              </v-card-title>
+
+              <v-divider class="mb-4"></v-divider>
+
+              <v-card-text>
+                <div>
+                <div class="text-medium-emphasis mb-4">
+                  Nom de la compétence : 
+                </div>
+                <v-text-field v-model="nameSkills" @update:model-value="nameSkills=$event" ></v-text-field>
+            </div>
+            <div>
+                <div class="text-medium-emphasis mb-4">
+                  Type de Compétence
+                </div>
+
+                <v-select
+  :items="skillsTypeList"
+  :model-value="selectTypeSkills"
+  @update:model-value="selectTypeSkills=$event"
+></v-select>
+            </div>
+          
+            <div>
+                <div class="text-medium-emphasis mb-4">
+                  Année d'expérience
+                </div>
+
+                <v-number-input
+  :reverse="false"
+  controlVariant="split"
+  label=""
+  :hideInput="false"
+  :inset="false"
+  v-model="yearsExperience"
+></v-number-input>
+            </div>
+            <div>
+                <div class="text-medium-emphasis mb-4">
+                  Dernière utilisation
+                </div>
+                <v-date-input
+      v-model="selectedDate"
+      label="Sélectionnez une date"
+      @change="selectedDate=$event"
+    ></v-date-input>
+            </div>
+          
+
+            <div>
+                <div class="text-medium-emphasis mb-4">
+                  Image d'illustration de la compétence : 
+                </div>
+                <v-file-input label="File input" v-model="imageSkills"></v-file-input>
+            </div>
+              </v-card-text>
+
+              <v-divider class="mt-2"></v-divider>
+
+              <v-card-actions class="my-2 d-flex justify-end">
+                <v-btn
+                  class="text-none"
+                  rounded="xl"
+                  text="Cancel"
+                  @click="dialogAdd = false"
+                ></v-btn>
+
+                <v-btn
+  class="text-none"
+  color="primary"
+  rounded="xl"
+  text="Send"
+  variant="flat"
+  @click="
+    console.log('Selected Year:', selectTypeSkills);
+    addSkills(nameSkills!, yearsExperience!, selectedDate!, imageSkills!, selectTypeSkills!, token!)
+  "
+>
+  Send
+</v-btn>
+
+              </v-card-actions>
+            </v-card>
+         
+        </v-dialog>
+
+
      <div v-if="skillsShow==='Développement Web'">
         <div class="ml-3">
         <div class="mt-5">
@@ -51,6 +151,17 @@
         <p class="text-h6 text-primary">Langues</p>
         <LanguageExperience :language-experience="languageExperience"></LanguageExperience>
     </div>
+    
+</div>
+<v-divider class="border-opacity-75" color="primary"></v-divider>
+
+<div class="d-flex justify-center align-center my-4" style="height: 90px;" v-if="token" >
+    <div class="d-flex align-center">
+        <v-btn variant="text" @click="dialogAdd=true" class="text-white mx-3">
+            <v-icon icon="mdi-plus" size="42"></v-icon>
+            <p class="text-white">Ajouter une Compétence</p>
+        </v-btn>
+    </div>
 </div>
         
    
@@ -79,18 +190,41 @@ import Alecoute from '/assets/a lecoute.png'
 import Serieux from '/assets/serieux.png'
 import France from '/assets/france.png'
 import Anglais from '/assets/anglais.jpg'
-import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
-import {  ref } from 'vue'
+import type { ISkillsExperience, ISkillsLanguage, TSkills, TSkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import {  computed, ref } from 'vue'
 import SkillsCard from '@/components/SkillsCard.vue'
 import LanguageExperience from '@/components/LanguageExperience.vue'
 import ButtonArrowTo from '@/components/ButtonArrowTo.vue'
 import { useDisplay } from 'vuetify'
+import { useConnexionStore } from '@/store/connexion.store'
+import {addSkills} from '@/services/skills.service'
 
 const {smAndDown}= useDisplay()
+const connexionStore = useConnexionStore();
+const token = computed(() => connexionStore.token);
+
+const dialogAdd=ref(false)
+const nameSkills=ref<string>()
+const selectTypeSkills=ref<TSkills>()
+const imageSkills=ref<File>()
+const yearsExperience=ref<number>()
+
+const addSkill=ref<ISkillsExperience>()
+
+const selectedDate = ref<Date>();
+const selectedYear = ref<number>();
+
+function extractYear(date: string):void {
+  if (date) {
+    selectedYear.value = new Date(date).getFullYear();
+  } 
+};
 
 const skillsShow=ref<TSkillsShow>('Développement Web')
 
 const skillstabs:TSkillsShow[]=['Développement Web','Base de donnees','Savoir être','Langues']
+
+const skillsTypeList:TSkills[]=['Front-end','Back-end','Base de données','Languages','Modelisation','Soft Skills']
 
 const frontLanguageExperience:ISkillsExperience[]=[{
     language:'VueJS',
@@ -227,4 +361,5 @@ const languageExperience:ISkillsLanguage[]=[
 function changeSkillsMode(value:TSkillsShow):void{
 skillsShow.value=value
 }
+
 </script>

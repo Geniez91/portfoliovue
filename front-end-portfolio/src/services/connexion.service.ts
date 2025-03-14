@@ -1,0 +1,22 @@
+import type { IHeader } from '@/interfaces/interfaces';
+import axios from 'axios'
+
+const urlConnexion='http://localhost:4000/auth/login'
+
+export async function Connexion(email:string,password:string){
+try{
+    const result = await axios.post(urlConnexion,{email,password})
+    return result
+}
+catch(error){
+    console.error('Erreur lors de la connexion :', error);
+    throw error;
+}
+}
+
+export function addHeaders(token:string) {
+return {
+    Authorization: `Bearer ${token}`, 
+    "Content-Type": "multipart/form-data",
+  }
+}

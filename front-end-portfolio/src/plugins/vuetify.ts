@@ -10,6 +10,8 @@ import 'vuetify/styles'
 
 // Composables
 import { createVuetify, type ThemeDefinition } from 'vuetify'
+import { VNumberInput } from 'vuetify/labs/VNumberInput'
+import { VDateInput } from 'vuetify/labs/components'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 
@@ -57,6 +59,7 @@ const darkTheme:ThemeDefinition={
 }
 
 export default createVuetify({
+  components:{VNumberInput,VDateInput},
   theme: {
     defaultTheme: 'light',
 themes:{

@@ -13,7 +13,7 @@ model skills {
   created_at      DateTime    @default(now()) @db.Timestamptz(6)
   language        String?
   yearsExperience BigInt?
-  usageExperience BigInt?
+  usageExperience DateTime?   @db.Date
   srcImg          String?
   idType          String?
   typeSkills      typeSkills? @relation(fields: [idType], references: [type], onDelete: NoAction, onUpdate: NoAction)

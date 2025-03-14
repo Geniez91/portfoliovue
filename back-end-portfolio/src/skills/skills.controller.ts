@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import {  Skills, SkillsParam } from './skills.interface';
+import {  AddSkills, Skills, SkillsParam } from './skills.interface';
 import { AuthGuard } from '../auth/auth.guard'
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('skills')
 export class SkillsController {
@@ -12,10 +13,14 @@ export class SkillsController {
         return this.skillService.getAllSkills();
     }
 
-    @UseGuards(AuthGuard)
+
+
     @Post()
-     addSkills(@Body()body:Skills):void{
-         this.skillService.addSkills(body)
+    @UseGuards(AuthGuard)
+    @UseInterceptors(FileInterceptor('file'))
+     async addSkills( @UploadedFile() file:Express.Multer.File,@Body()body:AddSkills):Promise<void>{
+        const skillsImg=await this.skillService.uploadImage(file)
+         this.skillService.addSkills(skillsImg,body)
     }
 
     @UseGuards(AuthGuard)
