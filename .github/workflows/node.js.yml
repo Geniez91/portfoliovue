@@ -49,12 +49,14 @@ jobs:
         run: npm ci
         working-directory: back-end-portfolio
 
-        - name: Disable strict mode in TypeScript (GitHub Actions only)
-  run: |
-    if [ "$GITHUB_ACTIONS" = "true" ]; then
-      jq '.compilerOptions.strict = false' tsconfig.json > tmp.json && mv tmp.json tsconfig.json
-    fi
-  working-directory: back-end-portfolio
+      - name: Disable strict mode in TypeScript (GitHub Actions only)
+        run: |
+          if [ "$GITHUB_ACTIONS" = "true" ]; then
+            jq '.compilerOptions.strict = false' tsconfig.json > tmp.json && mv tmp.json tsconfig.json
+          fi
+        working-directory: back-end-portfolio
+      
+      
 
 
       - name: Check Installed Packages
