@@ -9,15 +9,18 @@ export async function createNestApp(): Promise<NestExpressApplication> {
     .setTitle('Your API Title')
     .setDescription('Your API description')
     .setVersion('1.0')
-    .addServer('http://localhost:3000/', 'Local environment')
-    .addServer('https://staging.yourapi.com/', 'Staging')
-    .addServer('https://production.yourapi.com/', 'Production')
     .addTag('Your API Tag')
     .build();
 
     const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
   await app.init();
+
+  if (process.env.NODE_ENV !== 'production') {
+    await app.listen(3000);
+    console.log('Application en cours d\'exécution sur le port 3000');
+  }
+  
   return app as NestExpressApplication; // Casting vers NestExpressApplication
 }
 
