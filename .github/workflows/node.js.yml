@@ -43,6 +43,10 @@ jobs:
         run: npx tsc -v
         working-directory: back-end-portfolio  
 
+      - name: Check Installed Packages
+        run: npm list class-transformer
+        working-directory: back-end-portfolio
+
       - name: Install dependencies back-end
         run: npm ci
         working-directory: back-end-portfolio
