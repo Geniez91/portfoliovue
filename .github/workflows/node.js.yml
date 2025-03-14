@@ -39,10 +39,6 @@ jobs:
         run: npm test
         working-directory: front-end-portfolio
 
-      - name: Check TypeScript Version
-        run: npx tsc -v
-        working-directory: back-end-portfolio  
-
       - name: Clear npm cache
         run: npm cache clean --force
         working-directory: back-end-portfolio
@@ -52,19 +48,6 @@ jobs:
         run: npm ci
         working-directory: back-end-portfolio
 
-      - name: Disable strict mode in TypeScript (GitHub Actions only)
-        run: |
-          if [ "$GITHUB_ACTIONS" = "true" ]; then
-            jq '.compilerOptions.strict = false' tsconfig.json > tmp.json && mv tmp.json tsconfig.json
-          fi
-        working-directory: back-end-portfolio
-      
-      
-
-
-      - name: Check Installed Packages
-        run: npm list class-transformer
-        working-directory: back-end-portfolio
 
       - name: Build project
         run: npm run build --if-present
