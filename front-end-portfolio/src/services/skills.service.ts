@@ -2,7 +2,7 @@ import type { TSkills, TSkillsLanguage } from '@/interfaces/interfaces';
 import axios from 'axios'
 import { addHeaders } from './connexion.service';
 
-const urlSkills='http://localhost:4000/skills'
+const urlSkills='https://portfoliovue-back-end-production.up.railway.app/skills'
 
 
 
