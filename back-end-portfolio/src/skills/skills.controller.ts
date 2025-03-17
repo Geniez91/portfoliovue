@@ -3,7 +3,9 @@ import { SkillsService } from './skills.service';
 import {  AddSkills, Skills, SkillsParam } from './skills.interface';
 import { AuthGuard } from '../auth/auth.guard'
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Skills')
 @Controller('skills')
 export class SkillsController {
 
@@ -15,6 +17,8 @@ export class SkillsController {
 
 
 
+    @ApiBody({type:AddSkills})
+    @ApiConsumes('multipart/form-data')
     @Post()
     @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor('file'))
