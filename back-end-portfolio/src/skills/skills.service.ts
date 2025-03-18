@@ -1,13 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from "../prisma/prisma.service"
 import {  AddSkills, Skills } from './skills.interface';
 import { plainToInstance } from 'class-transformer';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
+import { ELoggerContext } from '@/logger/constant';
 
 @Injectable()
 export class SkillsService {
      private supabase:SupabaseClient;
+     private readonly logger=new Logger(SkillsService.name)
      
     constructor(private prisma:PrismaService, private configService: ConfigService){
                 this.supabase=createClient(
@@ -24,68 +26,81 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
     
 
     async addSkills(file: string, skills: AddSkills):Promise<void>{
-
-        await this.prisma.skills.create({
-            data:{
-                idType:skills.idType,
-                language:skills.language,
-                usageExperience:skills.usageExperience,
-                yearsExperience:skills.yearsExperience,
-                srcImg:file,
-            }
-        })
+        try{
+            await this.prisma.skills.create({
+                data:{
+                    idType:skills.idType,
+                    language:skills.language,
+                    usageExperience:skills.usageExperience,
+                    yearsExperience:skills.yearsExperience,
+                    srcImg:file,
+                }
+            })
+            this.logger.log(`${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`)
+        }
+        catch(error){
+            this.logger.error(`${ELoggerContext.SkillsService.AddSkills} with file : ${file} and language : ${skills.language} with error ${error}`)
+            throw error;
+        }  
     }
 
     async updateSkills(idSkills:number,skills:Skills):Promise<void>{
-        await this.prisma.skills.update({
-            data: {
-                language: skills.language,
-                srcImg: skills.srcImage,
-                idType: skills.idType,
-                usageExperience: skills.usageExperience,
-                yearsExperience: skills.yearsExperience,
-            },
-            where: {
+        try{
+            await this.prisma.skills.update({
+                data: {
+                    language: skills.language,
+                    srcImg: skills.srcImage,
+                    idType: skills.idType,
+                    usageExperience: skills.usageExperience,
+                    yearsExperience: skills.yearsExperience,
+                },
+                where: {
+                    id:idSkills
+                }
+            })
+            this.logger.log(`${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills}`)
+        }
+        catch(error){
+            this.logger.error(`${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills} with error ${error}`)
+            throw error;
+        }
+
+
+}
+async deleteSkills(idSkills:number):Promise<void>{
+    try{
+        await this.prisma.skills.delete({
+            where:{
                 id:idSkills
             }
         })
-}
-async deleteSkills(idSkills:number):Promise<void>{
-    await this.prisma.skills.delete({
-        where:{
-            id:idSkills
-        }
-    })
+        this.logger.log(`${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills}`)
+    }
+    catch(error){
+        this.logger.log(`${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills} with an error ${error}`)
+        throw error;
+    }
+
 }
 
 async uploadImage(file:Express.Multer.File):Promise<string>{
     const fileName=file.originalname;
-
     try{
-        console.log(file.buffer)
         const { data, error } = await this.supabase.storage.from('skills').upload(fileName, file.buffer, {
             contentType: file.mimetype,
             cacheControl: '3600',
             upsert: false,
         });
-
-        console.log('Upload successful, data:', data);
-
         if (error) {
-            console.error('Error getting public URL:', error);
             throw new Error('Error getting public URL');
         }
-
         const {data:publicUrlData}=await this.supabase.storage.from('skills').getPublicUrl(fileName)
-        console.log('Image uploaded successfully. Public URL: ', publicUrlData.publicUrl);
+        this.logger.log(`${ELoggerContext.SkillsService.UploadImage} with file ${file}`)
         return publicUrlData.publicUrl
     }
     catch(error){
+        this.logger.error(`${ELoggerContext.SkillsService.UploadImage} with file ${file} with an error ${error}`)
         throw error
     }
-
-
-
-
 }
 }

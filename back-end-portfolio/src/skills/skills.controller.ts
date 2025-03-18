@@ -15,8 +15,6 @@ export class SkillsController {
         return this.skillService.getAllSkills();
     }
 
-
-
     @ApiBody({type:AddSkills})
     @ApiConsumes('multipart/form-data')
     @Post()
