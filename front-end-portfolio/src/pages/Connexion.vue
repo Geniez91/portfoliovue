@@ -10,7 +10,7 @@
   :width="smAndDown ? '300px' : '500px'"
 >
 
-        <v-form cla :style="smAndDown? 'width:300px;':'width:500px;'" @submit.prevent v-model="isFormValid">
+        <v-form cla :style="smAndDown? 'width:300px;':'width:500px;'" @submit.prevent v-model="isFormValid" >
             <v-card color="card" class="pa-5">
             <div>
                 <p class="text-primary text-body-1 font-weight-bold mb-5">Adresse mail : </p>
@@ -18,7 +18,11 @@
             </div>
             <div >
                 <p class="text-primary text-body-1 font-weight-bold mb-5">Mot de passe : </p>
-                <v-text-field v-model="password" :rules="[emptyRules]" @update:model-value="password=$event" ></v-text-field>
+                <v-text-field  v-model="password" :rules="[emptyRules]" @update:model-value="password=$event" type="password" :error-messages="errorMessage"></v-text-field>
+            </div>
+
+            <div>
+               <router-link to="/forgetten-password">Mot de passe oublié ?</router-link>
             </div>
             <div class="d-flex flex-column align-center">
                 <v-btn type="submit" :disabled="!isFormValid" @Click="login(email,password)">Valider</v-btn>
@@ -32,13 +36,13 @@
 import { useDisplay } from 'vuetify';
 import {emailRules,emptyRules} from '../services/contact.service'
 import { ref } from 'vue';
-import {Connexion} from '../services/connexion.service'
 import { useConnexionStore } from '@/store/connexion.store';
 const {smAndDown}=useDisplay()
 
 const password=ref('');
 const email=ref('');
 const isFormValid=ref(false);
+const dialogOpen=ref(false)
 
-const {login,token}=useConnexionStore()
+const {login,token,errorMessage}=useConnexionStore()
 </script>

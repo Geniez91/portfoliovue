@@ -22,9 +22,11 @@ declare module 'vue-router/auto-routes' {
     '/Connexion': RouteRecordInfo<'/Connexion', '/Connexion', Record<never, never>, Record<never, never>>,
     '/Contact': RouteRecordInfo<'/Contact', '/Contact', Record<never, never>, Record<never, never>>,
     '/ExperienceDetail': RouteRecordInfo<'/ExperienceDetail', '/ExperienceDetail', Record<never, never>, Record<never, never>>,
+    '/ForgettenPassword': RouteRecordInfo<'/ForgettenPassword', '/ForgettenPassword', Record<never, never>, Record<never, never>>,
     '/Project': RouteRecordInfo<'/Project', '/Project', Record<never, never>, Record<never, never>>,
     '/ProjetDetail': RouteRecordInfo<'/ProjetDetail', '/ProjetDetail', Record<never, never>, Record<never, never>>,
     '/Skills': RouteRecordInfo<'/Skills', '/Skills', Record<never, never>, Record<never, never>>,
+    '/UpdatePassword': RouteRecordInfo<'/UpdatePassword', '/UpdatePassword', Record<never, never>, Record<never, never>>,
     '/Welcome': RouteRecordInfo<'/Welcome', '/Welcome', Record<never, never>, Record<never, never>>,
     '/WorkExperience': RouteRecordInfo<'/WorkExperience', '/WorkExperience', Record<never, never>, Record<never, never>>,
   }

@@ -12,4 +12,10 @@ export class AuthController {
         return this.authService.signIn(signInDTO.email,signInDTO.password)
     }
 
+    @HttpCode(HttpStatus.OK)
+    @Post('forgotten-password')
+    forgottenPassword(@Body() body:{email:string}){
+        return this.authService.forgottenPasswordEmail(body.email)
+    }
+
 }

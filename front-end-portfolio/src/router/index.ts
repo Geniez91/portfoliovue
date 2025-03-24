@@ -14,6 +14,8 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router/
 import Contact from '@/pages/Contact.vue'
 import ExperienceDetail from '@/pages/ExperienceDetail.vue'
 import Connexion from '@/pages/Connexion.vue'
+import ForgettenPassword from '@/pages/ForgettenPassword.vue'
+import UpdatePassword from '@/pages/UpdatePassword.vue'
 
 const routes:Array<RouteRecordRaw>=[{
   path:'/',
@@ -46,6 +48,14 @@ const routes:Array<RouteRecordRaw>=[{
 {
   path:"/admin-login",
   component:Connexion
+},
+{
+  path:'/forgetten-password',
+  component:ForgettenPassword
+},
+{
+  path:'/update-password',
+  component:UpdatePassword
 }
 ]
 

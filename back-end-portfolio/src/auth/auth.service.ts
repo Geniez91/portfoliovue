@@ -28,4 +28,9 @@ export class AuthService {
         this.logger.debug(`${ELoggerContext.AuthService.signIn} with email : ${email} and password : ${password}`)
         return {access_token:await this.jwtService.signAsync(payload)}
     }
+
+    async forgottenPasswordEmail(email:string):Promise<any>{
+        const {data,error}=await this.supabase.auth.resetPasswordForEmail(email)
+        return data
+    }
 }

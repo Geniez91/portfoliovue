@@ -19,10 +19,10 @@
                     </div>      
                 </v-card>
                 <div class="d-flex flex-column justify-space-evenly" v-if="token">
-                <v-btn color="warning">
+                <v-btn color="warning" @click="emit('update-skill')">
                     <v-icon icon="mdi-pencil"></v-icon>
                 </v-btn>
-                <v-btn color="red">
+                <v-btn color="red" @click="emit('delete-skill',expériences.language)">
                     <v-icon icon="mdi-delete"></v-icon>
                 </v-btn>
             </div>
@@ -40,6 +40,12 @@ import { useDisplay } from 'vuetify';
 
 const connexionStore = useConnexionStore();
 const token = computed(() => connexionStore.token);
+
+const emit = defineEmits<{
+  (event: 'delete-skill', language: string): string;
+  (event:'update-skill'):void
+}>();
+
 
 const {smAndDown}=useDisplay()
 const props = defineProps<{
