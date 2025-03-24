@@ -9,7 +9,7 @@
      </div>
 
 <DialogUpdate :dialog-update="dialogUpdate" @update-dialog="dialogUpdate=$event" v-if="dialogUpdate" ></DialogUpdate>
-<DialogDelete :dialog-delete="dialogDelete" @delete-dialog="dialogDelete = $event" v-if="dialogDelete"></DialogDelete>
+<DialogDelete :dialog-delete="dialogDelete" :selected-language="selectedLangage" @delete-dialog="dialogDelete = $event" v-if="dialogDelete"></DialogDelete>
 <DialogAdd v-if="dialogAdd" :dialog-add="dialogAdd" @add-dialog="dialogAdd = $event"></DialogAdd>
      <div v-if="skillsShow==='Développement Web'">
         <div class="ml-3">

@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose, Type } from "class-transformer";
-import { IsNumber } from "class-validator";
+import { IsNumber, IsOptional } from "class-validator";
 
 export class Skills{
 @ApiProperty()
@@ -14,18 +14,24 @@ id:number;
 language:string;
 @ApiProperty()
 @Expose()
+@IsOptional()
 @Type(()=>Number)
-yearsExperience:number;
+yearsExperience?:number;
 @ApiProperty()
+@IsOptional()
 @Expose()
 @Type(()=>Date)
-usageExperience:Date;
+usageExperience?:Date;
 @ApiProperty()
 @Expose()
 srcImage:string;
 @ApiProperty()
 @Expose()
 idType:string
+@ApiProperty()
+@Expose()
+@IsOptional()
+level?:string;
 }
 
 export class AddSkills{
@@ -34,15 +40,22 @@ export class AddSkills{
 language:string;
 @ApiProperty()
 @Expose()
+@IsOptional()
 @Type(()=>Number)
-yearsExperience:number;
+yearsExperience?:number;
 @ApiProperty()
+@IsOptional()
 @Expose()
 @Type(()=>Date)
-usageExperience:Date;
+usageExperience?:Date;
 @ApiProperty()
 @Expose()
 idType:string
+@ApiProperty()
+@Expose()
+@IsOptional()
+level?:string;
+
 }
 
 export class SkillsParam{

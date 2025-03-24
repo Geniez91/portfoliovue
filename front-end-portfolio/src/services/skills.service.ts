@@ -1,30 +1,28 @@
-import type { TSkills, TSkillsLanguage } from '@/interfaces/interfaces';
+import type { TSkills } from '@/interfaces/interfaces';
 import axios from 'axios'
 import { addHeaders } from './connexion.service';
 
 const urlSkills='https://portfoliovue-back-end-production.up.railway.app/skills'
 
-
-
-export async function addSkills(language:string,yearsExperience:number,usageExperience:Date,srcImg:File,type:TSkills,token:string){
+export async function addSkills(language:string,type:TSkills,srcImg:File,token:string,yearsExperience?:number,usageExperience?:Date,level?:string){
 try{
-    console.log(usageExperience)
-    console.log(type)
-
-
-    const formData = new FormData();
+const formData = new FormData();
 formData.append('file', srcImg);
 formData.append('idType', type);
 formData.append('language', language);
-formData.append('usageExperience', usageExperience.toISOString());
-formData.append('yearsExperience', yearsExperience.toString());
+if(usageExperience){
+    formData.append('usageExperience', usageExperience.toISOString());
+}
 
-console.log(formData.get('file'))
-console.log(formData.get('type'))
+if(yearsExperience){
+    formData.append('yearsExperience', yearsExperience.toString());
+}
 
-
-    const result = await axios.post(urlSkills,formData,{headers:addHeaders(token)})
-    return result
+if(level){
+    formData.append('level',level)
+}
+const result = await axios.post(urlSkills,formData,{headers:addHeaders(token)})
+return result
 }
 catch(error){
     console.error(`Erreur lors de l'ajout de compétence:`, error);

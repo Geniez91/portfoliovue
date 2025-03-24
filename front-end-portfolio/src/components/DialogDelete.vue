@@ -18,7 +18,7 @@
 
           <v-card-text>
           <div>
-            <p>Etes-vous sur de vouloir supprimer la compétence {{ selectedLangage }} de votre portfolio ?</p>
+            <p>Etes-vous sur de vouloir supprimer la compétence {{ props.selectedLanguage }} de votre portfolio ?</p>
           </div>
           </v-card-text>
 
@@ -55,10 +55,10 @@ import { ref } from 'vue';
 
 const props = defineProps<{
     dialogDelete: boolean;
+    selectedLanguage:string;
 }>();
 
 const emit=defineEmits(['delete-dialog'])
 
 
-const selectedLangage = ref("");
 </script>

@@ -16,6 +16,7 @@ model skills {
   usageExperience DateTime?   @db.Date
   srcImg          String?
   idType          String?
+  level           String?
   typeSkills      typeSkills? @relation(fields: [idType], references: [type], onDelete: NoAction, onUpdate: NoAction)
 }
 

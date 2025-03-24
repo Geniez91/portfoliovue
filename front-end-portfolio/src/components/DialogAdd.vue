@@ -35,7 +35,7 @@
 ></v-select>
     </div>
   
-    <div>
+    <div v-if="selectTypeSkills !== 'Soft Skills' && selectTypeSkills !== 'Languages'">
         <div class="text-medium-emphasis mb-4">
           Année d'expérience
         </div>
@@ -49,7 +49,7 @@ label=""
 v-model="yearsExperience"
 ></v-number-input>
     </div>
-    <div>
+    <div v-if="selectTypeSkills !== 'Soft Skills' && selectTypeSkills !== 'Languages'">
         <div class="text-medium-emphasis mb-4">
           Dernière utilisation
         </div>
@@ -60,6 +60,12 @@ label="Sélectionnez une date"
 ></v-date-input>
     </div>
   
+    <div v-if="selectTypeSkills==='Languages'">
+      <div class="text-medium-emphasis mb-4" >
+          Niveau : 
+        </div>
+        <v-select :items="skillsLevel" :model-value="selectSkillsLevel" @update:model-value="selectSkillsLevel=$event"></v-select>
+    </div>
 
     <div>
         <div class="text-medium-emphasis mb-4">
@@ -86,7 +92,7 @@ rounded="xl"
 text="Send"
 variant="flat"
 @click="
-addSkills(nameSkills!, yearsExperience!, selectedDate!, imageSkills!, selectTypeSkills!, token!)
+addSkills(nameSkills!,selectTypeSkills!, imageSkills!, token!, yearsExperience!, selectedDate!)
 "
 >
 Send
@@ -119,6 +125,9 @@ const connexionStore = useConnexionStore();
 const token = computed(() => connexionStore.token);
 
 const skillsTypeList:TSkills[]=['Front-end','Back-end','Base de données','Languages','Modelisation','Soft Skills']
+
+const skillsLevel:string[]=['Debutant','Intermediaire','Maternelle']
+const selectSkillsLevel=ref<string>('')
 
 const emit=defineEmits(['add-dialog'])
 </script>
