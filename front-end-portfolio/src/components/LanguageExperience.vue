@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import type { ISkills, ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
 import { useDisplay } from 'vuetify';
 
 const {smAndDown}=useDisplay()
 
 const props = defineProps<{
-languageExperience: ISkillsLanguage[];
+languageExperience: ISkills[];
 }>();
 
 </script>

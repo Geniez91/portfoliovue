@@ -15,6 +15,17 @@ export interface IItemNavBar{
     href?:string
 }
 
+export interface ISkills{
+id:number;
+language:string;
+yearsExperience?:number;
+usageExperience?:Date;
+srcImg:string;
+idType:string
+level?:string;
+TOIEC?:number;
+}
+
 export interface ISkillsExperience{
     language:TSkillsExperience,
     yearsExperience?:number,

@@ -17,6 +17,7 @@ model skills {
   srcImg          String?
   idType          String?
   level           String?
+  TOIEC           BigInt?
   typeSkills      typeSkills? @relation(fields: [idType], references: [type], onDelete: NoAction, onUpdate: NoAction)
 }
 

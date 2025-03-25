@@ -24,7 +24,7 @@ yearsExperience?:number;
 usageExperience?:Date;
 @ApiProperty()
 @Expose()
-srcImage:string;
+srcImg:string;
 @ApiProperty()
 @Expose()
 idType:string
@@ -32,6 +32,12 @@ idType:string
 @Expose()
 @IsOptional()
 level?:string;
+
+@ApiProperty()
+@Expose()
+@IsOptional()
+@Type(()=>Number)
+TOIEC?:number;
 }
 
 export class AddSkills{
@@ -56,6 +62,15 @@ idType:string
 @IsOptional()
 level?:string;
 
+@ApiProperty()
+@Expose()
+@IsOptional()
+@Type(()=>Number)
+TOIEC?:number;
+
+@ApiProperty()
+@Expose()
+srcImg:string;
 }
 
 export class SkillsParam{

@@ -1,4 +1,4 @@
-import type { TSkills } from '@/interfaces/interfaces';
+import type { ISkills, TSkills } from '@/interfaces/interfaces';
 import axios from 'axios'
 import { addHeaders } from './connexion.service';
 
@@ -28,4 +28,14 @@ catch(error){
     console.error(`Erreur lors de l'ajout de compétence:`, error);
     throw error;
 }
+}
+
+export async function getAllSkills():Promise<ISkills[]>{
+    try{
+        const result=await axios.get(urlSkills)
+        return result.data
+    }
+    catch(error){
+        throw error
+    }
 }

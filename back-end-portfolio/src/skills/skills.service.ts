@@ -49,7 +49,7 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
             await this.prisma.skills.update({
                 data: {
                     language: skills.language,
-                    srcImg: skills.srcImage,
+                    srcImg: skills.srcImg,
                     idType: skills.idType,
                     usageExperience: skills.usageExperience,
                     yearsExperience: skills.yearsExperience,

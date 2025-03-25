@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import type { ISkills, ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
 import { useConnexionStore } from '@/store/connexion.store';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
@@ -49,7 +49,7 @@ const emit = defineEmits<{
 
 const {smAndDown}=useDisplay()
 const props = defineProps<{
-  typeLanguage: ISkillsExperience[];
+  typeLanguage: ISkills[];
   withoutCard?:boolean
 }>();
 

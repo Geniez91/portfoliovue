@@ -16,14 +16,14 @@
         <div class="mt-5">
             <p class="text-h6 text-primary">Développement Front-end</p>
         </div>
-        <SkillsCard @delete-skill="deleteSkill" :type-language="frontLanguageExperience" @update-skill="dialogUpdate=true"/>
+        <SkillsCard @delete-skill="deleteSkill" :type-language="getSkillsByType('Front-End')" @update-skill="dialogUpdate=true"/>
         </div>
         <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
       
         <div class="mt-5 ml-3">
         <p class="text-h6 text-primary">Développement Back-end</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard  @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="backLanguageExperience"></SkillsCard>
+            <SkillsCard  @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="getSkillsByType('Back-End')"></SkillsCard>
     </div>
      </div>
     </div>
@@ -31,14 +31,14 @@
         <div class="ml-3">
         <p class="text-h6 text-primary">Base de données</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard   @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="bddLanguageExperience"></SkillsCard>
+            <SkillsCard   @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="getSkillsByType('Base de données')"></SkillsCard>
     </div>
     </div>
     <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
     <div class="ml-3 mt-5">
         <p class="text-h6 text-primary">Modélisation</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-        <SkillsCard @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="modelisationExperience"></SkillsCard>
+        <SkillsCard @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="getSkillsByType('Modelisation')"></SkillsCard>
     </div>
     </div>
     </div>
@@ -46,14 +46,14 @@
         <div class="ml-3 mt-5">
         <p class="text-h6 text-primary">Soft Skills</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard  @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="softSkillsExperience" :without-card="true"></SkillsCard>
+            <SkillsCard  @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="getSkillsByType('Soft Skills')" :without-card="true"></SkillsCard>
     </div>
     </div>
     </div>
     <div v-if="skillsShow==='Langues'">
         <div class="ml-3 mt-5">
         <p class="text-h6 text-primary">Langues</p>
-        <LanguageExperience @update-skill="dialogUpdate=true" @delete-skill="deleteSkill" :language-experience="languageExperience"></LanguageExperience>
+        <LanguageExperience @update-skill="dialogUpdate=true" @delete-skill="deleteSkill" :language-experience="getSkillsByType('Languages')"></LanguageExperience>
     </div>
     
 </div>
@@ -94,8 +94,8 @@ import Alecoute from '/assets/a lecoute.png'
 import Serieux from '/assets/serieux.png'
 import France from '/assets/france.png'
 import Anglais from '/assets/anglais.jpg'
-import type { ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
-import {  computed, ref } from 'vue'
+import type { ISkills, ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import {  computed, onMounted, ref } from 'vue'
 import SkillsCard from '@/components/SkillsCard.vue'
 import LanguageExperience from '@/components/LanguageExperience.vue'
 import { useDisplay } from 'vuetify'
@@ -103,6 +103,7 @@ import { useConnexionStore } from '@/store/connexion.store'
 import DialogAdd from '@/components/DialogAdd.vue'
 import DialogDelete from '@/components/DialogDelete.vue'
 import DialogUpdate from '@/components/DialogUpdate.vue'
+import { getAllSkills } from '@/services/skills.service'
 
 const {smAndDown}= useDisplay()
 const connexionStore = useConnexionStore();
@@ -112,11 +113,16 @@ const dialogAdd=ref(false)
 const dialogDelete=ref(false)
 const dialogUpdate=ref(false)
 const selectedLangage = ref("");
+const skills=ref<ISkills[]>([])
 
 
 function deleteSkill(langage:string){
     selectedLangage.value=langage;
     dialogDelete.value=true;
+}
+
+function getSkillsByType(type:string):ISkills[]{
+    return skills.value.filter((skills)=>skills.idType===type)
 }
 
 const skillsShow=ref<TSkillsShow>('Développement Web')
@@ -258,5 +264,9 @@ const languageExperience:ISkillsLanguage[]=[
 function changeSkillsMode(value:TSkillsShow):void{
 skillsShow.value=value
 }
+
+onMounted(async()=>{
+    skills.value=await getAllSkills()
+})
 
 </script>
