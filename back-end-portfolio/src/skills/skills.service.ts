@@ -25,9 +25,9 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
     }
     
 
-    async addSkills(file: string, skills: AddSkills):Promise<void>{
+    async addSkills(file: string, skills: AddSkills):Promise<Skills>{
         try{
-            await this.prisma.skills.create({
+          const result= await this.prisma.skills.create({
                 data:{
                     idType:skills.idType,
                     language:skills.language,
@@ -37,6 +37,7 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
                 }
             })
             this.logger.log(`${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`)
+            return plainToInstance(Skills, result, { excludeExtraneousValues: true });
         }
         catch(error){
             this.logger.error(`${ELoggerContext.SkillsService.AddSkills} with file : ${file} and language : ${skills.language} with error ${error}`)

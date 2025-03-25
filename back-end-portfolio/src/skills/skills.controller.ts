@@ -20,9 +20,9 @@ export class SkillsController {
     @Post()
     @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor('file'))
-     async addSkills( @UploadedFile() file:Express.Multer.File,@Body()body:AddSkills):Promise<void>{
+     async addSkills( @UploadedFile() file:Express.Multer.File,@Body()body:AddSkills):Promise<Skills>{
         const skillsImg=await this.skillService.uploadImage(file)
-         this.skillService.addSkills(skillsImg,body)
+        return this.skillService.addSkills(skillsImg,body)
     }
 
     @UseGuards(AuthGuard)
