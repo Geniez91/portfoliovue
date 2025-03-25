@@ -68,14 +68,15 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
 
 
 }
-async deleteSkills(idSkills:number):Promise<void>{
+async deleteSkills(idSkills:number):Promise<Skills>{
     try{
-        await this.prisma.skills.delete({
+       const result= await this.prisma.skills.delete({
             where:{
                 id:idSkills
             }
         })
         this.logger.log(`${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills}`)
+        return plainToInstance(Skills, result, { excludeExtraneousValues: true });
     }
     catch(error){
         this.logger.log(`${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills} with an error ${error}`)

@@ -33,7 +33,7 @@ export class SkillsController {
 
     @UseGuards(AuthGuard)
     @Delete()
-    deleteSkills(@Query('id')id:number):void{
-        this.skillService.deleteSkills(id)
+    deleteSkills(@Query('id')id:number):Promise<Skills>{
+        return this.skillService.deleteSkills(id);
     }
 }
