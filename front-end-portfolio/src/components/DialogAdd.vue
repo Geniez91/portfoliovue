@@ -66,6 +66,19 @@ label="Sélectionnez une date"
         </div>
         <v-select :items="skillsLevel" :model-value="selectSkillsLevel" @update:model-value="selectSkillsLevel=$event"></v-select>
     </div>
+    <div v-if="selectTypeSkills==='Languages'">
+      <div class="text-medium-emphasis mb-4" >
+          TOIEC : 
+        </div>
+        <v-number-input
+:reverse="false"
+controlVariant="split"
+label=""
+:hideInput="false"
+:inset="false"
+v-model="toiec"
+></v-number-input>
+    </div>
 
     <div>
         <div class="text-medium-emphasis mb-4">
@@ -91,8 +104,7 @@ color="primary"
 rounded="xl"
 text="Send"
 variant="flat"
-@click="
-addSkills(nameSkills!,selectTypeSkills!, imageSkills!, token!, yearsExperience!, selectedDate!)
+@click=" addSkillsEvent(nameSkills!,selectTypeSkills!, imageSkills!, token!, yearsExperience!, selectedDate!)
 "
 >
 Send
@@ -109,6 +121,8 @@ import type { TSkills } from '@/interfaces/interfaces'
 import {addSkills} from '@/services/skills.service'
 import { useConnexionStore } from '@/store/connexion.store'
 import { computed, ref } from 'vue'
+import { useSkillStore } from '@/store/skill.store'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps<{
     dialogAdd: boolean;
@@ -120,8 +134,12 @@ const nameSkills=ref<string>()
 const selectTypeSkills=ref<TSkills>()
 const imageSkills=ref<File>()
 const yearsExperience=ref<number>()
+const toiec=ref<number>()
 const selectedDate = ref<Date>();
 const connexionStore = useConnexionStore();
+const skillsStore = useSkillStore();
+const {  addSkill } = skillsStore;
+
 const token = computed(() => connexionStore.token);
 
 const skillsTypeList:TSkills[]=['Front-end','Back-end','Base de données','Languages','Modelisation','Soft Skills']
@@ -130,4 +148,9 @@ const skillsLevel:string[]=['Debutant','Intermediaire','Maternelle']
 const selectSkillsLevel=ref<string>('')
 
 const emit=defineEmits(['add-dialog'])
+
+async function addSkillsEvent(nameSkills:string,selectTypeSkills:TSkills , imageSkills:File , token:string , yearsExperience:number , selectedDate:Date ){
+  addSkill(nameSkills!,selectTypeSkills!, imageSkills!, token!, yearsExperience!, selectedDate!)
+  emit('add-dialog', false);
+}
 </script>

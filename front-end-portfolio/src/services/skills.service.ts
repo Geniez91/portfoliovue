@@ -3,8 +3,9 @@ import axios from 'axios'
 import { addHeaders } from './connexion.service';
 
 const urlSkills='https://portfoliovue-back-end-production.up.railway.app/skills'
+const urlDeleteSkills='https://portfoliovue-back-end-production.up.railway.app/skills?id='
 
-export async function addSkills(language:string,type:TSkills,srcImg:File,token:string,yearsExperience?:number,usageExperience?:Date,level?:string){
+export async function addSkills(language:string,type:TSkills,srcImg:File,token:string,yearsExperience?:number,usageExperience?:Date,level?:string,TOIEC?:number){
 try{
 const formData = new FormData();
 formData.append('file', srcImg);
@@ -21,6 +22,10 @@ if(yearsExperience){
 if(level){
     formData.append('level',level)
 }
+
+if(TOIEC){
+formData.append('TOIEC',TOIEC.toString())
+}
 const result = await axios.post(urlSkills,formData,{headers:addHeaders(token)})
 return result
 }
@@ -34,6 +39,16 @@ export async function getAllSkills():Promise<ISkills[]>{
     try{
         const result=await axios.get(urlSkills)
         return result.data
+    }
+    catch(error){
+        throw error
+    }
+}
+
+export async function deleteSkill(id:number,token:string){
+    try{
+      const result= await axios.delete(`${urlDeleteSkills}${id}`,{headers:addHeaders(token)})
+      return result
     }
     catch(error){
         throw error

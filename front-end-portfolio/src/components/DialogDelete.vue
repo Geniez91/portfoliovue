@@ -38,7 +38,7 @@ color="primary"
 rounded="xl"
 text="Send"
 variant="flat"
-@click="
+@click="deleteSkillsEvent
 "
 >
 Send
@@ -51,14 +51,25 @@ Send
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { useConnexionStore } from '@/store/connexion.store';
+import { useSkillStore } from '@/store/skill.store';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     dialogDelete: boolean;
     selectedLanguage:string;
+    idLangage:number;
 }>();
 
 const emit=defineEmits(['delete-dialog'])
 
+const skillsStore = useSkillStore();
+const connexionStore = useConnexionStore();
+const {  deleteSkillById } = skillsStore;
+const token = computed(() => connexionStore.token);
 
+function deleteSkillsEvent(){
+  deleteSkillById(props.idLangage,token.value!)
+  emit('delete-dialog', false);
+}
 </script>

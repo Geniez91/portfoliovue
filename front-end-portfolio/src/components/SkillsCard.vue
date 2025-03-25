@@ -14,7 +14,7 @@
                     <div class="d-flex mt-3 align-center">
                         <v-icon icon="mdi-code-tags" color="green" size="38" class="mr-2"></v-icon>
                         <p class="font-weight-bold text-body-1">Dernière utilisation : 
-                            {{ expériences.usageExperience }}
+                            {{ getDaysofDate(expériences.usageExperience!) }}
                         </p>
                     </div>      
                 </v-card>
@@ -22,7 +22,7 @@
                 <v-btn color="warning" @click="emit('update-skill')">
                     <v-icon icon="mdi-pencil"></v-icon>
                 </v-btn>
-                <v-btn color="red" @click="emit('delete-skill',expériences.language)">
+                <v-btn color="red" @click="emit('delete-skill',expériences.language,expériences.id)">
                     <v-icon icon="mdi-delete"></v-icon>
                 </v-btn>
             </div>
@@ -33,7 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { ISkills, ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import type { ISkills } from '@/interfaces/interfaces'
+import { getDaysofDate } from '@/services/utils';
 import { useConnexionStore } from '@/store/connexion.store';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
@@ -42,7 +43,7 @@ const connexionStore = useConnexionStore();
 const token = computed(() => connexionStore.token);
 
 const emit = defineEmits<{
-  (event: 'delete-skill', language: string): string;
+  (event: 'delete-skill', language: string,id:number): string;
   (event:'update-skill'):void
 }>();
 

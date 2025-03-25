@@ -9,21 +9,21 @@
      </div>
 
 <DialogUpdate :dialog-update="dialogUpdate" @update-dialog="dialogUpdate=$event" v-if="dialogUpdate" ></DialogUpdate>
-<DialogDelete :dialog-delete="dialogDelete" :selected-language="selectedLangage" @delete-dialog="dialogDelete = $event" v-if="dialogDelete"></DialogDelete>
+<DialogDelete :id-langage="idLangage" :dialog-delete="dialogDelete" :selected-language="selectedLangage" @delete-dialog="dialogDelete = $event" v-if="dialogDelete"></DialogDelete>
 <DialogAdd v-if="dialogAdd" :dialog-add="dialogAdd" @add-dialog="dialogAdd = $event"></DialogAdd>
      <div v-if="skillsShow==='Développement Web'">
         <div class="ml-3">
         <div class="mt-5">
             <p class="text-h6 text-primary">Développement Front-end</p>
         </div>
-        <SkillsCard @delete-skill="deleteSkill" :type-language="getSkillsByType('Front-End')" @update-skill="dialogUpdate=true"/>
+        <SkillsCard @delete-skill="deleteSkill" :type-language="getSkillsByType('Front-end')" @update-skill="dialogUpdate=true"/>
         </div>
         <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
       
         <div class="mt-5 ml-3">
         <p class="text-h6 text-primary">Développement Back-end</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard  @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="getSkillsByType('Back-End')"></SkillsCard>
+            <SkillsCard  @delete-skill="deleteSkill" @update-skill="dialogUpdate=true" :type-language="getSkillsByType('Back-end')"></SkillsCard>
     </div>
      </div>
     </div>
@@ -73,28 +73,7 @@
 
 </template>
 <script lang="ts" setup>
-import VueImg from '/assets/Vue.png'
-import TypeScript from '/assets/TypeScript.png'
-import HTML from '/assets/HTML.png'
-import CSS from '/assets/css.png'
-import Javascript from '/assets/Javascript.png'
-import Angular from '/assets/Angular.png'
-import PHP from '/assets/php.png'
-import React from '/assets/React.png'
-import NodeJs from '/assets/Node.js.png'
-import Nest from '/assets/NestJS.svg'
-import PostgreSql from '/assets/Postgresql.png'
-import MySQL from '/assets/MySQL.png'
-import OracleSql from '/assets/OracleSql.png'
-import Bdd from '/assets/bdd.png'
-import UML from '/assets/uml.png'
-import Equipe from '/assets/equipe.png'
-import Collaboration from '/assets/collaboration.png'
-import Alecoute from '/assets/a lecoute.png'
-import Serieux from '/assets/serieux.png'
-import France from '/assets/france.png'
-import Anglais from '/assets/anglais.jpg'
-import type { ISkills, ISkillsExperience, ISkillsLanguage, TSkillsShow } from '@/interfaces/interfaces'
+import type { ISkills, TSkillsShow } from '@/interfaces/interfaces'
 import {  computed, onMounted, ref } from 'vue'
 import SkillsCard from '@/components/SkillsCard.vue'
 import LanguageExperience from '@/components/LanguageExperience.vue'
@@ -103,21 +82,28 @@ import { useConnexionStore } from '@/store/connexion.store'
 import DialogAdd from '@/components/DialogAdd.vue'
 import DialogDelete from '@/components/DialogDelete.vue'
 import DialogUpdate from '@/components/DialogUpdate.vue'
-import { getAllSkills } from '@/services/skills.service'
+import { useSkillStore } from '@/store/skill.store'
+import { storeToRefs } from 'pinia'
 
 const {smAndDown}= useDisplay()
 const connexionStore = useConnexionStore();
+const skillsStore = useSkillStore();
+
+const { skills } = storeToRefs(skillsStore); 
+const { getSkills, addSkill } = skillsStore;
+
 const token = computed(() => connexionStore.token);
 
 const dialogAdd=ref(false)
 const dialogDelete=ref(false)
 const dialogUpdate=ref(false)
 const selectedLangage = ref("");
-const skills=ref<ISkills[]>([])
+const idLangage=ref()
 
 
-function deleteSkill(langage:string){
+function deleteSkill(langage:string,id:number){
     selectedLangage.value=langage;
+    idLangage.value=id
     dialogDelete.value=true;
 }
 
@@ -129,144 +115,12 @@ const skillsShow=ref<TSkillsShow>('Développement Web')
 
 const skillstabs:TSkillsShow[]=['Développement Web','Base de donnees','Savoir être','Langues']
 
-const frontLanguageExperience:ISkillsExperience[]=[{
-    language:'VueJS',
-    yearsExperience:2,
-    usageExperience:2025,
-    srcImg:VueImg
-},
-{
-    language:'TypeScript',
-    yearsExperience:2,
-    usageExperience:2025,
-    srcImg:TypeScript
-},
-{
-    language:'HTML',
-    yearsExperience:2,
-    usageExperience:2025,
-    srcImg:HTML
-},
-{
-    language:'CSS',
-    yearsExperience:2,
-    usageExperience:2025,
-    srcImg:CSS
-},
-{
-    language:'Javascript',
-    yearsExperience:2,
-    usageExperience:2025,
-    srcImg:Javascript
-},
-{
-    language:'Angular',
-    yearsExperience:0,
-    usageExperience:2024,
-    srcImg:Angular
-},
-{
-    language:'PHP',
-    yearsExperience:0,
-    usageExperience:2022,
-    srcImg:PHP
-},
-{
-    language:'React',
-    yearsExperience:0,
-    usageExperience:2022,
-    srcImg:React
-}
-]
-
-const backLanguageExperience:ISkillsExperience[]=[
-{
-    language:'Nest',
-    yearsExperience:2,
-    usageExperience:2024,
-    srcImg:Nest
-},{
-    language:'Node.Js',
-    yearsExperience:2,
-    usageExperience:2024,
-    srcImg:NodeJs
-},
-]
-
-const bddLanguageExperience:ISkillsExperience[]=[
-{
-    language:'PostgreSQL',
-    yearsExperience:2,
-    usageExperience:2024,
-    srcImg:PostgreSql
-},{
-    language:'Mysql',
-    yearsExperience:0,
-    usageExperience:2022,
-    srcImg:MySQL
-},
-{
-    language:'OracleSQL',
-    yearsExperience:0,
-    usageExperience:2022,
-    srcImg:OracleSql
-},
-]
-
-const modelisationExperience:ISkillsExperience[]=[
-    {
-        language:'Modelisation Base de données (MCD/MLD)',
-        yearsExperience:2,
-        usageExperience:2024,
-        srcImg:Bdd
-    },
-    {
-        language:'UML',
-        yearsExperience:0,
-        usageExperience:2022,
-        srcImg:UML
-    },
-]
-
-const softSkillsExperience:ISkillsExperience[]=[
-    {
-        language:'Travail en équipe',
-        srcImg:Equipe
-    },
-    {
-        language:'Collaboratif',
-        srcImg:Collaboration
-    },
-    {
-        language:'A l\'écoute',
-        srcImg:Alecoute
-    },
-    {
-        language:'Sérieux',
-        srcImg:Serieux
-    },
-]
-
-const languageExperience:ISkillsLanguage[]=[
- {
-    language:'Français',
-    level:'Langue Maternelle',
-    srcImg:France
- },
- {
-    language:'Anglais',
-    level:'Intermédiaire',
-    srcImg:Anglais,
-    TOIEC:805
- }
-]
-
 function changeSkillsMode(value:TSkillsShow):void{
 skillsShow.value=value
 }
 
 onMounted(async()=>{
-    skills.value=await getAllSkills()
+  await getSkills()
 })
 
 </script>
