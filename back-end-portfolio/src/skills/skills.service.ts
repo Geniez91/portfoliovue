@@ -45,15 +45,16 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
         }  
     }
 
-    async updateSkills(idSkills:number,skills:AddSkills):Promise<Skills>{
+    async updateSkills(idSkills:number,file:string,skills:AddSkills):Promise<Skills>{
         try{
             const result=await this.prisma.skills.update({
                 data: {
                     language: skills.language,
-                    srcImg: skills.srcImg,
+                    srcImg: file,
                     idType: skills.idType,
                     usageExperience: skills.usageExperience,
                     yearsExperience: skills.yearsExperience,
+                    
                 },
                 where: {
                     id:idSkills

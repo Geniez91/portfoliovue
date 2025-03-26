@@ -26,10 +26,13 @@ export class SkillsController {
     }
 
     @ApiBody({type:AddSkills})
+    @ApiConsumes('multipart/form-data')
     @UseGuards(AuthGuard)
     @Put()
-    updateSkills(@Query('id') id:number, @Body() body:AddSkills):Promise<Skills>{
-        return this.skillService.updateSkills(id,body)
+    @UseInterceptors(FileInterceptor('file'))
+    async updateSkills( @UploadedFile() file:Express.Multer.File, @Query('id') id:number, @Body() body:AddSkills):Promise<Skills>{
+        const skillsImg=await this.skillService.uploadImage(file)
+        return this.skillService.updateSkills(id,skillsImg,body)
     }
 
     @UseGuards(AuthGuard)
