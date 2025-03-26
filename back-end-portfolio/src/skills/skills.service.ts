@@ -45,9 +45,9 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
         }  
     }
 
-    async updateSkills(idSkills:number,skills:AddSkills):Promise<void>{
+    async updateSkills(idSkills:number,skills:AddSkills):Promise<Skills>{
         try{
-            await this.prisma.skills.update({
+            const result=await this.prisma.skills.update({
                 data: {
                     language: skills.language,
                     srcImg: skills.srcImg,
@@ -60,6 +60,7 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
                 }
             })
             this.logger.log(`${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills}`)
+            return plainToInstance(Skills, result, { excludeExtraneousValues: true });
         }
         catch(error){
             this.logger.error(`${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills} with error ${error}`)

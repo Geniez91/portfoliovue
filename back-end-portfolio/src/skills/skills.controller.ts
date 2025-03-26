@@ -28,8 +28,8 @@ export class SkillsController {
     @ApiBody({type:AddSkills})
     @UseGuards(AuthGuard)
     @Put()
-    updateSkills(@Query('id') id:number, @Body() body:AddSkills):void{
-        this.skillService.updateSkills(id,body)
+    updateSkills(@Query('id') id:number, @Body() body:AddSkills):Promise<Skills>{
+        return this.skillService.updateSkills(id,body)
     }
 
     @UseGuards(AuthGuard)
