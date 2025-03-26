@@ -25,9 +25,10 @@ export class SkillsController {
         return this.skillService.addSkills(skillsImg,body)
     }
 
+    @ApiBody({type:AddSkills})
     @UseGuards(AuthGuard)
     @Put()
-    updateSkills(@Query('id') id:number, @Body() body:Skills):void{
+    updateSkills(@Query('id') id:number, @Body() body:AddSkills):void{
         this.skillService.updateSkills(id,body)
     }
 
