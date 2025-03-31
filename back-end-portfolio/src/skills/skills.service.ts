@@ -93,7 +93,7 @@ async uploadImage(file:Express.Multer.File):Promise<string>{
         const { data, error } = await this.supabase.storage.from('skills').upload(fileName, file.buffer, {
             contentType: file.mimetype,
             cacheControl: '3600',
-            upsert: false,
+            upsert: true,
         });
         if (error) {
             throw new Error('Error getting public URL');
