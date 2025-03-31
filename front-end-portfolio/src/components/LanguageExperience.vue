@@ -1,6 +1,6 @@
 <template>
             <div class="mb-3" :class="smAndDown ? 'd-flex flex-column':'d-flex'">
-            <div v-for="(expériences) in languageExperience" class="mt-4 mx-2">
+            <div v-for="(expériences) in languageExperience" class="mt-4 mx-2" v-if="props.isLoaded">
                 <div class="d-flex">
                 <div class="d-flex flex-column align-center mr-8">
                 <v-img :src="expériences.srcImg" :width="130" :height="100" :alt="`${expériences.language} logo`"></v-img>
@@ -25,6 +25,21 @@
             </div>
             </div>
         </div>
+        <v-row>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+        </v-row>
+
         </div>
 </template>
 
@@ -43,8 +58,11 @@ const emit = defineEmits<{
   (event:'update-skill',skill:ISkills):void
 }>();
 
-const props = defineProps<{
-languageExperience: ISkills[];
-}>();
+const props = withDefaults(defineProps<{
+  languageExperience: ISkills[];
+  isLoaded: boolean;
+}>(), {
+  isLoaded: false
+});
 
 </script>

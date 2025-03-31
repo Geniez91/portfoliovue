@@ -1,6 +1,6 @@
 <template>
             <v-row class="mt-1">
-            <v-col v-for="(expériences) in typeLanguage">
+            <v-col v-for="(expériences) in typeLanguage" v-if="props.isLoaded">
                 <div class="d-flex" :class="smAndDown ?'d-flex flex-column mb-2':'d-flex'">
                 <div class="d-flex flex-column align-center mr-8" >
                 <v-img :src="expériences.srcImg" :width="150" :height="100" :alt="`${expériences.language} logo`"></v-img>
@@ -29,6 +29,18 @@
             </div>
 
             </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="3" v-if="props.isLoaded==false">
+                <v-skeleton-loader color="grey" type="card"></v-skeleton-loader>
+            </v-col>
         </v-row>
 </template>
 
@@ -36,7 +48,7 @@
 import type { ISkills } from '@/interfaces/interfaces'
 import { getDaysofDate } from '@/services/utils';
 import { useConnexionStore } from '@/store/connexion.store';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 
 const connexionStore = useConnexionStore();
@@ -49,9 +61,13 @@ const emit = defineEmits<{
 
 
 const {smAndDown}=useDisplay()
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   typeLanguage: ISkills[];
-  withoutCard?:boolean
-}>();
+  isLoaded: boolean;
+  withoutCard?: boolean;
+}>(), {
+  isLoaded: false
+});
+
 
 </script>

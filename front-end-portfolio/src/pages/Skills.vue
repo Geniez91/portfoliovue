@@ -19,14 +19,14 @@
         <div class="mt-5">
             <p class="text-h6 text-primary">Développement Front-end</p>
         </div>
-        <SkillsCard @delete-skill="deleteSkill" :type-language="getSkillsByType('Front-end')" @update-skill="updateSkill"/>
+        <SkillsCard @delete-skill="deleteSkill" :is-loaded="isLoaded" :type-language="getSkillsByType('Front-end')" @update-skill="updateSkill"/>
         </div>
         <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
       
         <div class="mt-5 ml-3">
         <p class="text-h6 text-primary">Développement Back-end</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard  @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Back-end')"></SkillsCard>
+            <SkillsCard :is-loaded="isLoaded"  @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Back-end')"></SkillsCard>
     </div>
      </div>
     </div>
@@ -34,14 +34,14 @@
         <div class="ml-3">
         <p class="text-h6 text-primary">Base de données</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard   @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Base de données')"></SkillsCard>
+            <SkillsCard  :is-loaded="isLoaded" @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Base de données')"></SkillsCard>
     </div>
     </div>
     <v-divider class="border-opacity-75 mt-12" color="primary"></v-divider>
     <div class="ml-3 mt-5">
         <p class="text-h6 text-primary">Modélisation</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-        <SkillsCard @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Modelisation')"></SkillsCard>
+        <SkillsCard :is-loaded="isLoaded" @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Modelisation')"></SkillsCard>
     </div>
     </div>
     </div>
@@ -49,14 +49,14 @@
         <div class="ml-3 mt-5">
         <p class="text-h6 text-primary">Soft Skills</p>
         <div class="d-flex mb-5" style="width: fit-content;">
-            <SkillsCard  @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Soft Skills')" :without-card="true"></SkillsCard>
+            <SkillsCard :is-loaded="isLoaded" @delete-skill="deleteSkill" @update-skill="updateSkill" :type-language="getSkillsByType('Soft Skills')" :without-card="true"></SkillsCard>
     </div>
     </div>
     </div>
     <div v-if="skillsShow==='Langues'">
         <div class="ml-3 mt-5">
         <p class="text-h6 text-primary">Langues</p>
-        <LanguageExperience @update-skill="updateSkill" @delete-skill="deleteSkill" :language-experience="getSkillsByType('Languages')"></LanguageExperience>
+        <LanguageExperience :is-loaded="isLoaded" @update-skill="updateSkill" @delete-skill="deleteSkill" :language-experience="getSkillsByType('Languages')"></LanguageExperience>
     </div>
     
 </div>
@@ -93,9 +93,9 @@ const connexionStore = useConnexionStore();
 const skillsStore = useSkillStore();
 
 const { skills } = storeToRefs(skillsStore); 
-const { getSkills, addSkill,} = skillsStore;
-
+const { getSkills, addSkill} = skillsStore;
 const token = computed(() => connexionStore.token);
+const isLoaded=computed(()=>skillsStore.isLoaded)
 
 const dialogAdd=ref(false)
 const dialogDelete=ref(false)

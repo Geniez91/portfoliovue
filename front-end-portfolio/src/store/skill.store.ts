@@ -7,10 +7,12 @@ export const useSkillStore=defineStore('skill',()=>{
     const skills = ref<ISkills[]>([]);
     const errorMessage = ref('');
     const successMessage = ref('');
+    const isLoaded=ref(false);
 
     async function getSkills():Promise<void>{
         try{
           skills.value=await getAllSkills()
+          isLoaded.value=true
         }
         catch(error){
             errorMessage.value='Erreur de chargement des compétences'
@@ -58,5 +60,5 @@ export const useSkillStore=defineStore('skill',()=>{
             throw error;
         }
     }
-    return {skills,errorMessage,successMessage,getSkills,addSkill,deleteSkillById,updateSkillById}
+    return {skills,errorMessage,successMessage,isLoaded,getSkills,addSkill,deleteSkillById,updateSkillById}
 })
