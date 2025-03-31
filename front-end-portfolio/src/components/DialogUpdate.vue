@@ -139,7 +139,7 @@ const imageSkills=ref<File>()
 const yearsExperience=ref<number>()
 const selectedDate = ref<Date>();
 const {  updateSkillById } = skillsStore;
-const skillsLevel:string[]=['Debutant','Intermediaire','Maternelle']
+const skillsLevel:string[]=['Debutant','Intermediaire','Langue Maternelle']
 const successMessage=computed(()=>skillsStore.successMessage)
 const errorMessage=computed(()=>skillsStore.errorMessage)
 

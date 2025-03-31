@@ -142,7 +142,7 @@ const successMessage=computed(()=>skillsStore.successMessage)
 const errorMessage=computed(()=>skillsStore.errorMessage)
 const token = computed(() => connexionStore.token);
 const skillsTypeList:TSkills[]=['Front-end','Back-end','Base de données','Languages','Modelisation','Soft Skills']
-const skillsLevel:string[]=['Debutant','Intermediaire','Maternelle']
+const skillsLevel:string[]=['Debutant','Intermediaire','Langue Maternelle']
 const selectSkillsLevel=ref<string>('')
 const emit=defineEmits(['add-dialog','error-message','success-message'],)
 
