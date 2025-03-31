@@ -5,6 +5,7 @@ import { plainToInstance } from 'class-transformer';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
 import { ELoggerContext } from '@/logger/constant';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class SkillsService {
@@ -88,7 +89,7 @@ async deleteSkills(idSkills:number):Promise<Skills>{
 }
 
 async uploadImage(file:Express.Multer.File):Promise<string>{
-    const fileName=file.originalname;
+    const fileName = `${uuidv4()}_${file.originalname}`; 
     try{
         const { data, error } = await this.supabase.storage.from('skills').upload(fileName, file.buffer, {
             contentType: file.mimetype,
@@ -96,6 +97,7 @@ async uploadImage(file:Express.Multer.File):Promise<string>{
             upsert: true,
         });
         if (error) {
+            console.log(error)
             throw new Error('Error getting public URL');
         }
         const {data:publicUrlData}=await this.supabase.storage.from('skills').getPublicUrl(fileName)
