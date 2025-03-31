@@ -17,6 +17,7 @@
       <v-divider class="mb-4"></v-divider>
 
       <v-card-text>
+        <v-alert v-if="errorMessage" class="mb-5" color="error" icon="mdi-check-circle" >{{ errorMessage }}</v-alert>
         <div>
         <div class="text-medium-emphasis mb-4">
           Nom de la compétence : 
@@ -128,8 +129,6 @@ const props = defineProps<{
     dialogAdd: boolean;
 }>();
 
-
-
 const nameSkills=ref<string>()
 const selectTypeSkills=ref<TSkills>()
 const imageSkills=ref<File>()
@@ -139,18 +138,19 @@ const selectedDate = ref<Date>();
 const connexionStore = useConnexionStore();
 const skillsStore = useSkillStore();
 const {  addSkill } = skillsStore;
-
+const successMessage=computed(()=>skillsStore.successMessage)
+const errorMessage=computed(()=>skillsStore.errorMessage)
 const token = computed(() => connexionStore.token);
-
 const skillsTypeList:TSkills[]=['Front-end','Back-end','Base de données','Languages','Modelisation','Soft Skills']
-
 const skillsLevel:string[]=['Debutant','Intermediaire','Maternelle']
 const selectSkillsLevel=ref<string>('')
-
-const emit=defineEmits(['add-dialog'])
+const emit=defineEmits(['add-dialog','error-message','success-message'],)
 
 async function addSkillsEvent(nameSkills:string,selectTypeSkills:TSkills , imageSkills:File , token:string , yearsExperience:number , selectedDate:Date ){
-  addSkill(nameSkills!,selectTypeSkills!, imageSkills!, token!, yearsExperience!, selectedDate!)
+  await addSkill(nameSkills!,selectTypeSkills!, imageSkills!, token!, yearsExperience!, selectedDate!)
+  console.log(successMessage.value)
+  emit('success-message',successMessage.value)
+  emit('error-message',errorMessage.value)
   emit('add-dialog', false);
 }
 </script>

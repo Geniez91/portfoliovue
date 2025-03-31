@@ -54,3 +54,38 @@ export async function deleteSkill(id:number,token:string){
         throw error
     }
 }
+
+export async function updateSkill(id:number,skill:ISkills,file:File,token:string){
+
+    const formData = new FormData();
+  
+formData.append('file', file);
+formData.append('idType', skill.idType);
+formData.append('language', skill.language);
+if (skill.usageExperience) {
+    const usageDate = new Date(skill.usageExperience);
+    if (!isNaN(usageDate.getTime())) { 
+        formData.append('usageExperience', usageDate.toISOString());
+    }
+}
+
+if(skill.yearsExperience){
+    formData.append('yearsExperience', skill.yearsExperience.toString());
+}
+
+if(skill.level){
+    formData.append('level',skill.level)
+}
+
+if(skill.TOIEC){
+formData.append('TOIEC',skill.TOIEC.toString())
+}
+
+    try{
+        const result=await axios.put(`${urlDeleteSkills}${id}`,formData,{headers:addHeaders(token)})
+        return result
+    }
+    catch(error){
+        throw error;
+    }
+}

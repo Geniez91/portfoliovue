@@ -19,7 +19,7 @@
                     </div>      
                 </v-card>
                 <div class="d-flex flex-column justify-space-evenly" v-if="token">
-                <v-btn color="warning" @click="emit('update-skill')">
+                <v-btn color="warning" @click="emit('update-skill',expériences)">
                     <v-icon icon="mdi-pencil"></v-icon>
                 </v-btn>
                 <v-btn color="red" @click="emit('delete-skill',expériences.language,expériences.id)">
@@ -44,7 +44,7 @@ const token = computed(() => connexionStore.token);
 
 const emit = defineEmits<{
   (event: 'delete-skill', language: string,id:number): string;
-  (event:'update-skill'):void
+  (event:'update-skill',skill:ISkills):void
 }>();
 
 

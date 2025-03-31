@@ -61,15 +61,18 @@ const props = defineProps<{
     idLangage:number;
 }>();
 
-const emit=defineEmits(['delete-dialog'])
-
+const emit=defineEmits(['delete-dialog','error-message','success-message'])
 const skillsStore = useSkillStore();
 const connexionStore = useConnexionStore();
 const {  deleteSkillById } = skillsStore;
 const token = computed(() => connexionStore.token);
+const successMessage=computed(()=>skillsStore.successMessage)
+const errorMessage=computed(()=>skillsStore.errorMessage)
 
-function deleteSkillsEvent(){
-  deleteSkillById(props.idLangage,token.value!)
+async function deleteSkillsEvent(){
+await deleteSkillById(props.idLangage,token.value!)
   emit('delete-dialog', false);
+  emit('success-message',successMessage.value)
+  emit('error-message',errorMessage.value)
 }
 </script>

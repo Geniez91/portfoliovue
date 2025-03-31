@@ -21,7 +21,7 @@ language:string;
 yearsExperience?:number;
 usageExperience?:Date;
 srcImg:string;
-idType:string
+idType:TSkills 
 level?:string;
 TOIEC?:number;
 }
