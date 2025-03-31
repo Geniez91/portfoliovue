@@ -35,6 +35,8 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
                     usageExperience:skills.usageExperience,
                     yearsExperience:skills.yearsExperience,
                     srcImg:file,
+                    level:skills.level,
+                    TOIEC:skills.TOIEC
                 }
             })
             this.logger.log(`${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`)
@@ -55,7 +57,8 @@ return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
                     idType: skills.idType,
                     usageExperience: skills.usageExperience,
                     yearsExperience: skills.yearsExperience,
-                    
+                    level:skills.level,
+                    TOIEC:skills.TOIEC
                 },
                 where: {
                     id:idSkills
