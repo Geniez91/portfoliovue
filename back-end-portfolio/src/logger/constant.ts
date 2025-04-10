@@ -8,4 +8,7 @@ export namespace ELoggerContext{
     export enum AuthService{
         signIn="AuthService.signIn"
     }
+    export enum WorkExperienceService{
+        AddWorkExperience="WorkExperienceService.AddWorkExperience"
+    }
 }

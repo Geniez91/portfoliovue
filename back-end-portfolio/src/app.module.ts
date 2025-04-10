@@ -6,11 +6,12 @@ import { SkillsService } from './skills/skills.service';
 import { SkillsModule } from './skills/skills.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { WorkExperienceModule } from './workExperience/workExperience.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal:true
-  }),PrismaModule, SkillsModule, AuthModule],
+  }),PrismaModule, SkillsModule, AuthModule,WorkExperienceModule],
   controllers: [AppController],
   providers: [AppService, SkillsService],
 })
