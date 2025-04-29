@@ -21,6 +21,15 @@ export class WorkExperienceController {
         @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
         async addSkills(@UploadedFile() file:Express.Multer.File,@Body() body:WorkExperience):Promise<WorkExperience>{
             const workExperienceImg=await this.workExperienceService.uploadImage(file)
-            return await this.workExperienceService.addWorkExperience(workExperienceImg,body)
+            if (typeof body.stack === 'string') {
+                try {
+                  body.stack = JSON.parse(body.stack);
+             
+                }
+                catch(error){
+                    throw error
+                }
         }
+        return await this.workExperienceService.addWorkExperience(workExperienceImg,body)
+}
 }
