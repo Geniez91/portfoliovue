@@ -58,7 +58,7 @@ export class WorkExperienceService {
                 console.log(error)
                 throw new Error('Error getting public URL');
             }
-            const {data:publicUrlData}=await this.supabase.storage.from('skills').getPublicUrl(fileName)
+            const {data:publicUrlData}=await this.supabase.storage.from('workexperience').getPublicUrl(fileName)
             this.logger.log(`${ELoggerContext.SkillsService.UploadImage} with file ${file}`)
             return publicUrlData.publicUrl
         }
