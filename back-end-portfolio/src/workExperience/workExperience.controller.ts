@@ -4,6 +4,8 @@ import { WorkExperience } from "./workExperience.interface";
 import { ApiBody, ApiConsumes } from "@nestjs/swagger";
 import { AuthGuard } from "@/auth/auth.guard";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { plainToInstance } from "class-transformer";
+import { validateOrReject } from "class-validator";
 
 @Controller('workExperience')
 export class WorkExperienceController {
@@ -13,23 +15,27 @@ export class WorkExperienceController {
             return this.workExperienceService.getAllWorkExperience();
         }
 
-        @ApiBody({type:WorkExperience})
         @Post()
         @UseInterceptors(FileInterceptor('file'))
         @ApiConsumes('multipart/form-data')
         @UseGuards(AuthGuard)
-        @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
-        async addSkills(@UploadedFile() file:Express.Multer.File,@Body() body:WorkExperience):Promise<WorkExperience>{
-            const workExperienceImg=await this.workExperienceService.uploadImage(file)
-            if (typeof body.stack === 'string') {
-                try {
-                  body.stack = JSON.parse(body.stack);
-             
-                }
-                catch(error){
-                    throw error
-                }
-        }
-        return await this.workExperienceService.addWorkExperience(workExperienceImg,body)
+        async addSkills(
+          @UploadedFile() file: Express.Multer.File,
+          @Body() body: any
+        ): Promise<WorkExperience> {
+          const workExperienceImg = await this.workExperienceService.uploadImage(file);
+        
+          // Transformation manuelle de `body`
+          const transformed = plainToInstance(WorkExperience, {
+            ...body,
+            startDate: new Date(body.startDate),
+            endDate: new Date(body.endDate),
+            stack: JSON.parse(body.stack),
+          });
+        
+          // Validation manuelle, car ValidationPipe ne marche pas sur @Body() + multipart
+          await validateOrReject(transformed);
+        
+          return await this.workExperienceService.addWorkExperience(workExperienceImg,transformed);
 }
 }
