@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Get, Post, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
 import { WorkExperienceService } from "./workExperience.service";
 import { WorkExperience } from "./workExperience.interface";
 import { ApiBody, ApiConsumes } from "@nestjs/swagger";
 import { AuthGuard } from "@/auth/auth.guard";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller('workExperience')
 export class WorkExperienceController {
@@ -14,9 +15,12 @@ export class WorkExperienceController {
 
         @ApiBody({type:WorkExperience})
         @Post()
+        @UseInterceptors(FileInterceptor('file'))
+        @ApiConsumes('multipart/form-data')
         @UseGuards(AuthGuard)
         @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
-        async addSkills(@Body() body:WorkExperience):Promise<WorkExperience>{
-            return await this.workExperienceService.addWorkExperience(body)
+        async addSkills(@UploadedFile() file:Express.Multer.File,@Body() body:WorkExperience):Promise<WorkExperience>{
+            const workExperienceImg=await this.workExperienceService.uploadImage(file)
+            return await this.workExperienceService.addWorkExperience(workExperienceImg,body)
         }
 }

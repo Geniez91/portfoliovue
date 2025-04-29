@@ -38,4 +38,5 @@ model workExperience {
   endDate     DateTime? @db.Date
   stack       Json?
   content     String?
+  srcImg      String?
 }

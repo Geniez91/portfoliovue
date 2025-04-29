@@ -5,6 +5,7 @@ import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { WorkExperience } from "./workExperience.interface";
 import { plainToInstance } from "class-transformer";
 import { ELoggerContext } from "@/logger/constant";
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class WorkExperienceService {
@@ -23,7 +24,7 @@ export class WorkExperienceService {
     return plainToInstance(WorkExperience, result);
     }
 
-    async addWorkExperience(workExperience:WorkExperience):Promise<WorkExperience>{
+    async addWorkExperience(workExperienceImg:string,workExperience:WorkExperience):Promise<WorkExperience>{
         try{
             const result=await this.prisma.workExperience.create({
                 data:{
@@ -34,6 +35,7 @@ export class WorkExperienceService {
                     stack:workExperience.stack as [],
                     tasks:workExperience.tasks,
                     startDate:workExperience.startDate,
+                    srcImg:workExperienceImg
                 }
             })
             this.logger.log(`${ELoggerContext.WorkExperienceService.AddWorkExperience}`)
@@ -43,5 +45,27 @@ export class WorkExperienceService {
             throw error;
         }
     }
+
+    async uploadImage(file:Express.Multer.File):Promise<string>{
+        const fileName = `${uuidv4()}_${file.originalname}`; 
+        try{
+            const { data, error } = await this.supabase.storage.from('workexperience').upload(fileName, file.buffer, {
+                contentType: file.mimetype,
+                cacheControl: '3600',
+                upsert: true,
+            });
+            if (error) {
+                console.log(error)
+                throw new Error('Error getting public URL');
+            }
+            const {data:publicUrlData}=await this.supabase.storage.from('skills').getPublicUrl(fileName)
+            this.logger.log(`${ELoggerContext.SkillsService.UploadImage} with file ${file}`)
+            return publicUrlData.publicUrl
+        }
+        catch(error){
+            this.logger.error(`${ELoggerContext.SkillsService.UploadImage} with file ${file} with an error ${error}`)
+            throw error
+        }
+    }
+    }
         
-}

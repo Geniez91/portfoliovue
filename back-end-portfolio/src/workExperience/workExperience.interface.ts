@@ -54,4 +54,7 @@ export class WorkExperience {
   @IsNotEmpty()
   @ApiProperty()
   content: string;
+
+  @ApiProperty()
+  srcImg:string;
 }
