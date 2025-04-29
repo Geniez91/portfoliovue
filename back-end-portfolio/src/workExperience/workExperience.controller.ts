@@ -24,18 +24,13 @@ export class WorkExperienceController {
           @Body() body: any
         ): Promise<WorkExperience> {
           const workExperienceImg = await this.workExperienceService.uploadImage(file);
-        
-          // Transformation manuelle de `body`
-          const transformed = plainToInstance(WorkExperience, {
+            const transformed = plainToInstance(WorkExperience, {
             ...body,
             startDate: new Date(body.startDate),
             endDate: new Date(body.endDate),
             stack: JSON.parse(body.stack),
           });
-        
-          // Validation manuelle, car ValidationPipe ne marche pas sur @Body() + multipart
           await validateOrReject(transformed);
-        
           return await this.workExperienceService.addWorkExperience(workExperienceImg,transformed);
 }
 }
