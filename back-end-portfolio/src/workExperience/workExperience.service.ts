@@ -20,8 +20,7 @@ export class WorkExperienceService {
 
     async getAllWorkExperience(): Promise<WorkExperience[]> {
     const result = await this.prisma.workExperience.findMany();
-    const resultArray = Array.isArray(result) ? result : [result]; 
-    return plainToInstance(WorkExperience, resultArray, { excludeExtraneousValues: true });
+    return plainToInstance(WorkExperience, result);
     }
 
     async addWorkExperience(workExperience:WorkExperience):Promise<WorkExperience>{
