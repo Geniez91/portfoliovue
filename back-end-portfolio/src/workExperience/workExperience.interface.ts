@@ -44,10 +44,6 @@ export class WorkExperience {
   @ApiProperty()
   endDate: Date;
 
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => StackImgDto)
-  @ApiProperty({ type: [StackImgDto] })
   stack: StackImgDto[];
 
   @IsString()
