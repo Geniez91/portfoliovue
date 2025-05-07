@@ -29,6 +29,8 @@ export class WorkExperienceController {
             startDate: new Date(body.startDate),
             endDate: new Date(body.endDate),
             stack: JSON.parse(body.stack),
+            tasks:JSON.parse(body.tasks)
+
           });
           await validateOrReject(transformed);
           return await this.workExperienceService.addWorkExperience(workExperienceImg,transformed);
