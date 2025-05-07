@@ -31,7 +31,6 @@ export class WorkExperience {
   @ApiProperty()
   job: string;
 
-  @IsArray()
   @IsNotEmpty()
   @ApiProperty()
   tasks: string[];
