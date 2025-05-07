@@ -33,7 +33,7 @@ export class WorkExperienceService {
                     nameCompany:workExperience.nameCompany,
                     job:workExperience.job,
                     stack:workExperience.stack as [],
-                    tasks:workExperience.tasks,
+                    tasks:workExperience.tasks as [],
                     startDate:workExperience.startDate,
                     srcImg:workExperienceImg
                 }
