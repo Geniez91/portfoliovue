@@ -31,10 +31,10 @@ export class WorkExperience {
   @ApiProperty()
   job: string;
 
-  @IsString()
+  @IsArray()
   @IsNotEmpty()
   @ApiProperty()
-  tasks: string;
+  tasks: string[];
 
   @Type(()=>Date)
   @ApiProperty()
