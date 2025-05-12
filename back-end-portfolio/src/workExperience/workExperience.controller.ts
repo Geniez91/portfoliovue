@@ -49,16 +49,18 @@ async deleteWorkExperience(@Query('id')id:number):Promise<WorkExperience>{
 @UseInterceptors(FileInterceptor('file'))
   async updateSkills( @UploadedFile() file:Express.Multer.File, @Query('id') id:number, @Body() body:WorkExperience):Promise<WorkExperience>{
     const workExperienceImg = await this.workExperienceService.uploadImage(file);
+    
     const transformed = plainToInstance(WorkExperience, {
-    ...body,
-    startDate: new Date(body.startDate),
-    endDate: new Date(body.endDate),
-    stack: body.stack,
-    tasks:body.tasks
-
-  });
+      ...body,
+      startDate: new Date(body.startDate),
+      endDate: new Date(body.endDate),
+      tasks: typeof body.tasks === 'string' ? JSON.parse(body.tasks) : body.tasks,
+      stack: typeof body.stack === 'string' ? JSON.parse(body.stack) : body.stack,
+      srcImg: workExperienceImg,
+    });
+    
   await validateOrReject(transformed);        
-  return this.workExperienceService.updateWorkExperience(id,workExperienceImg,body)
+  return this.workExperienceService.updateWorkExperience(id,workExperienceImg,transformed)
     }
 
 }
