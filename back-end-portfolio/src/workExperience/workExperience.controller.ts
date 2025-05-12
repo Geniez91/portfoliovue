@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Query, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
 import { WorkExperienceService } from "./workExperience.service";
 import { WorkExperience } from "./workExperience.interface";
 import { ApiBody, ApiConsumes } from "@nestjs/swagger";
@@ -35,4 +35,11 @@ export class WorkExperienceController {
           await validateOrReject(transformed);
           return await this.workExperienceService.addWorkExperience(workExperienceImg,transformed);
 }
+
+@Delete()
+@UseGuards(AuthGuard)
+async deleteWorkExperience(@Query('id')id:number):Promise<WorkExperience>{
+  return await this.workExperienceService.deleteWorkExperience(id)
+}
+
 }

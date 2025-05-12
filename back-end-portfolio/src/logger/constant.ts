@@ -9,6 +9,7 @@ export namespace ELoggerContext{
         signIn="AuthService.signIn"
     }
     export enum WorkExperienceService{
-        AddWorkExperience="WorkExperienceService.AddWorkExperience"
+        AddWorkExperience="WorkExperienceService.AddWorkExperience",
+        DeleteWorkExperience="WorkExperienceService.DeleteWorkExperience"
     }
 }

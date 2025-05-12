@@ -46,6 +46,20 @@ export class WorkExperienceService {
         }
     }
 
+    async deleteWorkExperience(idSkills:number):Promise<WorkExperience>{
+        try {
+            const result=await this.prisma.workExperience.delete({
+                where:{
+                    id:idSkills
+                }
+            })
+            return plainToInstance(WorkExperience, result, { excludeExtraneousValues: true });
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
     async uploadImage(file:Express.Multer.File):Promise<string>{
         const fileName = `${uuidv4()}_${file.originalname}`; 
         try{
