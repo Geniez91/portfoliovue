@@ -59,6 +59,24 @@ export class WorkExperienceService {
             throw error;
         }
     }
+    
+    async updateWorkExperience(idWorkExperience:number,file:string,workExperience:WorkExperience){
+        const result=await this.prisma.workExperience.update({
+            data: {
+                endDate: workExperience.endDate,
+                job: workExperience.job,
+                nameCompany: workExperience.nameCompany,
+                srcImg: file,
+                startDate: workExperience.startDate,
+                tasks: workExperience.tasks
+            },
+            where: {
+                id:idWorkExperience
+            }
+        })
+        this.logger.log(`${ELoggerContext.WorkExperienceService.UpdateWorkExperience} with idSkills ${idWorkExperience}`)
+        return plainToInstance(WorkExperience, result, { excludeExtraneousValues: true });
+    }
 
     async uploadImage(file:Express.Multer.File):Promise<string>{
         const fileName = `${uuidv4()}_${file.originalname}`; 

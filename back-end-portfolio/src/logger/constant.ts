@@ -10,6 +10,7 @@ export namespace ELoggerContext{
     }
     export enum WorkExperienceService{
         AddWorkExperience="WorkExperienceService.AddWorkExperience",
-        DeleteWorkExperience="WorkExperienceService.DeleteWorkExperience"
+        DeleteWorkExperience="WorkExperienceService.DeleteWorkExperience",
+        UpdateWorkExperience="WorkExperienceService.UpdateWorkExperience"
     }
 }

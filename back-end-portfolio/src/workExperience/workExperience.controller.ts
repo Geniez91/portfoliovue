@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Query, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
 import { WorkExperienceService } from "./workExperience.service";
 import { WorkExperience } from "./workExperience.interface";
 import { ApiBody, ApiConsumes } from "@nestjs/swagger";
@@ -41,5 +41,24 @@ export class WorkExperienceController {
 async deleteWorkExperience(@Query('id')id:number):Promise<WorkExperience>{
   return await this.workExperienceService.deleteWorkExperience(id)
 }
+
+@ApiBody({type:WorkExperience})
+@ApiConsumes('multipart/form-data')
+@UseGuards(AuthGuard)
+@Put()
+@UseInterceptors(FileInterceptor('file'))
+  async updateSkills( @UploadedFile() file:Express.Multer.File, @Query('id') id:number, @Body() body:WorkExperience):Promise<WorkExperience>{
+    const workExperienceImg = await this.workExperienceService.uploadImage(file);
+    const transformed = plainToInstance(WorkExperience, {
+    ...body,
+    startDate: new Date(body.startDate),
+    endDate: new Date(body.endDate),
+    stack: body.stack,
+    tasks:body.tasks
+
+  });
+  await validateOrReject(transformed);        
+  return this.workExperienceService.updateWorkExperience(id,workExperienceImg,body)
+    }
 
 }
