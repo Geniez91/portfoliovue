@@ -47,20 +47,27 @@ async deleteWorkExperience(@Query('id')id:number):Promise<WorkExperience>{
 @UseGuards(AuthGuard)
 @Put()
 @UseInterceptors(FileInterceptor('file'))
-  async updateSkills( @UploadedFile() file:Express.Multer.File, @Query('id') id:number, @Body() body:WorkExperience):Promise<WorkExperience>{
-    const workExperienceImg = await this.workExperienceService.uploadImage(file);
+  async updateSkills( @Query('id') id:number, @Body() body:WorkExperience,@UploadedFile() file?:Express.Multer.File,):Promise<WorkExperience>{
+   
     
-    const transformed = plainToInstance(WorkExperience, {
+    let transformed = plainToInstance(WorkExperience, {
       ...body,
       startDate: new Date(body.startDate),
       endDate: new Date(body.endDate),
       tasks: typeof body.tasks === 'string' ? JSON.parse(body.tasks) : body.tasks,
       stack: typeof body.stack === 'string' ? JSON.parse(body.stack) : body.stack,
-      srcImg: workExperienceImg,
     });
+
+    if(file){
+    const workExperienceImg = await this.workExperienceService.uploadImage(file);
+    let transformed = plainToInstance(WorkExperience, {
+      ...body,
+    srcImg:workExperienceImg
+    });
+    }
     
   await validateOrReject(transformed);        
-  return this.workExperienceService.updateWorkExperience(id,workExperienceImg,transformed)
+  return this.workExperienceService.updateWorkExperience(id,transformed)
     }
 
 }

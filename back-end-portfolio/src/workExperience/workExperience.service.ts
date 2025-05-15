@@ -60,13 +60,13 @@ export class WorkExperienceService {
         }
     }
     
-    async updateWorkExperience(idWorkExperience:number,file:string,workExperience:WorkExperience){
+    async updateWorkExperience(idWorkExperience:number,workExperience:WorkExperience){
         const result=await this.prisma.workExperience.update({
             data: {
                 endDate: workExperience.endDate,
                 job: workExperience.job,
                 nameCompany: workExperience.nameCompany,
-                srcImg: file,
+                srcImg: workExperience.srcImg,
                 startDate: workExperience.startDate,
                 tasks: workExperience.tasks
             },
