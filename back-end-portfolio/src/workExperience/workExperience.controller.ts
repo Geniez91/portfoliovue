@@ -60,7 +60,7 @@ async deleteWorkExperience(@Query('id')id:number):Promise<WorkExperience>{
 
     if(file){
     const workExperienceImg = await this.workExperienceService.uploadImage(file);
-    let transformed = plainToInstance(WorkExperience, {
+     transformed = plainToInstance(WorkExperience, {
       ...body,
     srcImg:workExperienceImg
     });
