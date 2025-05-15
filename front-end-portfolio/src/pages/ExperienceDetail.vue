@@ -15,7 +15,8 @@
 import { ref, onMounted } from 'vue';
 import VueMarkdownRender from 'vue-markdown-render';
 import { useRoute } from 'vue-router';
-import {loadMarkdown} from '../services/experienceDetail.service'
+import type { IWorkExperience2 } from '@/interfaces/interfaces';
+import { getAllWorkExperience } from '@/services/workExperience.service';
 
 
 const route = useRoute();
@@ -39,10 +40,21 @@ const Breadcrumbs = ref([
 ]);
 
 const markdownContent = ref('');
+const workExperiences = ref<IWorkExperience2[]>([]);
+const currentWorkExperience=ref<IWorkExperience2>()
+currentWorkExperience.value?.nameCompany
+
+function findWorkExperience(){
+  return workExperiences.value.find(
+    (exp) => exp.nameCompany === route.params.name
+  );
+}
 
 onMounted(async () => {
-  const response= await loadMarkdown(route.params.name as string);
-  markdownContent.value = await response.text();
+  workExperiences.value  = await getAllWorkExperience();
+  currentWorkExperience.value = findWorkExperience()
+  markdownContent.value = currentWorkExperience.value?.content!
+  
 });
 </script>
 

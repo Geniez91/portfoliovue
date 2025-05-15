@@ -23,5 +23,6 @@ declare module 'vue' {
     WelcomeDescription: typeof import('./src/components/WelcomeDescription.vue')['default']
     WelcomeLinks: typeof import('./src/components/WelcomeLinks.vue')['default']
     WelcomePresentation: typeof import('./src/components/WelcomePresentation.vue')['default']
+    Wrapper: typeof import('./src/components/Wrapper.vue')['default']
   }
 }

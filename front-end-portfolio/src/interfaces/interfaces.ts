@@ -58,6 +58,30 @@ export interface IWorkExperience{
     entrepriseImg:any;
 }
 
+export interface IWorkExperience1{
+    id?:string,
+    nameCompany:string;
+    stack:IStackWorkExperience[],
+    job:string;
+    tasks:string[],
+    startDate:Date,
+    endDate:Date,
+    content:string;
+    srcImg:File;
+}
+
+export interface IWorkExperience2{
+    id?:number,
+    nameCompany:string;
+    stack:IStackWorkExperience[],
+    job:string;
+    tasks:string[],
+    startDate:Date,
+    endDate:Date,
+    content:string;
+    srcImg:string|File;
+}
+
 export interface IProject{
     name:string,
     thumbnail:any[],
@@ -83,5 +107,10 @@ export interface IEmailSend {
 export interface IHeader{
     Authorization:string,
     "Content-Type"?:string
+}
+
+export interface IStackWorkExperience{
+    img:string;
+    name:string;
 }
 

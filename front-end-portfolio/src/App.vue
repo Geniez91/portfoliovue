@@ -8,6 +8,7 @@
 </template>
 
 <script lang="ts" setup>
+import '@toast-ui/editor/dist/toastui-editor.css';
 import NavBar from './components/NavBar.vue';
 
 </script>

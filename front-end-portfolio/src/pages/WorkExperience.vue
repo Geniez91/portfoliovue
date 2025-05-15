@@ -1,116 +1,86 @@
 <template>
     <div class="mx-3 my-5">
         <p class="text-h6 text-primary">Mes Expériences professionnelles</p>
+        <div  v-if="workExperienceStore.successMessage" class="my-5">
+        <v-alert  color="success" icon="mdi-check-circle" width="fit-content">{{ workExperienceStore.successMessage }}</v-alert>
+    </div>
         <div class="mt-7">
             <v-row style="width: fit-content;">
-                <v-col v-for="experience in workExperience" cols="12">
+                <v-col v-for="experience in workExperiences" cols="12" :key="experience.id">
+                    
                     <div class="mb-3">
-                    <p class="text-primary text-body-2" style="font-style: italic;">{{ experience.period }}</p>
+                        
+                    <p class="text-primary text-body-2" style="font-style: italic;">{{ formatDateToMonthYear(experience.startDate) }} - {{ formatDateToMonthYear(experience.endDate) }} {{ calculateDifferenceBetweenTwoDates(experience.startDate,experience.endDate) }}</p>
                 </div>
-                <v-card color="secondary" hover :to="`workExperience/${experience.entreprise}`" >
+                <v-card color="secondary" hover :to="`workExperience/${experience.nameCompany}`" >
                     <div class="d-flex">
-                        <v-img :src="experience.entrepriseImg" :alt="`${experience.entreprise} logo`" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
+                        <v-img :src="experience.srcImg as string" :alt="`${experience.nameCompany} logo`" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
                         <div class="d-flex flex-column justify-center ml-3">
-                            <p class="mb-2 text-primary font-weight-bold text-subtitle-1">{{ experience.name }}</p>
-                            <p class="text-subtitle-1 text-primary">{{ experience.entreprise }}</p>
+                            <p class="mb-2 text-primary font-weight-bold text-subtitle-1">{{ experience.job }}</p>
+                            <p class="text-subtitle-1 text-primary">{{ experience.nameCompany }}</p>
                         </div>
                     </div>
                     <v-divider class="border-opacity-75" color="primary"></v-divider>
                     <div class="ml-3 mt-2">
                         <p class="text-primary text-subtitle-1" style="text-decoration: underline;">Taches Effectués : </p>
                         <ul>
-                            <li v-for="description in experience.description" class="mb-2 ml-3">
-                                <p v-html="description" class="text-primary text-body-1"></p>
+                            <li class="mx-4 mb-2 text-primary" v-for="(experiences) in experience.tasks">
+                                {{ experiences }}
                             </li>
                         </ul>
+                   
                        </div>
                     <div class="ml-3 mt-2">
                         <p class="text-primary text-subtitle-1" style="text-decoration: underline;">Stack Technique : </p>
                        
                         <v-row class="my-3">
-                            <v-col md="1" sm="3" v-for="img in experience.stackImg">
-                                <v-img :src="img" :alt="`${experience.stackImg} logo`" style="width: 60px; height: 60px;"></v-img>
+                            <v-col md="1" sm="3" v-for="img in experience.stack">
+                                <v-img :src="img.img" :alt="`${img} logo`" style="width: 60px; height: 60px;"></v-img>
                             </v-col>
                         </v-row>
-                   
                     </div>
                     <div class="d-flex flex-column align-center my-2">
-                        <router-link :to="`workExperience/${experience.entreprise}`"><v-btn color="navbar">En savoir plus ?</v-btn></router-link>
+                        <router-link :to="`workExperience/${experience.nameCompany}`"><v-btn color="navbar">En savoir plus ?</v-btn></router-link>
                     </div>
                  
                 </v-card>
+                <div class="d-flex flex-column justify-space-evenly" v-if="token">
+                <v-btn color="warning" :to="`editWorkExperience/${experience.id}`">
+                    <v-icon icon="mdi-pencil"></v-icon>
+                </v-btn>
+                <v-btn color="red" @click="workExperienceStore.deleteWorkExperiences(experience.id!,token)">
+                    <v-icon icon="mdi-delete" ></v-icon>
+                </v-btn>
+            </div>
                 </v-col>
+                
             </v-row>
+            <div class="d-flex justify-center align-center my-4" style="height: 90px;" v-if="token" >
+    <div class="d-flex align-center">
+        <v-btn variant="text" to="addWorkExperience" class="text-white mx-3">
+            <v-icon icon="mdi-plus" size="42"></v-icon>
+            <p class="text-white">Ajouter une Expérience Profesionelle</p>
+        </v-btn>
+    </div>
+</div>
+        
         </div>
     </div>
 </template> 
 <script lang="ts" setup>
-import type { IWorkExperience } from '@/interfaces/interfaces';
-import VueImg from '/assets/Vue.png'
-import TypeScript from '/assets/TypeScript.png'
-import HTML from '/assets/HTML.png'
-import CSS from '/assets/css.png'
-import Javascript from '/assets/Javascript.png'
-import Nest from '/assets/NestJS.svg'
-import PostgreSql from '/assets/Postgresql.png'
-import Carbonscore from '/assets/carbonscore.jpg'
-import IUTParis from '/assets/iutParis.png'
-import Python from '/assets/python.png'
-import SkLearn from '/assets/sklearn.png'
-import Pandas from '/assets/pandas.png'
-import MathplotLib from '/assets/mathplotlib.png'
-import C2RMF from '/assets/C2RMF.png'
-import PHP from '/assets/php.png'
-import FruityIce from '/assets/fruityIce.png'
-import Wordpress from '/assets/wordpress.png'
-import { useDisplay } from 'vuetify';
+import { computed, onMounted } from 'vue';
+import { useConnexionStore } from '@/store/connexion.store';
+import {formatDateToMonthYear,calculateDifferenceBetweenTwoDates} from '@/services/utils'
+import { useWorkExperienceStore } from '@/store/workExperience.store';
 
-const {smAndDown}=useDisplay()
+const connexionStore = useConnexionStore();
+const token = computed(() => connexionStore.token);
+const workExperienceStore= useWorkExperienceStore()
+const workExperiences = computed(() => workExperienceStore.workExperiences);
 
-const workExperience:IWorkExperience[]=[{
-    period:'Octobre 2022 - Novembre 2024 (2 ans)',
-    entreprise:'TechupClimate',
-    name:'Apprenti Développeur Full Stack',
-    description:[`<span class='font-weight-bold'>Développement Front-end :</span> Contribution à l’amélioration d’une
-application web existante en concevant et implémentant de nouvelles
-fonctionnalités avec Vue.js, TypeScript, Chart.js et CSS. Résolution de
-bugs et amélioration des fonctionnalités existantes pour offrir une
-meilleure expérience utilisateur`,`<span class='font-weight-bold'>Développement Back-end : </span>Participation à des cycles de
-développement complets, partant d’une idée simple, en passant par la
-conceptualisation de la base de données (MCD) jusqu’à l’implémentation
-de nouvelles routes API REST en NestJS. Utilisation de PostgreSQL pour
-la gestion des données et de l’ORM Prisma pour simplifier les requêtes.`,`<span class='font-weight-bold'>Tests Unitaires et Qualité de code : </span>Écriture de tests unitaires avec
-Vitest et Jest pour chacune des fonctions créées afin de garantir la
-robustesse du code. Mise en pratique des guidelines TypeScript de
-Google, assurant ainsi une cohérence et une meilleure maintenabilité du
-code.`],
-    stackImg:[VueImg,TypeScript,HTML,CSS,Javascript,Nest,PostgreSql],
-    entrepriseImg:Carbonscore
-},
-{
-    period:'Mai 2022 - Juin 2022 (2 mois)',
-    entreprise:'IUT Paris Cité',
-    entrepriseImg:IUTParis,
-    name:'Stagiaire Machine Learning',
-    description:['Exploitation des données avec Python (Pandas,Matplotlib)',`Amélioration des performances de l'intelligence artificielle avec SKlearn`],
-    stackImg:[Python,Pandas,SkLearn,MathplotLib]
-},{
-    period:'Janvier 2020 - Fevrier 2020 (2 mois)',
-    entreprise:'Centre de Recherche et des Restauration des musées de France',
-    entrepriseImg:C2RMF,
-    name:'Stagiaire Développement Web',
-    description:[`Débogage d'un intranet et mise en place de nouvelles
-fonctionnalités en PHP`,'Modification de la base de données existante',`Rédaction d'une documentation technique`]
-,stackImg:[PHP,Javascript,HTML,CSS]},
-{
-period:'Mai 2019 - Juin 2019 (2 mois)',
-entreprise:'Fruity-Ice',
-entrepriseImg:FruityIce,
-name:'Stagiaire Développement Web',
-description:[`Création d'un site vitrine sous Wordpress pour un restaurant.`,'Etude et mise en place du référencement du site web sous Wordpress'],
-stackImg:[Wordpress,HTML,CSS,PHP]
-}]
-
+onMounted(async () => {
+ await workExperienceStore.getAllWorkExperiences();
+});
 </script>
 <style lang="css">
 .v-responsive{

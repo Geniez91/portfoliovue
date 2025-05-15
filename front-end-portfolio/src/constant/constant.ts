@@ -26,7 +26,7 @@ export const JAVASCRIPT:IStack={
 
 export const TYPESCRIPT:IStack={
     img:TypeScript,
-    name:'JavaScript'
+    name:'TypeScript'
 }
 
 export const VUE:IStack={
@@ -109,4 +109,24 @@ export const FIREBASE:IStack={
     name:'Firebase'
 }
 
+export const STACKLIST:IStack[]=[
+    JAVASCRIPT,
+    TYPESCRIPT,
+    VUE,
+    HTML,
+    CSS,
+    PYTHON,
+    SKLEARN,
+    PANDAS,
+    ANGULAR,
+    NEST,
+    REACT_NATIVE,
+    REACT,
+    PHP,
+    C,
+    Go,
+    REDIS,
+    FLUTTER,
+    FIREBASE
+]
 

@@ -46,7 +46,9 @@ import { ref } from 'vue';
 import WelcomeLinks from '@/components/WelcomeLinks.vue';
 import type { IEmailSend } from '@/interfaces/interfaces';
 import emailjs from '@emailjs/browser';
-import {emailRules,emptyRules} from '../services/contact.service'
+import {emailRules} from '../services/contact.service'
+import {emptyRules} from '../services/utils'
+
 import { useDisplay } from 'vuetify';
 
 const {smAndDown}= useDisplay()

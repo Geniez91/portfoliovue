@@ -34,7 +34,8 @@
 
 <script lang="ts" setup>
 import { useDisplay } from 'vuetify';
-import {emailRules,emptyRules} from '../services/contact.service'
+import {emailRules} from '../services/contact.service'
+import {emptyRules} from '../services/utils'
 import { ref } from 'vue';
 import { useConnexionStore } from '@/store/connexion.store';
 const {smAndDown}=useDisplay()

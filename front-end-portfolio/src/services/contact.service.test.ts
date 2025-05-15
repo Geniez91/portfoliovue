@@ -1,5 +1,6 @@
 import { expect, test,describe,it } from 'vitest'
-import {emailRules, emptyRules} from '../services/contact.service'
+import {emailRules} from '../services/contact.service'
+import {emptyRules} from '../services/utils'
 
 
 describe('emailRules',()=>{

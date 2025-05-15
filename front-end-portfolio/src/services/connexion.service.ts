@@ -14,9 +14,10 @@ catch(error){
 }
 }
 
-export function addHeaders(token:string) {
-return {
-    Authorization: `Bearer ${token}`, 
-    "Content-Type": "multipart/form-data",
+export function addHeaders(token: string, formData: boolean = true) {
+    return {
+      Authorization: `Bearer ${token}`, 
+      "Content-Type": formData ? "multipart/form-data" : "application/json",
+    };
   }
-}
+  

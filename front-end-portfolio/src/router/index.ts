@@ -16,6 +16,9 @@ import ExperienceDetail from '@/pages/ExperienceDetail.vue'
 import Connexion from '@/pages/Connexion.vue'
 import ForgettenPassword from '@/pages/ForgettenPassword.vue'
 import UpdatePassword from '@/pages/UpdatePassword.vue'
+import TestEditor from '@/pages/AddWorkExperience.vue'
+import AddWorkExperience from '@/pages/AddWorkExperience.vue'
+import EditWorkExperience from '@/pages/EditWorkExperience.vue'
 
 const routes:Array<RouteRecordRaw>=[{
   path:'/',
@@ -56,6 +59,14 @@ const routes:Array<RouteRecordRaw>=[{
 {
   path:'/update-password',
   component:UpdatePassword
+},
+{
+  path:'/addWorkExperience',
+  component:AddWorkExperience
+},
+{
+  path:'/editWorkExperience/:id',
+  component:EditWorkExperience
 }
 ]
 
