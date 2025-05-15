@@ -13,7 +13,7 @@
                     <p class="text-primary text-body-2" style="font-style: italic;">{{ formatDateToMonthYear(experience.startDate) }} - {{ formatDateToMonthYear(experience.endDate) }} {{ calculateDifferenceBetweenTwoDates(experience.startDate,experience.endDate) }}</p>
                 </div>
                  <v-skeleton-loader color="grey" type="card" v-if="isLoaded==false"></v-skeleton-loader>
-                                 <!-- <v-card color="secondary" hover :to="`workExperience/${experience.nameCompany}`" v-else>
+                                 <v-card color="secondary" hover :to="`workExperience/${experience.nameCompany}`" v-else>
                     <div class="d-flex">
                         <v-img :src="experience.srcImg as string" :alt="`${experience.nameCompany} logo`" style="border: 1px solid; border-radius: 5px; width: 70px;"></v-img>
                         <div class="d-flex flex-column justify-center ml-3">
@@ -44,7 +44,7 @@
                         <router-link :to="`workExperience/${experience.nameCompany}`"><v-btn color="navbar">En savoir plus ?</v-btn></router-link>
                     </div>
                  
-                </v-card> -->
+                </v-card>
 
                 <div class="d-flex flex-column justify-space-evenly" v-if="token">
                 <v-btn color="warning" :to="`editWorkExperience/${experience.id}`">

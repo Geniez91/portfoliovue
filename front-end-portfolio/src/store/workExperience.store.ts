@@ -13,7 +13,6 @@ export const useWorkExperienceStore=defineStore('workExperience',()=>{
             try{
                 workExperiences.value=await getAllWorkExperience()
                 isLoaded.value=true
-                console.log("store " + workExperiences.value)
             }
             catch(error){
                 errorMessage.value='Erreur de chargement des compétences'
