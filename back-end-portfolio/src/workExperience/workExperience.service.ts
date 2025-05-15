@@ -20,7 +20,11 @@ export class WorkExperienceService {
     }
 
     async getAllWorkExperience(): Promise<WorkExperience[]> {
-    const result = await this.prisma.workExperience.findMany();
+    const result = await this.prisma.workExperience.findMany({
+        orderBy:{
+            startDate:'desc'
+        }
+    });
     return plainToInstance(WorkExperience, result);
     }
 
