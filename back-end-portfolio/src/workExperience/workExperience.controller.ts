@@ -62,7 +62,11 @@ async deleteWorkExperience(@Query('id')id:number):Promise<WorkExperience>{
     const workExperienceImg = await this.workExperienceService.uploadImage(file);
      transformed = plainToInstance(WorkExperience, {
       ...body,
-    srcImg:workExperienceImg
+            startDate: new Date(body.startDate),
+      endDate: new Date(body.endDate),
+      tasks: typeof body.tasks === 'string' ? JSON.parse(body.tasks) : body.tasks,
+      stack: typeof body.stack === 'string' ? JSON.parse(body.stack) : body.stack,
+      srcImg:workExperienceImg
     });
     }
     
