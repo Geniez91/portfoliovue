@@ -58,5 +58,5 @@ export const useWorkExperienceStore=defineStore('workExperience',()=>{
             }
         }
 
-        return {workExperiences,errorMessage,successMessage,getAllWorkExperiences,addWorkExperiences,deleteWorkExperiences,updateWorkExperienceById}
+        return {workExperiences,errorMessage,successMessage,isLoaded,getAllWorkExperiences,addWorkExperiences,deleteWorkExperiences,updateWorkExperienceById}
 })
