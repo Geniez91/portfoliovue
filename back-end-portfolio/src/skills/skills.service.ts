@@ -20,9 +20,14 @@ export class SkillsService {
     }
 
     async getAllSkills(): Promise<Skills[]> {
-        const result = await this.prisma.skills.findMany();
+        try{
+ const result = await this.prisma.skills.findMany();
         const resultArray = Array.isArray(result) ? result : [result]; 
 return plainToInstance(Skills, resultArray, { excludeExtraneousValues: true });
+        }
+        catch(error){
+            throw error;
+        }
     }
     
 

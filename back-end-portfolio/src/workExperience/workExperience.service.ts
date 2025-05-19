@@ -20,12 +20,19 @@ export class WorkExperienceService {
     }
 
     async getAllWorkExperience(): Promise<WorkExperience[]> {
-    const result = await this.prisma.workExperience.findMany({
-        orderBy:{
-            startDate:'desc'
+        try{
+            const result = await this.prisma.workExperience.findMany({
+                orderBy:{
+                    startDate:'desc'
+                }
+            });
+            this.logger.log(`${ELoggerContext.WorkExperienceService.GetAllWorkExperience}`)
+            return plainToInstance(WorkExperience, result);
         }
-    });
-    return plainToInstance(WorkExperience, result);
+        catch(error){
+            this.logger.error(`${ELoggerContext.WorkExperienceService.GetAllWorkExperience} with error ${error}`)
+            throw error;
+        }
     }
 
     async addWorkExperience(workExperienceImg:string,workExperience:WorkExperience):Promise<WorkExperience>{
@@ -42,10 +49,11 @@ export class WorkExperienceService {
                     srcImg:workExperienceImg
                 }
             })
-            this.logger.log(`${ELoggerContext.WorkExperienceService.AddWorkExperience}`)
+            this.logger.log(`${ELoggerContext.WorkExperienceService.AddWorkExperience} with workExperienceImg ${workExperienceImg} and workExperience ${workExperience}`)
             return plainToInstance(WorkExperience, result, { excludeExtraneousValues: true });
         }
         catch(error){
+            this.logger.error(`${ELoggerContext.WorkExperienceService.AddWorkExperience} error ${error} with workExperienceImg ${workExperienceImg} and workExperience ${workExperience}`)
             throw error;
         }
     }
@@ -57,14 +65,17 @@ export class WorkExperienceService {
                     id:idSkills
                 }
             })
+            this.logger.log(`${ELoggerContext.WorkExperienceService.DeleteWorkExperience} with ${idSkills}`)
             return plainToInstance(WorkExperience, result, { excludeExtraneousValues: true });
         }
         catch(error){
+            this.logger.error(`${ELoggerContext.WorkExperienceService.DeleteWorkExperience} error ${error} with idSkills ${idSkills}`)
             throw error;
         }
     }
     
     async updateWorkExperience(idWorkExperience:number,workExperience:WorkExperience){
+        try{
         const result=await this.prisma.workExperience.update({
             data: {
                 endDate: workExperience.endDate,
@@ -72,7 +83,9 @@ export class WorkExperienceService {
                 nameCompany: workExperience.nameCompany,
                 srcImg: workExperience.srcImg,
                 startDate: workExperience.startDate,
-                tasks: workExperience.tasks
+                tasks: workExperience.tasks,
+                content:workExperience.content,
+                stack:workExperience.stack as [],
             },
             where: {
                 id:idWorkExperience
@@ -80,6 +93,11 @@ export class WorkExperienceService {
         })
         this.logger.log(`${ELoggerContext.WorkExperienceService.UpdateWorkExperience} with idSkills ${idWorkExperience}`)
         return plainToInstance(WorkExperience, result, { excludeExtraneousValues: true });
+        }
+        catch(error){
+        this.logger.log(`${ELoggerContext.WorkExperienceService.UpdateWorkExperience} error ${error} with idSkills ${idWorkExperience}`)
+        throw error;
+        }
     }
 
     async uploadImage(file:Express.Multer.File):Promise<string>{

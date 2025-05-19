@@ -1,5 +1,6 @@
 export namespace ELoggerContext{
     export enum SkillsService{
+        GetAllSkills="SkillsService.GetAllSkills",
         AddSkills="SkillsService.AddSkills",
         UpdateSkills="SkillsService.UpdateSkills",
         DeleteSkills="SkillsService.DeleteSkills",
@@ -11,6 +12,8 @@ export namespace ELoggerContext{
     export enum WorkExperienceService{
         AddWorkExperience="WorkExperienceService.AddWorkExperience",
         DeleteWorkExperience="WorkExperienceService.DeleteWorkExperience",
-        UpdateWorkExperience="WorkExperienceService.UpdateWorkExperience"
+        UpdateWorkExperience="WorkExperienceService.UpdateWorkExperience",
+        GetAllWorkExperience="WorkExperienceService.GetAllWorkExperience"
+
     }
 }
