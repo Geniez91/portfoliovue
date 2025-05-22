@@ -14,6 +14,8 @@ export namespace ELoggerContext{
         DeleteWorkExperience="WorkExperienceService.DeleteWorkExperience",
         UpdateWorkExperience="WorkExperienceService.UpdateWorkExperience",
         GetAllWorkExperience="WorkExperienceService.GetAllWorkExperience"
-
+    }
+        export enum ProjectService{
+        GetAllProject="WorkExperienceService.GetAllProject"
     }
 }
