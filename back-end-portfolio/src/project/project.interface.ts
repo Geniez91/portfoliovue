@@ -48,4 +48,8 @@ export class Project{
     @ApiProperty()
     content:string
 
+    @ApiProperty()
+    @Type(()=>Number)
+    nbCollaborator:number
+
 }
