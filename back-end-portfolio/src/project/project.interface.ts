@@ -43,7 +43,7 @@ export class Project{
 
     @ApiProperty()
     @IsString()
-    thumbnail:string
+    thumbnail:string[]
 
     @ApiProperty()
     content:string

@@ -51,6 +51,6 @@ model project {
   linkGithub     String?
   nbCollaborator BigInt?
   stackImg       Json?
-  thumbnail      String?
+  thumbnail      String[]
   content        String?
 }

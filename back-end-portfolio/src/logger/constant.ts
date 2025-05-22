@@ -16,6 +16,7 @@ export namespace ELoggerContext{
         GetAllWorkExperience="WorkExperienceService.GetAllWorkExperience"
     }
         export enum ProjectService{
-        GetAllProject="WorkExperienceService.GetAllProject"
+        GetAllProject="ProjectService.GetAllProject",
+        AddProject="ProjectService.AddProject"
     }
 }
