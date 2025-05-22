@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { Type } from "class-transformer"
-import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator"
 
 class StackImgDto {
   @IsString()
@@ -42,7 +42,7 @@ export class Project{
     stackImg:StackImgDto[]
 
     @ApiProperty()
-    @IsString()
+    @IsArray()
     thumbnail:string[]
 
     @ApiProperty()
