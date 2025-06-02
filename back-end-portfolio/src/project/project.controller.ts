@@ -22,12 +22,12 @@ export class ProjectController {
     @ApiConsumes('multipart/form-data')
     @UseGuards(AuthGuard)
     async addProject(@UploadedFiles() files: Express.Multer.File[],@Body() body: any): Promise<Project> {
-             console.log(body.stack)
+             console.log(body.stackImg)
         const workExperienceImgs = await this.projetService.uploadImages(files);
                 const transformed = plainToInstance(Project, {
                 ...body,
                 year: new Date(body.year),
-                stack: JSON.parse(body.stack),
+                stackImg: JSON.parse(body.stackImg),
               });
               await validateOrReject(transformed);
               return await this.projetService.addProject(workExperienceImgs,transformed);
