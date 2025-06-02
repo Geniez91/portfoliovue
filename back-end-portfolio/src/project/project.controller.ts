@@ -29,6 +29,8 @@ export class ProjectController {
                 ...body,
                 year: new Date(body.year),
                 stackImg: JSON.parse(body.stackImg),
+                thumbnail:workExperienceImgs
+                
               });
               await validateOrReject(transformed);
               return await this.projetService.addProject(workExperienceImgs,transformed);
