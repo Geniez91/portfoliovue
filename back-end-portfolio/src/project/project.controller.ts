@@ -2,7 +2,7 @@ import {  Body, Controller, Get, Post, UploadedFile, UploadedFiles, UseGuards, U
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ProjectService } from './project.service';
 import { Project } from './project.interface';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { plainToInstance } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import { AuthGuard } from '@/auth/auth.guard';
@@ -18,7 +18,7 @@ export class ProjectController {
     }
 
     @Post()
-    @UseInterceptors(FileInterceptor('file'))
+    @UseInterceptors(FilesInterceptor('file'))
     @ApiConsumes('multipart/form-data')
     @UseGuards(AuthGuard)
     async addProject(@UploadedFiles() files: Express.Multer.File[],@Body() body: any): Promise<Project> {
