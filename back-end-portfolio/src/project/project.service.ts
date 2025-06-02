@@ -76,6 +76,7 @@ export class ProjectService {
 
         async uploadImages(files: Express.Multer.File[]): Promise<string[]> {
         const urls: string[] = [];
+        console.log('files:', files);
         for (const file of files) {
             const url = await this.uploadImage(file); 
             urls.push(url);
