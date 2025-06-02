@@ -46,11 +46,11 @@ model project {
   id             BigInt    @id @default(autoincrement())
   created_at     DateTime  @default(now()) @db.Timestamptz(6)
   name           String?
-  year           DateTime? @db.Date
   description    String?
   linkGithub     String?
-  nbCollaborator BigInt?
-  stackImg       Json?
-  thumbnail      String[]
   content        String?
+  nbCollaborator BigInt?
+  stackImg       Json[]
+  year           DateTime? @db.Date
+  thumbnail      String[]
 }
