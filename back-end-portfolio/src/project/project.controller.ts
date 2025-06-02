@@ -24,6 +24,7 @@ export class ProjectController {
     async addProject(@UploadedFiles() files: Express.Multer.File[],@Body() body: any): Promise<Project> {
              console.log(body.stackImg)
         const workExperienceImgs = await this.projetService.uploadImages(files);
+        console.log(workExperienceImgs)
                 const transformed = plainToInstance(Project, {
                 ...body,
                 year: new Date(body.year),
