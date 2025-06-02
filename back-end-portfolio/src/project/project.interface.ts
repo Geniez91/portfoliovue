@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { Type } from "class-transformer"
-import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 
 class StackImgDto {
   @IsString()
@@ -17,10 +17,11 @@ class StackImgDto {
 
 export class Project{
 
+    @IsOptional()
     @ApiProperty()
     @IsNumber()
     @Type(()=>Number)
-    id:number
+    id?:number
 
     @ApiProperty()
     @IsString()
