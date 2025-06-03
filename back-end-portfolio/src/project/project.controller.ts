@@ -1,4 +1,4 @@
-import {  Body, Controller, Get, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import {  Body, Controller, Delete, Get, Post, Query, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ProjectService } from './project.service';
 import { Project } from './project.interface';
@@ -22,9 +22,7 @@ export class ProjectController {
     @ApiConsumes('multipart/form-data')
     @UseGuards(AuthGuard)
     async addProject(@UploadedFiles() files: Express.Multer.File[],@Body() body: any): Promise<Project> {
-             console.log(body.stackImg)
-        const workExperienceImgs = await this.projetService.uploadImages(files);
-        console.log(workExperienceImgs)
+                const workExperienceImgs = await this.projetService.uploadImages(files);
                 const transformed = plainToInstance(Project, {
                 ...body,
                 year: new Date(body.year),
@@ -33,8 +31,15 @@ export class ProjectController {
                 
               });
               await validateOrReject(transformed);
-              return await this.projetService.addProject(workExperienceImgs,transformed);
+              return await this.projetService.addProject(transformed);
     }
+
+    @Delete()
+    @UseGuards(AuthGuard)
+    async deleteProject(@Query('id')id:number):Promise<Project>{
+    return await this.projetService.deleteProject(id)
+    }
+    
     
     
 

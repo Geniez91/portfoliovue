@@ -31,7 +31,7 @@ export class ProjectService {
         }
     }
 
-    async addProject(projetImg:string[],projet:Project):Promise<Project>{
+    async addProject(projet:Project):Promise<Project>{
         try{
             const result=await this.prisma.project.create({
                 data:{
@@ -42,7 +42,7 @@ export class ProjectService {
                     nbCollaborator:projet.nbCollaborator,
                     stackImg:projet.stackImg as [],
                     year:projet.year,
-                    thumbnail:projetImg 
+                    thumbnail:projet.thumbnail 
                 }
             })
             return plainToInstance(Project,result)
@@ -76,12 +76,25 @@ export class ProjectService {
 
         async uploadImages(files: Express.Multer.File[]): Promise<string[]> {
         const urls: string[] = [];
-        console.log('files:', files);
         for (const file of files) {
             const url = await this.uploadImage(file); 
             urls.push(url);
         }
         return urls;
+}
+
+async deleteProject(idProject:number):Promise<Project>{
+    try{
+        const result=await this.prisma.project.delete({
+            where:{
+                id:idProject
+            }
+        })
+        return plainToInstance(Project, result);
+    }
+    catch(error){
+        throw error;
+    }
 }
 
 }
