@@ -97,4 +97,28 @@ async deleteProject(idProject:number):Promise<Project>{
     }
 }
 
+async updateProject(idProject:number,project:Project){
+   try{
+        const result=await this.prisma.project.update({
+            where:{
+                id:idProject
+            },
+            data:{
+                content:project.content,
+                description:project.description,
+                linkGithub:project.linkGitHub,
+                name:project.name,
+                nbCollaborator:project.nbCollaborator,
+                stackImg:project.stackImg as [],
+                thumbnail:project.thumbnail,
+                year:project.year,
+            }
+        })
+        return plainToInstance(Project,result)
+   }
+   catch(error){
+    throw error;
+   }
+
+}
 }
