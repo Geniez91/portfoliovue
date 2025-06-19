@@ -36,7 +36,7 @@ export class ProjectService {
             const result=await this.prisma.project.create({
                 data:{
                     content:projet.content,
-                    linkGithub:projet.linkGitHub,
+                    linkGithub:projet.linkGithub,
                     description:projet.description,
                     name:projet.name,
                     nbCollaborator:projet.nbCollaborator,
@@ -106,7 +106,7 @@ async updateProject(idProject:number,project:Project){
             data:{
                 content:project.content,
                 description:project.description,
-                linkGithub:project.linkGitHub,
+                linkGithub:project.linkGithub,
                 name:project.name,
                 nbCollaborator:project.nbCollaborator,
                 stackImg:project.stackImg as [],

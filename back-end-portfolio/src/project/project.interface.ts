@@ -37,7 +37,7 @@ export class Project{
 
     @ApiProperty()
     @IsString()
-    linkGitHub:string
+    linkGithub:string
 
     @ApiProperty()
     stackImg:StackImgDto[]
