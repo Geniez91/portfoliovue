@@ -12,6 +12,7 @@ import 'vuetify/styles'
 import { createVuetify, type ThemeDefinition } from 'vuetify'
 import { VNumberInput } from 'vuetify/labs/VNumberInput'
 import { VDateInput } from 'vuetify/labs/components'
+import { VFileUpload } from 'vuetify/labs/VFileUpload'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 
@@ -59,7 +60,7 @@ const darkTheme:ThemeDefinition={
 }
 
 export default createVuetify({
-  components:{VNumberInput,VDateInput},
+  components:{VNumberInput,VDateInput,VFileUpload},
   theme: {
     defaultTheme: 'light',
 themes:{

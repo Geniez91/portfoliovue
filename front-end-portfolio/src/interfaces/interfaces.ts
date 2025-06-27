@@ -92,6 +92,32 @@ export interface IProject{
     year:Date;
 }
 
+export interface IProject2{
+    id?:number
+    name:string
+    year:Date
+    description:string
+    linkGitHub:string
+    stackImg:IStack[]
+    thumbnail:string[]
+    content:string
+
+}
+
+export interface IProject3{
+    id?:number
+    name:string
+    year:Date
+    description:string
+    linkGithub:string
+    stackImg:IStack[]
+    thumbnail:File[]|string[]
+    content:string
+    nbCollaborator:number,
+}
+
+
+
 export interface IStack{
     img:any,
     name:TNameStack

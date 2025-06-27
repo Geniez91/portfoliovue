@@ -19,6 +19,9 @@ import UpdatePassword from '@/pages/UpdatePassword.vue'
 import TestEditor from '@/pages/AddWorkExperience.vue'
 import AddWorkExperience from '@/pages/AddWorkExperience.vue'
 import EditWorkExperience from '@/pages/EditWorkExperience.vue'
+import ProjetDetail from '@/pages/ProjetDetail.vue'
+import AddProject from '@/pages/AddProject.vue'
+import EditProject from '@/pages/EditProject.vue'
 
 const routes:Array<RouteRecordRaw>=[{
   path:'/',
@@ -45,6 +48,10 @@ const routes:Array<RouteRecordRaw>=[{
   component:Project
 },
 {
+  path:'/projects/:name',
+  component:ProjetDetail
+},
+{
   path:'/contact',
   component:Contact
 },
@@ -67,6 +74,14 @@ const routes:Array<RouteRecordRaw>=[{
 {
   path:'/editWorkExperience/:id',
   component:EditWorkExperience
+},
+{
+  path:'/addProject',
+  component:AddProject
+},
+{
+  path:'/editProject/:id',
+  component:EditProject
 }
 ]
 
