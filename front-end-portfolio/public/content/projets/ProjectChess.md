@@ -1,6 +1,6 @@
 <!-- Titre principal -->
 <div class="d-flex flex-column align-center mt-16">
-  <p class="primary font-weight-bold text-h4">TodoListApp</p>
+  <p class="primary font-weight-bold text-h4">Chess (TDD)</p>
 </div>
 
 <hr class='my-2'>
@@ -22,12 +22,7 @@
 <div class="d-flex flex-column align-center mt-3" id="Contexte">
   <p class="text-h6 primary font-weight-bold">Présentation du Projet</p>
   <p class="my-6 primary text-body-1 text-center mx-10">
-    TodoListApp est un <strong>projet personnel</strong> développé pour approfondir mes compétences en <strong>Angular</strong>,
-    en mettant en pratique la gestion d’état avec les services, les formulaires réactifs et les bonnes pratiques du framework.
-    <br><br>
-    Ce projet consiste en une application de gestion de tâches permettant à l’utilisateur d’ajouter, modifier, supprimer et marquer comme terminées des tâches.
-    <br><br>
-    L’application offre une interface utilisateur réactive et moderne, avec une architecture modulaire et une utilisation des composants Angular.
+    <strong>Chess</strong> est un projet académique développé en <strong>TypeScript</strong> pour apprendre et appliquer la méthode de <strong>Test-Driven Development (TDD)</strong> à travers la création d'un jeu d'échecs. Chaque pièce du jeu est modélisée par une classe spécifique, avec des tests unitaires dédiés pour valider leurs comportements et interactions sur le plateau.
   </p>
 </div>
 
@@ -39,12 +34,17 @@
 </div>
 <div class="row mx-6 my-3 primary">
   <div class="col4">
-    <p>Développement Front-end :</p>
+    <p>Développement :</p>
     <div class="flexChip my-3">
-      <div class="chip mb-2 text-black">Angular</div>
       <div class="chip mb-2 text-black">TypeScript</div>
-      <div class="chip mb-2 text-black">HTML</div>
-      <div class="chip mb-2 text-black">CSS</div>
+      <div class="chip mb-2 text-black">Node.js</div>
+    </div>
+  </div>
+  <div class="col4">
+    <p>Tests :</p>
+    <div class="flexChip my-3">
+      <div class="chip mb-2 text-black">Jest</div>
+      <div class="chip mb-2 text-black">ts-jest</div>
     </div>
   </div>
   <div class="col4">
@@ -52,7 +52,6 @@
     <div class="d-flex my-3">
       <div class="chip text-black">Visual Studio Code</div>
       <div class="chip text-black">GitHub</div>
-      <div class="chip text-black">npm</div>
     </div>
   </div>
 </div>
@@ -63,12 +62,11 @@
 <div class="d-flex flex-column align-center mt-3" id="Fonctionnalites">
   <p class="text-h6 primary font-weight-bold">Fonctionnalités</p>
   <ul class="mt-3 primary text-left mx-10">
-    <li>➕ <strong>Ajouter une tâche :</strong> via un formulaire réactif.</li>
-    <li>✏️ <strong>Modifier une tâche :</strong> possibilité d’éditer le texte d’une tâche existante.</li>
-    <li>✅ <strong>Marquer une tâche comme terminée :</strong> grâce à une case à cocher.</li>
-    <li>🗑️ <strong>Supprimer une tâche :</strong> suppression individuelle.</li>
-    <li>🧹 <strong>Vider la liste :</strong> possibilité de supprimer toutes les tâches d’un coup.</li>
-    <li>🔄 <strong>Réactivité de l’interface :</strong> mise à jour immédiate sans rechargement.</li>
+    <li>♟️ <strong>Modélisation des pièces :</strong> Chaque pièce (Pion, Tour, Cavalier, Fou, Reine, Roi) est représentée par une classe avec ses propres règles de déplacement et de capture.</li>
+    <li>🔄 <strong>Déplacements valides :</strong> Les mouvements sont validés par des tests unitaires spécifiques à chaque type de pièce.</li>
+    <li>🧩 <strong>Interactions entre pièces :</strong> Les tests vérifient les interactions entre les pièces, comme les captures et les déplacements simultanés.</li>
+    <li>♚ <strong>Règles du jeu :</strong> Implémentation des règles d'échec et de mat, de la promotion des pions, et du roque, validées par des tests dédiés.</li>
+    <li>🧪 <strong>Tests unitaires :</strong> Chaque fonctionnalité est couverte par des tests unitaires, assurant la fiabilité et la maintenabilité du code.</li>
   </ul>
 </div>
 
@@ -78,10 +76,10 @@
 <div class="d-flex flex-column align-center mt-3" id="GitHub">
   <p class="text-h6 primary font-weight-bold">Lien GitHub</p>
   <p class="my-6 primary text-body-1 text-center">
-    Le code source du projet TodoListApp est disponible ici :  
+    Le code source du projet Chess (TDD) est disponible ici :
     <br><br>
-    <a href="https://github.com/Geniez91/TodoListApp" target="_blank" style="color: blue; font-weight: bold;">
-      🔗 https://github.com/Geniez91/TodoListApp
+    <a href="https://github.com/Geniez91/chess" target="_blank" style="color: blue; font-weight: bold;">
+      🔗 https://github.com/Geniez91/chess
     </a>
   </p>
 </div>
