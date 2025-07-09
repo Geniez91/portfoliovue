@@ -20,13 +20,25 @@
           v-if="withoutCard === false"
         >
           <div class="d-flex align-center">
-            <v-icon icon="mdi-briefcase" color="black" size="38" class="mr-2"></v-icon>
+            <v-icon
+              icon="mdi-briefcase"
+              color="black"
+              size="38"
+              class="mr-2"
+              alt="Work Experience Icon"
+            ></v-icon>
             <p class="font-weight-bold text-body-1">
               {{ expériences.yearsExperience }} ans d'expériences
             </p>
           </div>
           <div class="d-flex mt-3 align-center">
-            <v-icon icon="mdi-code-tags" color="green" size="38" class="mr-2"></v-icon>
+            <v-icon
+              icon="mdi-code-tags"
+              color="green"
+              size="38"
+              class="mr-2"
+              alt="Icon Programming"
+            ></v-icon>
             <p class="font-weight-bold text-body-1">
               Dernière utilisation :
               {{ getDaysofDate(expériences.usageExperience!) }}
@@ -35,10 +47,10 @@
         </v-card>
         <div class="d-flex flex-column justify-space-evenly" v-if="token">
           <v-btn color="warning" @click="emit('update-skill', expériences)">
-            <v-icon icon="mdi-pencil"></v-icon>
+            <v-icon icon="mdi-pencil" alt="Edit Icon"></v-icon>
           </v-btn>
           <v-btn color="red" @click="emit('delete-skill', expériences.language, expériences.id)">
-            <v-icon icon="mdi-delete"></v-icon>
+            <v-icon icon="mdi-delete" alt="Delete Icon"></v-icon>
           </v-btn>
         </div>
       </div>

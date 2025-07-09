@@ -29,6 +29,7 @@
             v-model="name"
             :rules="[emptyRules]"
             @update:model-value="name = $event"
+            alt="text field name"
           ></v-text-field>
         </div>
         <div>
@@ -38,6 +39,7 @@
             :rules="[emailRules, emptyRules]"
             v-model="email"
             @update:model-value="email = $event"
+            alt="text field mail"
           ></v-text-field>
         </div>
         <div>
@@ -48,6 +50,7 @@
             @update:model-value="subject = $event"
             :counter="maxCharacterSubjet"
             :persistent-counter="true"
+            alt="text field objet"
           ></v-text-field>
         </div>
         <div>
@@ -57,6 +60,7 @@
             label="Label"
             :rules="[emptyRules]"
             @update:model-value="message = $event"
+            alt="text field message"
           ></v-textarea>
         </div>
         <div class="d-flex flex-column align-center">

@@ -83,10 +83,10 @@
               <div class="d-flex flex-column mt-2">
                 <v-btn color="navbar" :to="`projects/${projet.name}`">En savoir plus ?</v-btn>
                 <v-btn color="warning" :to="`editProject/${projet.id}`">
-                  <v-icon icon="mdi-pencil"></v-icon>
+                  <v-icon icon="mdi-pencil" alt="edit icon"></v-icon>
                 </v-btn>
                 <v-btn color="red" @click="projectStore.deleteProjects(token!, projet.id!)">
-                  <v-icon icon="mdi-delete"></v-icon>
+                  <v-icon icon="mdi-delete" alt="delete icon"></v-icon>
                 </v-btn>
               </div>
             </v-card>
@@ -98,7 +98,7 @@
     <div class="d-flex justify-center align-center my-4" style="height: 90px" v-if="token">
       <div class="d-flex align-center">
         <v-btn variant="text" to="addProject" class="text-white mx-3">
-          <v-icon icon="mdi-plus" size="42"></v-icon>
+          <v-icon icon="mdi-plus" size="42" alt="icon plus"></v-icon>
           <p class="text-white">Ajouter un Projet</p>
         </v-btn>
       </div>

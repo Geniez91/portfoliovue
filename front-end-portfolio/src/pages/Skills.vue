@@ -128,7 +128,7 @@
   <div class="d-flex justify-center align-center my-4" style="height: 90px" v-if="token">
     <div class="d-flex align-center">
       <v-btn variant="text" @click="dialogAdd = true" class="text-white mx-3">
-        <v-icon icon="mdi-plus" size="42"></v-icon>
+        <v-icon icon="mdi-plus" size="42" alt="Plus Icon"></v-icon>
         <p class="text-white">Ajouter une Compétence</p>
       </v-btn>
     </div>

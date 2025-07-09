@@ -66,13 +66,13 @@
 
           <div class="d-flex flex-column justify-space-evenly" v-if="token">
             <v-btn color="warning" :to="`editWorkExperience/${experience.id}`">
-              <v-icon icon="mdi-pencil"></v-icon>
+              <v-icon icon="mdi-pencil" alt="edit icon"></v-icon>
             </v-btn>
             <v-btn
               color="red"
               @click="workExperienceStore.deleteWorkExperiences(experience.id!, token)"
             >
-              <v-icon icon="mdi-delete"></v-icon>
+              <v-icon icon="mdi-delete" alt="edit icon"></v-icon>
             </v-btn>
           </div>
         </v-col>
