@@ -1,26 +1,31 @@
 <template>
-    <v-breadcrumbs divider=">" bg-color="info" class="text-black" :items="Breadcrumbs"></v-breadcrumbs>
+  <v-breadcrumbs
+    divider=">"
+    bg-color="info"
+    class="text-black"
+    :items="Breadcrumbs"
+  ></v-breadcrumbs>
   <div class="m-0">
-    <v-card class="text-primary pb-10" color="secondary"height="fit-content">
-        <vue-markdown-render class='ma-7':source="markdownContent" :options="{ html: true }"></vue-markdown-render>
+    <v-card class="text-primary pb-10" color="secondary" height="fit-content">
+      <vue-markdown-render
+        class="ma-7"
+        :source="markdownContent"
+        :options="{ html: true }"
+      ></vue-markdown-render>
     </v-card>
-
   </div>
-    <div>
-       
-    </div>
+  <div></div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import VueMarkdownRender from 'vue-markdown-render';
-import { useRoute } from 'vue-router';
-import type { IProject3, IWorkExperience2 } from '@/interfaces/interfaces';
-import { getAllWorkExperience } from '@/services/workExperience.service';
-import { getAllProject } from '@/services/project.service';
+import { ref, onMounted } from 'vue'
+import VueMarkdownRender from 'vue-markdown-render'
+import { useRoute } from 'vue-router'
+import type { IProject3, IWorkExperience2 } from '@/interfaces/interfaces'
+import { getAllWorkExperience } from '@/services/workExperience.service'
+import { getAllProject } from '@/services/project.service'
 
-
-const route = useRoute();
+const route = useRoute()
 
 const Breadcrumbs = ref([
   {
@@ -34,61 +39,58 @@ const Breadcrumbs = ref([
     href: '/projects',
   },
   {
-    title:  typeof route.params.name === 'string' ? route.params.name : '',
+    title: typeof route.params.name === 'string' ? route.params.name : '',
     disabled: false,
     href: '',
   },
-]);
+])
 
-const markdownContent = ref('');
-const project = ref<IProject3[]>([]);
-const currentProject=ref<IProject3>()
+const markdownContent = ref('')
+const project = ref<IProject3[]>([])
+const currentProject = ref<IProject3>()
 currentProject.value?.name
 
-function findProject(){
-  return project.value.find(
-    (exp) => exp.name === route.params.name
-  );
+function findProject() {
+  return project.value.find((exp) => exp.name === route.params.name)
 }
 
 onMounted(async () => {
-  project.value  = await getAllProject();
+  project.value = await getAllProject()
   currentProject.value = findProject()
   markdownContent.value = currentProject.value?.content!
-  
-});
+})
 </script>
 
 <style lang="css">
-.chip{
+.chip {
   border: 1px solid;
   border-radius: 20px;
   padding: 5px;
   margin-left: 5px;
   margin-right: 5px;
-  background-color:lightgray;
-  width:fit-content
+  background-color: lightgray;
+  width: fit-content;
 }
 
-.col4{
+.col4 {
   flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
+  max-width: 33.3333333333%;
 }
 
-.row{
+.row {
   display: flex;
-    flex-wrap: wrap;
-    flex: 1 1 auto;
-    margin: -12px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: -12px;
 }
 
-.bigImgDetail{
+.bigImgDetail {
   max-width: 800px;
   width: 100%;
   height: auto;
 }
 
-.flexChip{
+.flexChip {
   display: flex;
 }
 
@@ -101,10 +103,9 @@ onMounted(async () => {
 
 @media (max-width: 768px) {
   .flexChip {
-   display: flex;
-   flex-direction: column;
-   padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
   }
 }
-
 </style>

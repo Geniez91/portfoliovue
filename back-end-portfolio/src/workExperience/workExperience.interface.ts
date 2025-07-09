@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsDateString, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 class StackImgDto {
   @IsString()
@@ -15,11 +22,10 @@ class StackImgDto {
 }
 
 export class WorkExperience {
-
   @IsOptional()
   @ApiProperty()
-  @Type(()=>Number)
-  id?:number
+  @Type(() => Number)
+  id?: number;
 
   @IsString()
   @IsNotEmpty()
@@ -35,11 +41,11 @@ export class WorkExperience {
   @ApiProperty()
   tasks: string[];
 
-  @Type(()=>Date)
+  @Type(() => Date)
   @ApiProperty()
   startDate: Date;
 
-  @Type(()=>Date)
+  @Type(() => Date)
   @ApiProperty()
   endDate: Date;
 
@@ -51,5 +57,5 @@ export class WorkExperience {
   content: string;
 
   @ApiProperty()
-  srcImg:string;
+  srcImg: string;
 }

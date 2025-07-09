@@ -1,4 +1,3 @@
-
   <div class="d-flex flex-column align-center mt-16">
         <p class="primary font-weight-bold text-h4">Stagiaire Développeur Web</p>
         <div class="mt-7">
@@ -38,7 +37,6 @@
 
 <hr class='my-2'>
 
-
 <div class="d-flex flex-column align-center mt-3" id="Role">
   <p class="text-h6 primary font-weight-bold">Mon rôle</p>
   <p class="text-center primary text-body-1 my-6">
@@ -54,9 +52,7 @@
   </ul>
 </div>
 
-
 <hr class='my-2'>
-
 
 <div class="d-flex flex-column align-center mt-3">
         <p class="mb-6 text-h6 primary font-weight-bold">Outils utilisées</p>
@@ -130,12 +126,14 @@
     Travailler en équipe a été une expérience très enrichissante, nous permettant de partager nos idées et de collaborer efficacement sur la conception des différentes pages du site.
   </p>
 
-  <img src="/assets/plat2_fruityice.png" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
+<img src="/assets/plat2_fruityice.png" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
+
   <p class="text-center primary text-body-1 mb-6">
     Ce projet m’a permis de renforcer mes compétences en design web et de gagner en autonomie. Mon tuteur n'étant pas développeur, j'ai dû effectuer mes propres recherches pour résoudre les problèmes techniques rencontrés.
   </p>
 
 <img src="/assets/google_maps_fruityice.png" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
+
   <p class="text-center primary text-body-1 mb-6">
     Pour intégrer une carte Google Maps sur le site, j'ai utilisé l'API officielle fournie par Google, assurant ainsi une géolocalisation précise du restaurant directement sur la page d’accueil.
   </p>
@@ -161,7 +159,8 @@
     Pour indexer notre site WordPress, j'ai utilisé Google Search Console en soumettant l'URL du site. Cet outil permet non seulement de référencer le site, mais aussi de suivre ses performances et de recevoir des conseils d'optimisation.
   </p>
 
-  <img src="/assets/searchconsole2.png" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
+<img src="/assets/searchconsole2.png" alt="Illustration Impact Environnemental" class="bigImgDetail"></v-img>
+
   <p class="text-center primary text-body-1 mb-6">
     <strong>2) Amélioration de la visibilité :</strong>
   </p>

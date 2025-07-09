@@ -218,15 +218,16 @@
     </ul>
 
 L’administrateur peut :
-    <ul class="text-left mx-10">
-        <img src="/assets/add_skills.PNG" alt="Liste des expériences" width="1000" />
-      <li><strong>Ajouter</strong> une nouvelle compétence via un formulaire dédié</li>
-      <img src="/assets/update_skills.PNG" alt="Liste des expériences" width="500" />
-      <li><strong>Modifier</strong> une compétence existante (le formulaire est pré-rempli)</li>
-      <li><strong>Supprimer</strong> définitivement une compétence</li>
-    </ul>
-    Les actions déclenchent des requêtes sécurisées vers l’API <strong>NestJS</strong>, avec vérification du token d’authentification JWT.
-    Les données sont immédiatement reflétées sur l’interface grâce à la mise à jour en temps réel du <strong>store Pinia</strong>.
+<ul class="text-left mx-10">
+<img src="/assets/add_skills.PNG" alt="Liste des expériences" width="1000" />
+<li><strong>Ajouter</strong> une nouvelle compétence via un formulaire dédié</li>
+<img src="/assets/update_skills.PNG" alt="Liste des expériences" width="500" />
+<li><strong>Modifier</strong> une compétence existante (le formulaire est pré-rempli)</li>
+<li><strong>Supprimer</strong> définitivement une compétence</li>
+</ul>
+Les actions déclenchent des requêtes sécurisées vers l’API <strong>NestJS</strong>, avec vérification du token d’authentification JWT.
+Les données sont immédiatement reflétées sur l’interface grâce à la mise à jour en temps réel du <strong>store Pinia</strong>.
+
   </p>
 
   <!-- Expériences Professionnelles -->

@@ -1,22 +1,28 @@
 <template>
-<div class="container">
-    <p class="text-write text-primary text-h5 font-weight-bold" :class="smAndDown ? 'text-center mb-3 text-wrap':''">
-      Bonjour à tous et Bienvenue sur mon portfolio ! 
+  <div class="container">
+    <p
+      class="text-write text-primary text-h5 font-weight-bold"
+      :class="smAndDown ? 'text-center mb-3 text-wrap' : ''"
+    >
+      Bonjour à tous et Bienvenue sur mon portfolio !
     </p>
   </div>
-  <p class="text-h5 text-primary font-weight-bold text-slide-in":class="smAndDown ? 'text-center':''"  >
-     Je m'appelle Jérémy Weltmann et je suis Développeur Web Full Stack.
-    </p>
+  <p
+    class="text-h5 text-primary font-weight-bold text-slide-in"
+    :class="smAndDown ? 'text-center' : ''"
+  >
+    Je m'appelle Jérémy Weltmann et je suis Développeur Web Full Stack.
+  </p>
 </template>
 
 <script lang="ts" setup>
-import { useDisplay } from 'vuetify';
+import { useDisplay } from 'vuetify'
 
-const {smAndDown}=useDisplay()
+const { smAndDown } = useDisplay()
 </script>
 
 <style lang="css">
-.container{
+.container {
   display: inline-block;
 }
 </style>

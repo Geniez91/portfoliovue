@@ -5,6 +5,6 @@ import { WorkExperienceService } from './workExperience.service';
 
 @Module({
   controllers: [WorkExperienceController],
-  providers:[PrismaService,WorkExperienceService]
+  providers: [PrismaService, WorkExperienceService],
 })
 export class WorkExperienceModule {}

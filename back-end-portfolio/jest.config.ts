@@ -1,6 +1,6 @@
 // jest.config.ts
-import { pathsToModuleNameMapper } from 'ts-jest'
-import { compilerOptions } from './tsconfig.json'
+import { pathsToModuleNameMapper } from 'ts-jest';
+import { compilerOptions } from './tsconfig.json';
 
 export default {
   preset: 'ts-jest',
@@ -14,4 +14,4 @@ export default {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
-}
+};

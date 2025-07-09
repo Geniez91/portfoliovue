@@ -3,18 +3,18 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
-import Editor from '@toast-ui/editor';
+import { onMounted, ref } from 'vue'
+import Editor from '@toast-ui/editor'
 
-import '@toast-ui/editor/dist/toastui-editor.css';
+import '@toast-ui/editor/dist/toastui-editor.css'
 
-const editor = ref<Editor | null>(null);
+const editor = ref<Editor | null>(null)
 
-defineExpose({ editor });
+defineExpose({ editor })
 
 const props = defineProps<{
-    initialValue?:string;
-}>();
+  initialValue?: string
+}>()
 
 onMounted(() => {
   editor.value = new Editor({
@@ -22,7 +22,9 @@ onMounted(() => {
     height: '500px',
     initialEditType: 'markdown',
     previewStyle: 'vertical',
-    initialValue: props.initialValue ? props.initialValue : '# Hello World\nCeci est un test en Markdown.',
-  });
-});
+    initialValue: props.initialValue
+      ? props.initialValue
+      : '# Hello World\nCeci est un test en Markdown.',
+  })
+})
 </script>

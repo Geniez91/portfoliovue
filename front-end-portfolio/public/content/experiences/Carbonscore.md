@@ -1,4 +1,3 @@
-
   <div class="d-flex flex-column align-center mt-16">
         <p class="primary font-weight-bold text-h4">Apprenti Développeur Full Stack</p>
         <div class="mt-7">
@@ -13,7 +12,6 @@
       </div>
 
   <hr class='my-2'>
-
 
    <div class="d-flex flex-column align-center mt-3">
         <div class="mt-2">
@@ -52,8 +50,6 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
 
 <hr class='my-2'>
 
-
-
 <div class="d-flex flex-column align-center mt-3" id="Role">
         <p class="text-h6 primary font-weight-bold">Mon rôle </p>
         <p class="text-center primary text-body-1 my-6">J’ai été intégré à l’équipe de développement, responsable du développement du logiciel « CarbonScore » ainsi que du site vitrine qui permet aux clients de découvrir les différents services proposés par ce logiciel.</p>
@@ -65,7 +61,6 @@ Afin de sensibiliser les collaborateurs, diverses fonctionnalités ont été mis
       </div>
 
 <hr class='my-2'>
-
 
 <div class="d-flex flex-column align-center mt-3">
         <p class="mb-6 text-h6 primary font-weight-bold">Outils utilisées</p>
@@ -229,7 +224,6 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 <h2 class="text-subtitle-1" style="text-decoration:underline">1) Initialisation du projet : </h2>
 <p>Le développement commence par une demande spécifique d’un client ou par une fonctionnalité souhaitée par l’équipe de développement. Ces demandes spécifiques sont formulées par le biais de mails envoyés à l’organisation ou lors de réunions dédiées, où les discussions portent sur le logiciel et les améliorations potentielles.</p>
 
-
 <p>De temps en temps, des réunions brainstorming sont également organisées pour permettre à chaque membre de l’équipe de proposer des idées d’amélioration pour le logiciel. Pour cela, nous utilisons Microsoft Teams, avec l’outil WhiteBoard, permettant de schématiser des idées en temps réel et de manière partagée.</p>
 </div>
 <div class='my-2'>
@@ -264,8 +258,6 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 
 <p>C’est le développeur ayant réalisé la fonctionnalité qui définit la plage de tests pour valider que la fonctionnalité est conforme aux besoins.</p>
 
-
-
 <div class="d-flex flex-column align-center my-4">
   <p>Une discussion est créée sur Teams à chaque fois qu’une fonctionnalité est terminée, nous permettant d’obtenir des retours et des conseils sur certains éléments. Si les retours sont positifs et que les tests sont réussis, la fonctionnalité est mise en production. Si des remarques négatives sont émises, elles permettent d’identifier les problèmes et de mettre en place des actions correctrices.</p>
   
@@ -276,14 +268,11 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
   
 </div>
 
-
 <h2 class='text-subtitle-1' style="text-decoration:underline">6) Mise en Production et Cycle de Vie Continu</h2>
 
 <p>Une fois le code validé et les tests réussis, une nouvelle version de l’application est déployée en production.</p>
 
 <p>Toutefois, le projet ne s’arrête pas là ! Des retours peuvent encore être faits par les clients ou les membres de l’équipe, entraînant la création de tickets pour corriger d’éventuels bugs ou pour apporter des modifications supplémentaires.</p>
-
-
 
 <p class="primary text-center  text-subtitle-1 font-weight-bold mt-2">5) Réalisation : </p>
 <p>Ce projet a sollicité 3 développeurs pour l’ensemble du projet.</p>
@@ -306,7 +295,6 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
 </a>
   <p>Figure : Exemple de schéma d’architecture des routes d’un autre projet</p>
 </div>
-
 
 <p class="mt-2">Enfin, il a maquetté les interfaces du nouveau tableau de bord grâce au logiciel Figma en suivant les spécifications définies dans la documentation technique.</p>
 
@@ -336,7 +324,6 @@ Mettre en place cette refonte du tableau de bord était essentiel pour garder un
   </a>
   <p>Figure : Tableau de bord « Mes usages »</p>
 </div>
-
 
 <p>• Je me suis également occupé de mettre en place la partie back-end du calcul des consommations mensuelles et annuelles des différents usages, en utilisant la documentation technique comprenant des explications sur son fonctionnement et des schémas d’architectures de base de données pour guider le développeur à réaliser la fonctionnalité back-end.</p>
 

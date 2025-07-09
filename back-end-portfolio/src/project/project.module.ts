@@ -5,6 +5,6 @@ import { ProjectController } from './project.controller';
 
 @Module({
   controllers: [ProjectController],
-  providers:[PrismaService,ProjectService]
+  providers: [PrismaService, ProjectService],
 })
 export class ProjectModule {}

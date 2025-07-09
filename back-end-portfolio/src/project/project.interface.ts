@@ -1,6 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger"
-import { Type } from "class-transformer"
-import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 class StackImgDto {
   @IsString()
@@ -14,43 +20,40 @@ class StackImgDto {
   name: string;
 }
 
+export class Project {
+  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  @Type(() => Number)
+  id?: number;
 
-export class Project{
+  @ApiProperty()
+  @IsString()
+  name: string;
 
-    @IsOptional()
-    @ApiProperty()
-    @IsNumber()
-    @Type(()=>Number)
-    id?:number
+  @ApiProperty()
+  @Type(() => Date)
+  year: Date;
 
-    @ApiProperty()
-    @IsString()
-    name:string
+  @ApiProperty()
+  @IsString()
+  description: string;
 
-    @ApiProperty()
-    @Type(()=>Date)
-    year:Date
+  @ApiProperty()
+  @IsString()
+  linkGithub: string;
 
-    @ApiProperty()
-    @IsString()
-    description:string
+  @ApiProperty()
+  stackImg: StackImgDto[];
 
-    @ApiProperty()
-    @IsString()
-    linkGithub:string
+  @ApiProperty()
+  @IsArray()
+  thumbnail: string[];
 
-    @ApiProperty()
-    stackImg:StackImgDto[]
+  @ApiProperty()
+  content: string;
 
-    @ApiProperty()
-    @IsArray()
-    thumbnail:string[]
-
-    @ApiProperty()
-    content:string
-
-    @ApiProperty()
-    @Type(()=>Number)
-    nbCollaborator:number
-
+  @ApiProperty()
+  @Type(() => Number)
+  nbCollaborator: number;
 }

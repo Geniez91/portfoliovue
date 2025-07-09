@@ -1,4 +1,3 @@
-
   <div class="d-flex flex-column align-center mt-16">
         <p class="primary font-weight-bold text-h4">Stagiaire Développeur Web</p>
         <div class="mt-7">
@@ -44,7 +43,6 @@ Situé à Paris (sites du carrousel et du Pavillon de Flore du Louvre) et à Ver
 
 <hr class='my-2'>
 
-
 <div class="d-flex flex-column align-center mt-3" id="Role">
   <p class="text-h6 primary font-weight-bold">Mon rôle</p>
   <p class="text-center primary text-body-1 my-6">
@@ -60,9 +58,7 @@ Situé à Paris (sites du carrousel et du Pavillon de Flore du Louvre) et à Ver
   </ul>
 </div>
 
-
 <hr class='my-2'>
-
 
 <div class="d-flex flex-column align-center mt-3">
         <p class="mb-6 text-h6 primary font-weight-bold">Outils utilisées</p>
@@ -119,6 +115,7 @@ Situé à Paris (sites du carrousel et du Pavillon de Flore du Louvre) et à Ver
   </p>
 
 <img src="/assets/bug3_c2rmf.png" alt="Bug C2RMF 3" class="bigImgDetail"></v-img>
+
   <p class="text-center primary text-body-1 mb-6">
     Après analyse, j'ai procédé à la rectification des erreurs en adaptant les requêtes SQL aux tables et aux champs existants dans la base de données. Une fois les requêtes corrigées, je les ai intégrées dans le code source en remplacement des anciennes.
   </p>
@@ -154,7 +151,8 @@ Situé à Paris (sites du carrousel et du Pavillon de Flore du Louvre) et à Ver
     Une seconde évolution concernait l'ajout de deux nouveaux paramètres dans l'annuaire : <strong>le département</strong> et <strong>la filière</strong>. Afin d'optimiser la saisie des données et d'éviter les erreurs manuelles, j'ai créé deux nouvelles tables associées. Les utilisateurs peuvent désormais sélectionner une valeur dans une liste déroulante plutôt que de saisir du texte librement.
   </p>
 
-  <img src="/assets/bdd_c2rmf.png" alt="Bdd C2RMF" class="bigImgDetail"></v-img>
+<img src="/assets/bdd_c2rmf.png" alt="Bdd C2RMF" class="bigImgDetail"></v-img>
+
   <p class="text-center primary text-body-1 mb-6">
     Pour réaliser ces changements, j'ai d'abord élaboré un <strong>modèle conceptuel de données (MCD)</strong> représentant les nouvelles relations entre les tables existantes et celles créées. Après validation, j'ai implémenté ces modifications dans <strong>PhpMyAdmin</strong> afin de mettre à jour la base de données.
   </p>
@@ -173,6 +171,7 @@ Situé à Paris (sites du carrousel et du Pavillon de Flore du Louvre) et à Ver
   </p>
 
 <img src="/assets/gestion.png" alt="gestion" class="bigImgDetail"></v-img>
+
   <p class="text-center primary text-body-1 mb-6">
     Pour soutenir ces évolutions, j'ai conçu un <strong>espace de gestion administrateur</strong> permettant d’administrer différentes tables directement depuis le site, sans passer par PhpMyAdmin.
   </p>
@@ -243,8 +242,6 @@ Situé à Paris (sites du carrousel et du Pavillon de Flore du Louvre) et à Ver
   <p class="text-center primary text-body-1 mb-6">
     Cette expérience m'a permis d'acquérir des compétences techniques complémentaires, mais aussi de mieux comprendre l'importance de l'assistance informatique pour assurer le bon fonctionnement quotidien d'une organisation.
   </p>
-
-
 
 <p class="primary text-center  text-subtitle-1 font-weight-bold mt-2">5) Réalisation d'une documentation technique </p>
       <div class="d-flex flex-column align-center mt-5" style="cursor: pointer;">

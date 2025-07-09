@@ -12,10 +12,17 @@ import { ProjectService } from './project/project.service';
 import { ProjectModule } from './project/project.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal:true
-  }),PrismaModule, SkillsModule, AuthModule,WorkExperienceModule,ProjectModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    PrismaModule,
+    SkillsModule,
+    AuthModule,
+    WorkExperienceModule,
+    ProjectModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, SkillsService,WorkExperienceService,ProjectService],
+  providers: [AppService, SkillsService, WorkExperienceService, ProjectService],
 })
 export class AppModule {}

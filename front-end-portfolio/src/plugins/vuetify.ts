@@ -16,8 +16,7 @@ import { VFileUpload } from 'vuetify/labs/VFileUpload'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 
-
-const lightTheme:ThemeDefinition ={
+const lightTheme: ThemeDefinition = {
   dark: false,
   colors: {
     background: 'linear-gradient( #F5F5F5, #0E67ED);',
@@ -27,18 +26,18 @@ const lightTheme:ThemeDefinition ={
     'surface-variant': '#424242',
     'on-surface-variant': '#EEEEEE',
     primary: '#000000',
-    'navbar': '#FFFFFF',
+    navbar: '#FFFFFF',
     secondary: '#39B8B1',
     'secondary-darken-1': '#018786',
     error: '#B00020',
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
-    'card':'#FFFFFF'
-}
+    card: '#FFFFFF',
+  },
 }
 
-const darkTheme:ThemeDefinition={
+const darkTheme: ThemeDefinition = {
   dark: true,
   colors: {
     background: '#FFFFFF',
@@ -48,24 +47,24 @@ const darkTheme:ThemeDefinition={
     'surface-variant': '#424242',
     'on-surface-variant': '#EEEEEE',
     primary: '#E0E0E0',
-    'navbar': '#333333',
+    navbar: '#333333',
     secondary: '#090B16',
     'secondary-darken-1': '#018786',
     error: '#B00020',
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
-    'card':'575757'
-}
+    card: '575757',
+  },
 }
 
 export default createVuetify({
-  components:{VNumberInput,VDateInput,VFileUpload},
+  components: { VNumberInput, VDateInput, VFileUpload },
   theme: {
     defaultTheme: 'light',
-themes:{
-  light:lightTheme,
-  dark:darkTheme
-}
+    themes: {
+      light: lightTheme,
+      dark: darkTheme,
+    },
   },
 })

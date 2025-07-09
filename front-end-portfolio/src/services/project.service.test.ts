@@ -1,7 +1,5 @@
-import { describe, it } from "vitest";
+import { describe, it } from 'vitest'
 
-describe('projetsTitle',()=>{
-    it('should return projets title',()=>{
-        
-    })
+describe('projetsTitle', () => {
+  it('should return projets title', () => {})
 })

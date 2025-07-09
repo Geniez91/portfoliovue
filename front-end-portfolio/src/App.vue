@@ -8,23 +8,20 @@
 </template>
 
 <script lang="ts" setup>
-import '@toast-ui/editor/dist/toastui-editor.css';
-import NavBar from './components/NavBar.vue';
-
+import '@toast-ui/editor/dist/toastui-editor.css'
+import NavBar from './components/NavBar.vue'
 </script>
 
 <style lang="css" scoped>
-.v-application{
-  background: linear-gradient( #F5F5F5, #0E67ED);;
+.v-application {
+  background: linear-gradient(#f5f5f5, #0e67ed);
 }
 
 .v-application.v-theme--light {
-  background: linear-gradient(#F5F5F5, #0E67ED);
+  background: linear-gradient(#f5f5f5, #0e67ed);
 }
 
 .v-application.v-theme--dark {
-  background: linear-gradient( #121212, #1E1E1E);
+  background: linear-gradient(#121212, #1e1e1e);
 }
-
-  
 </style>
