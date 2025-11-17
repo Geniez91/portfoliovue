@@ -21,8 +21,7 @@
 import { ref, onMounted } from 'vue'
 import VueMarkdownRender from 'vue-markdown-render'
 import { useRoute } from 'vue-router'
-import type { IProject3, IWorkExperience2 } from '@/interfaces/interfaces'
-import { getAllWorkExperience } from '@/services/workExperience.service'
+import type { IProject3 } from '@/interfaces/interfaces'
 import { getAllProject } from '@/services/project.service'
 
 const route = useRoute()
