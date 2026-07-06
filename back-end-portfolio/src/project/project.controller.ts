@@ -15,9 +15,7 @@ import {
 } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ProjectService } from './project.service';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { plainToInstance } from 'class-transformer';
-import { validateOrReject } from 'class-validator';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from '@/auth/auth.guard';
 import { Project } from './entity/project.entity.dto';
 import { WorkExperience } from '@/workExperience/entity/workExperience.entity';

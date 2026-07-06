@@ -30,7 +30,7 @@ export class SkillsController {
 
   @Get(':id')
   async findSkillsById(@Param('id', ParseIntPipe) id: number): Promise<Skills> {
-    return this.skillService.getSkillsById(id);
+    return this.skillService.findSkillByIdOrThrow(id);
   }
 
   @ApiBody({ type: CreateSkillDto })
@@ -64,6 +64,5 @@ export class SkillsController {
   deleteSkills(@Param('id', ParseIntPipe) id: number): Promise<Skills> {
     return this.skillService.deleteSkills(id);
   }
-
 
 }

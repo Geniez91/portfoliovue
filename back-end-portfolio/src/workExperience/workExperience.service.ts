@@ -1,5 +1,5 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable, Logger } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { plainToInstance } from 'class-transformer';
@@ -25,7 +25,6 @@ export class WorkExperienceService {
   }
 
   async getAllWorkExperience(): Promise<WorkExperience[]> {
-    try {
       const result = await this.prisma.workExperience.findMany({
         orderBy: {
           startDate: 'desc',
@@ -35,19 +34,42 @@ export class WorkExperienceService {
         `${ELoggerContext.WorkExperienceService.GetAllWorkExperience}`,
       );
       return plainToInstance(WorkExperience, result);
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.WorkExperienceService.GetAllWorkExperience} with error ${error}`,
-      );
-      throw error;
     }
-  }
+
+    async findWorkExperienceByIdOrThrow(idWorkExperience: number): Promise<WorkExperience> {
+      const result = await this.prisma.workExperience.findUnique({
+        where: {
+          id: idWorkExperience,
+        },
+      });
+      
+      if (!result) {
+        this.logger.warn(
+          `${ELoggerContext.WorkExperienceService.FindWorkExperienceByIdOrThrow} with idWorkExperience ${idWorkExperience} not found`,
+        );
+        throw new NotFoundException(`WorkExperience with id ${idWorkExperience} not found`);
+      }
+      return plainToInstance(WorkExperience, result);
+    }
+
 
   async addWorkExperience(
     workExperienceImg: string,
     workExperience: CreateWorkExperienceDto,
   ): Promise<WorkExperience> {
-    try {
+      const existingWorkExperience = await this.prisma.workExperience.findFirst({
+        where: {
+          nameCompany: workExperience.nameCompany,
+        },
+      });
+      
+      if (existingWorkExperience) {
+        this.logger.warn(
+          `${ELoggerContext.WorkExperienceService.AddWorkExperience} workExperience with nameCompany ${workExperience.nameCompany} already exists`,
+        );
+        throw new ConflictException(`WorkExperience with nameCompany ${workExperience.nameCompany} already exists`);
+      }
+
       const result = await this.prisma.workExperience.create({
         data: {
           content: workExperience.content,
@@ -66,16 +88,11 @@ export class WorkExperienceService {
       return plainToInstance(WorkExperience, result, {
         excludeExtraneousValues: true,
       });
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.WorkExperienceService.AddWorkExperience} error ${error} with workExperienceImg ${workExperienceImg} and workExperience ${workExperience}`,
-      );
-      throw error;
     }
-  }
+  
 
   async deleteWorkExperience(idSkills: number): Promise<WorkExperience> {
-    try {
+      await this.findWorkExperienceByIdOrThrow(idSkills);
       const result = await this.prisma.workExperience.delete({
         where: {
           id: idSkills,
@@ -87,20 +104,15 @@ export class WorkExperienceService {
       return plainToInstance(WorkExperience, result, {
         excludeExtraneousValues: true,
       });
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.WorkExperienceService.DeleteWorkExperience} error ${error} with idSkills ${idSkills}`,
-      );
-      throw error;
     }
-  }
+  
 
   async updateWorkExperience(
     idWorkExperience: number,
     workExperience: UpdateWorkExperienceDto,
     workExperienceImg?: string,
   ): Promise<WorkExperience> {
-    try {
+      await this.findWorkExperienceByIdOrThrow(idWorkExperience);
       const result = await this.prisma.workExperience.update({
         data: {
           endDate: workExperience.endDate,
@@ -122,13 +134,7 @@ export class WorkExperienceService {
       return plainToInstance(WorkExperience, result, {
         excludeExtraneousValues: true,
       });
-    } catch (error) {
-      this.logger.log(
-        `${ELoggerContext.WorkExperienceService.UpdateWorkExperience} error ${error} with idSkills ${idWorkExperience}`,
-      );
-      throw error;
     }
-  }
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
     const fileName = `${uuidv4()}_${file.originalname}`;

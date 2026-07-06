@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { plainToInstance } from 'class-transformer';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
@@ -26,33 +26,24 @@ export class SkillsService {
   }
 
   async getAllSkills(): Promise<Skills[]> {
-    try {
       const result = await this.prisma.skills.findMany();
-      const resultArray = Array.isArray(result) ? result : [result];
-      return plainToInstance(Skills, resultArray, {
+      return plainToInstance(Skills, result, {
         excludeExtraneousValues: true,
       });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getSkillsById(idSkills: number): Promise<Skills> {
-    try {
-      const result = await this.prisma.skills.findUnique({
-        where: {
-          id: idSkills,
-        },
-      });
-      return plainToInstance(Skills, result, { excludeExtraneousValues: true });
-    }
-    catch (error) {
-      throw error;
-    }
   }
 
   async addSkills(file: string, skills: CreateSkillDto): Promise<Skills> {
-    try {
+      const existingSkill = await this.prisma.skills.findFirst({
+        where: {
+          language: skills.language
+        }
+      });
+
+      if (existingSkill) {
+         this.logger.warn(`${ELoggerContext.SkillsService.AddSkills} language ${skills.language} already exists`)
+        throw new ConflictException(`Skill with language ${skills.language} already exists`)
+      }
+
       const result = await this.prisma.skills.create({
         data: {
           idType: skills.idType,
@@ -68,12 +59,25 @@ export class SkillsService {
         `${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`,
       );
       return plainToInstance(Skills, result, { excludeExtraneousValues: true });
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.SkillsService.AddSkills} with file : ${file} and language : ${skills.language} with error ${error}`,
-      );
-      throw error;
-    }
+  }
+
+  async findSkillByIdOrThrow(idSkills: number): Promise<Skills> {
+    const result = await this.prisma.skills.findUnique({
+      where: {
+        id: idSkills,
+      },
+    });
+
+    if (!result) {
+    this.logger.warn(
+      `${ELoggerContext.SkillsService.FindSkill} skill ${idSkills} not found`,
+    );
+
+    throw new NotFoundException(
+      `Skill ${idSkills} not found`,
+    );
+  }
+    return plainToInstance(Skills, result, { excludeExtraneousValues: true });
   }
 
   async updateSkills(
@@ -87,8 +91,9 @@ export class SkillsService {
          data.srcImg =await this.uploadImage(file);
     }
 
-    try {
-      const result = await this.prisma.skills.update({
+    await this.findSkillByIdOrThrow(idSkills);
+
+    const result = await this.prisma.skills.update({
         data: data,
         where: {
           id: idSkills,
@@ -98,15 +103,10 @@ export class SkillsService {
         `${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills}`,
       );
       return plainToInstance(Skills, result, { excludeExtraneousValues: true });
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills} with error ${error}`,
-      );
-      throw error;
     }
-  }
+  
   async deleteSkills(idSkills: number): Promise<Skills> {
-    try {
+    await this.findSkillByIdOrThrow(idSkills);
       const result = await this.prisma.skills.delete({
         where: {
           id: idSkills,
@@ -116,14 +116,8 @@ export class SkillsService {
         `${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills}`,
       );
       return plainToInstance(Skills, result, { excludeExtraneousValues: true });
-    } catch (error) {
-      this.logger.log(
-        `${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills} with an error ${error}`,
-      );
-      throw error;
-    }
-  }
-
+    } 
+  
   async uploadImage(file: Express.Multer.File): Promise<string> {
     const fileName = `${uuidv4()}_${file.originalname}`;
     try {

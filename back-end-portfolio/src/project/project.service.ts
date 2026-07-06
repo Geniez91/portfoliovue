@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
@@ -25,20 +25,41 @@ export class ProjectService {
   }
 
   async getAllProject(): Promise<Project[]> {
-    try {
       const result = await this.prisma.project.findMany();
       this.logger.log(`${ELoggerContext.ProjectService.GetAllProject}`);
       return plainToInstance(Project, result);
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.ProjectService.GetAllProject} with error ${error}`,
+  }
+
+  async findProjectByIdOrThrow(idProject: number): Promise<Project> {
+    const result = await this.prisma.project.findUnique({
+      where: {
+        id: idProject,
+      },
+    });
+
+    if (!result) {
+      this.logger.warn(
+        `${ELoggerContext.ProjectService.FindProjectByIdOrThrow} with idProject ${idProject} not found`,
       );
-      throw error;
+      throw new NotFoundException(`Project with id ${idProject} not found`);
     }
+    return plainToInstance(Project, result);
   }
 
   async addProject(projet: CreateProjectDto,workExperienceImgs: string[]): Promise<Project> {
-    try {
+      const existingProject = await this.prisma.project.findFirst({
+        where: {
+          name: projet.name,
+        },
+      });
+      
+      if (existingProject) {
+        this.logger.warn(
+          `${ELoggerContext.ProjectService.AddProject} project with name ${projet.name} already exists`,
+        );
+        throw new ConflictException(`Project with name ${projet.name} already exists`);
+      }
+
       const result = await this.prisma.project.create({
         data: {
           content: projet.content,
@@ -52,10 +73,8 @@ export class ProjectService {
         },
       });
       return plainToInstance(Project, result);
-    } catch (error) {
-      throw error;
     }
-  }
+  
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
     const fileName = `${uuidv4()}_${file.originalname}`;
@@ -96,20 +115,19 @@ export class ProjectService {
   }
 
   async deleteProject(idProject: number): Promise<Project> {
-    try {
+      await this.findProjectByIdOrThrow(idProject);
       const result = await this.prisma.project.delete({
         where: {
           id: idProject,
         },
       });
       return plainToInstance(Project, result);
-    } catch (error) {
-      throw error;
     }
-  }
+  
 
   async updateProject(idProject: number, project: UpdateProjectDto, workExperienceImgs: string[]):Promise<Project> {
-    try {
+      await this.findProjectByIdOrThrow(idProject);
+      
       const result = await this.prisma.project.update({
         where: {
           id: idProject,
@@ -126,8 +144,6 @@ export class ProjectService {
         },
       });
       return plainToInstance(Project, result);
-    } catch (error) {
-      throw error;
     }
   }
-}
+

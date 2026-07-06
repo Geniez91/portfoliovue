@@ -5,6 +5,7 @@ export namespace ELoggerContext {
     UpdateSkills = 'SkillsService.UpdateSkills',
     DeleteSkills = 'SkillsService.DeleteSkills',
     UploadImage = 'SkillsService.UploadImage',
+    FindSkill = 'SkillsService.FindSkill',
   }
   export enum AuthService {
     signIn = 'AuthService.signIn',
@@ -14,9 +15,13 @@ export namespace ELoggerContext {
     DeleteWorkExperience = 'WorkExperienceService.DeleteWorkExperience',
     UpdateWorkExperience = 'WorkExperienceService.UpdateWorkExperience',
     GetAllWorkExperience = 'WorkExperienceService.GetAllWorkExperience',
+    FindWorkExperienceByIdOrThrow = 'WorkExperienceService.FindWorkExperienceByIdOrThrow',
   }
   export enum ProjectService {
     GetAllProject = 'ProjectService.GetAllProject',
     AddProject = 'ProjectService.AddProject',
+    FindProjectByIdOrThrow = 'ProjectService.FindProjectByIdOrThrow',
+    UpdateProject = 'ProjectService.UpdateProject',
+    DeleteProject = 'ProjectService.DeleteProject',
   }
 }
