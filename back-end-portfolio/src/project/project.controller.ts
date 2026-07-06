@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
+  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -13,12 +15,14 @@ import {
 } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ProjectService } from './project.service';
-import { Project } from './project.interface';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { plainToInstance } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import { AuthGuard } from '@/auth/auth.guard';
-import { WorkExperience } from '@/workExperience/workExperience.interface';
+import { Project } from './entity/project.entity.dto';
+import { WorkExperience } from '@/workExperience/entity/workExperience.entity';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
 
 @ApiTags('project')
 @Controller('project')
@@ -36,43 +40,29 @@ export class ProjectController {
   @UseGuards(AuthGuard)
   async addProject(
     @UploadedFiles() files: Express.Multer.File[],
-    @Body() body: any,
+    @Body() body: CreateProjectDto,
   ): Promise<Project> {
     const workExperienceImgs = await this.projetService.uploadImages(files);
-    const transformed = plainToInstance(Project, {
-      ...body,
-      year: new Date(body.year),
-      stackImg: JSON.parse(body.stackImg),
-      thumbnail: workExperienceImgs,
-    });
-    await validateOrReject(transformed);
-    return await this.projetService.addProject(transformed);
+    return await this.projetService.addProject(body,workExperienceImgs);
   }
 
-  @Delete()
+  @Delete(':id')
   @UseGuards(AuthGuard)
-  async deleteProject(@Query('id') id: number): Promise<Project> {
+  async deleteProject(@Param('id', new ParseIntPipe()) id: number): Promise<Project> {
     return await this.projetService.deleteProject(id);
   }
 
   @ApiBody({ type: WorkExperience })
   @ApiConsumes('multipart/form-data')
   @UseGuards(AuthGuard)
-  @Put()
+  @Put(':id')
   @UseInterceptors(FilesInterceptor('file'))
   async updateProject(
-    @Query('id') id: number,
-    @Body() body: any,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateProjectDto,
     @UploadedFiles() files: Express.Multer.File[],
   ): Promise<Project> {
     const workExperienceImgs = await this.projetService.uploadImages(files);
-    const transformed = plainToInstance(Project, {
-      ...body,
-      year: new Date(body.year),
-      stackImg: JSON.parse(body.stackImg),
-      thumbnail: workExperienceImgs,
-    });
-    await validateOrReject(transformed);
-    return await this.projetService.updateProject(id, transformed);
+    return await this.projetService.updateProject(id, body, workExperienceImgs);
   }
 }

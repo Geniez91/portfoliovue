@@ -1,11 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { AddSkills, Skills } from './skills.interface';
 import { plainToInstance } from 'class-transformer';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
 import { ELoggerContext } from '@/logger/constant';
 import { v4 as uuidv4 } from 'uuid';
+import { Prisma } from '@prisma/client';
+import { CreateSkillDto } from './dto/create-skill.dto';
+import { UpdateSkillDto } from './dto/update-skill.dto';
+import { Skills } from './entity/skill.entity';
 
 @Injectable()
 export class SkillsService {
@@ -34,7 +37,21 @@ export class SkillsService {
     }
   }
 
-  async addSkills(file: string, skills: AddSkills): Promise<Skills> {
+  async getSkillsById(idSkills: number): Promise<Skills> {
+    try {
+      const result = await this.prisma.skills.findUnique({
+        where: {
+          id: idSkills,
+        },
+      });
+      return plainToInstance(Skills, result, { excludeExtraneousValues: true });
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  async addSkills(file: string, skills: CreateSkillDto): Promise<Skills> {
     try {
       const result = await this.prisma.skills.create({
         data: {
@@ -61,20 +78,18 @@ export class SkillsService {
 
   async updateSkills(
     idSkills: number,
-    file: string,
-    skills: AddSkills,
+    skills: UpdateSkillDto,
+    file?: Express.Multer.File,
   ): Promise<Skills> {
+    const data: Prisma.skillsUpdateInput = {...skills,};
+    
+    if (file) {
+         data.srcImg =await this.uploadImage(file);
+    }
+
     try {
       const result = await this.prisma.skills.update({
-        data: {
-          language: skills.language,
-          srcImg: file,
-          idType: skills.idType,
-          usageExperience: skills.usageExperience,
-          yearsExperience: skills.yearsExperience,
-          level: skills.level,
-          TOIEC: skills.TOIEC,
-        },
+        data: data,
         where: {
           id: idSkills,
         },

@@ -1,14 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import {
-  IsArray,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
-class StackImgDto {
+export class StackImgDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()

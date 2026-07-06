@@ -2,10 +2,12 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { WorkExperience } from './workExperience.interface';
 import { plainToInstance } from 'class-transformer';
 import { ELoggerContext } from '@/logger/constant';
 import { v4 as uuidv4 } from 'uuid';
+import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
+import { WorkExperience } from './entity/workExperience.entity';
+import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
 
 @Injectable()
 export class WorkExperienceService {
@@ -43,7 +45,7 @@ export class WorkExperienceService {
 
   async addWorkExperience(
     workExperienceImg: string,
-    workExperience: WorkExperience,
+    workExperience: CreateWorkExperienceDto,
   ): Promise<WorkExperience> {
     try {
       const result = await this.prisma.workExperience.create({
@@ -95,15 +97,16 @@ export class WorkExperienceService {
 
   async updateWorkExperience(
     idWorkExperience: number,
-    workExperience: WorkExperience,
-  ) {
+    workExperience: UpdateWorkExperienceDto,
+    workExperienceImg?: string,
+  ): Promise<WorkExperience> {
     try {
       const result = await this.prisma.workExperience.update({
         data: {
           endDate: workExperience.endDate,
           job: workExperience.job,
           nameCompany: workExperience.nameCompany,
-          srcImg: workExperience.srcImg,
+          srcImg: workExperienceImg,
           startDate: workExperience.startDate,
           tasks: workExperience.tasks,
           content: workExperience.content,

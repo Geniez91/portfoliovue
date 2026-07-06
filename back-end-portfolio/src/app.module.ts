@@ -10,6 +10,7 @@ import { WorkExperienceModule } from './workExperience/workExperience.module';
 import { WorkExperienceService } from './workExperience/workExperience.service';
 import { ProjectService } from './project/project.service';
 import { ProjectModule } from './project/project.module';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { ProjectModule } from './project/project.module';
     ProjectModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SkillsService, WorkExperienceService, ProjectService],
+  providers: [AppService, SkillsService, WorkExperienceService, ProjectService,AuthService],
 })
 export class AppModule {}

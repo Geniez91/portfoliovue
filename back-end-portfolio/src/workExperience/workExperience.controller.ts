@@ -3,22 +3,21 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
+  ParseIntPipe,
   Post,
   Put,
-  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { WorkExperienceService } from './workExperience.service';
-import { WorkExperience } from './workExperience.interface';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { AuthGuard } from '@/auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { plainToInstance } from 'class-transformer';
-import { validateOrReject } from 'class-validator';
+import { WorkExperience } from './entity/workExperience.entity';
+import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
+import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
 
 @Controller('workExperience')
 export class WorkExperienceController {
@@ -34,65 +33,32 @@ export class WorkExperienceController {
   @UseGuards(AuthGuard)
   async addSkills(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: any,
+    @Body() body: CreateWorkExperienceDto,
   ): Promise<WorkExperience> {
-    const workExperienceImg =
-      await this.workExperienceService.uploadImage(file);
-    const transformed = plainToInstance(WorkExperience, {
-      ...body,
-      startDate: new Date(body.startDate),
-      endDate: new Date(body.endDate),
-      stack: JSON.parse(body.stack),
-      tasks: JSON.parse(body.tasks),
-    });
-    await validateOrReject(transformed);
-    return await this.workExperienceService.addWorkExperience(
-      workExperienceImg,
-      transformed,
-    );
+    const workExperienceImg = await this.workExperienceService.uploadImage(file);
+    return await this.workExperienceService.addWorkExperience(workExperienceImg,body);
   }
 
-  @Delete()
+  @Delete(':id')
   @UseGuards(AuthGuard)
-  async deleteWorkExperience(@Query('id') id: number): Promise<WorkExperience> {
+  async deleteWorkExperience(@Param('id', ParseIntPipe) id: number): Promise<WorkExperience> {
     return await this.workExperienceService.deleteWorkExperience(id);
   }
 
-  @ApiBody({ type: WorkExperience })
+  @ApiBody({ type: UpdateWorkExperienceDto })
   @ApiConsumes('multipart/form-data')
   @UseGuards(AuthGuard)
-  @Put()
+  @Put(':id')
   @UseInterceptors(FileInterceptor('file'))
   async updateSkills(
-    @Query('id') id: number,
-    @Body() body: WorkExperience,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateWorkExperienceDto,
     @UploadedFile() file?: Express.Multer.File,
   ): Promise<WorkExperience> {
-    let transformed = plainToInstance(WorkExperience, {
-      ...body,
-      startDate: new Date(body.startDate),
-      endDate: new Date(body.endDate),
-      tasks:
-        typeof body.tasks === 'string' ? JSON.parse(body.tasks) : body.tasks,
-      stack:
-        typeof body.stack === 'string' ? JSON.parse(body.stack) : body.stack,
-    });
-
+    let workExperienceImg: string | undefined = undefined;
     if (file) {
-      const workExperienceImg =
-        await this.workExperienceService.uploadImage(file);
-      transformed = plainToInstance(WorkExperience, {
-        ...body,
-        startDate: new Date(body.startDate),
-        endDate: new Date(body.endDate),
-        tasks:
-          typeof body.tasks === 'string' ? JSON.parse(body.tasks) : body.tasks,
-        stack:
-          typeof body.stack === 'string' ? JSON.parse(body.stack) : body.stack,
-        srcImg: workExperienceImg,
-      });
+      workExperienceImg = await this.workExperienceService.uploadImage(file);
     }
-    await validateOrReject(transformed);
-    return this.workExperienceService.updateWorkExperience(id, transformed);
+    return this.workExperienceService.updateWorkExperience(id, body, workExperienceImg);
   }
 }

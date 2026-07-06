@@ -2,10 +2,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
-import { Project } from './project.interface';
 import { plainToInstance } from 'class-transformer';
 import { ELoggerContext } from '@/logger/constant';
 import { v4 as uuidv4 } from 'uuid';
+import { Project } from './entity/project.entity.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
+import { CreateProjectDto } from './dto/create-project.dto';
 
 @Injectable()
 export class ProjectService {
@@ -35,7 +37,7 @@ export class ProjectService {
     }
   }
 
-  async addProject(projet: Project): Promise<Project> {
+  async addProject(projet: CreateProjectDto,workExperienceImgs: string[]): Promise<Project> {
     try {
       const result = await this.prisma.project.create({
         data: {
@@ -46,7 +48,7 @@ export class ProjectService {
           nbCollaborator: projet.nbCollaborator,
           stackImg: projet.stackImg as [],
           year: projet.year,
-          thumbnail: projet.thumbnail,
+          thumbnail: workExperienceImgs,
         },
       });
       return plainToInstance(Project, result);
@@ -106,7 +108,7 @@ export class ProjectService {
     }
   }
 
-  async updateProject(idProject: number, project: Project) {
+  async updateProject(idProject: number, project: UpdateProjectDto, workExperienceImgs: string[]):Promise<Project> {
     try {
       const result = await this.prisma.project.update({
         where: {
@@ -119,7 +121,7 @@ export class ProjectService {
           name: project.name,
           nbCollaborator: project.nbCollaborator,
           stackImg: project.stackImg as [],
-          thumbnail: project.thumbnail,
+          thumbnail: workExperienceImgs,
           year: project.year,
         },
       });
