@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Project } from './entity/project.entity.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { CreateProjectDto } from './dto/create-project.dto';
+import { ProjectRepository } from './repository/project.repository';
 
 @Injectable()
 export class ProjectService {
@@ -15,8 +16,8 @@ export class ProjectService {
   private readonly logger = new Logger(ProjectService.name);
 
   constructor(
-    private prisma: PrismaService,
     private configService: ConfigService,
+    private projectRepository:ProjectRepository
   ) {
     this.supabase = createClient(
       this.configService.get<string>('SUPABASE_URL')!,
@@ -25,17 +26,13 @@ export class ProjectService {
   }
 
   async getAllProject(): Promise<Project[]> {
-      const result = await this.prisma.project.findMany();
+      const result = await this.projectRepository.findAll();
       this.logger.log(`${ELoggerContext.ProjectService.GetAllProject}`);
       return plainToInstance(Project, result);
   }
 
   async findProjectByIdOrThrow(idProject: number): Promise<Project> {
-    const result = await this.prisma.project.findUnique({
-      where: {
-        id: idProject,
-      },
-    });
+    const result = await this.projectRepository.findById(idProject);
 
     if (!result) {
       this.logger.warn(
@@ -47,12 +44,7 @@ export class ProjectService {
   }
 
   async addProject(projet: CreateProjectDto,workExperienceImgs: string[]): Promise<Project> {
-      const existingProject = await this.prisma.project.findFirst({
-        where: {
-          name: projet.name,
-        },
-      });
-      
+      const existingProject = await this.projectRepository.findByName(projet.name);
       if (existingProject) {
         this.logger.warn(
           `${ELoggerContext.ProjectService.AddProject} project with name ${projet.name} already exists`,
@@ -60,18 +52,7 @@ export class ProjectService {
         throw new ConflictException(`Project with name ${projet.name} already exists`);
       }
 
-      const result = await this.prisma.project.create({
-        data: {
-          content: projet.content,
-          linkGithub: projet.linkGithub,
-          description: projet.description,
-          name: projet.name,
-          nbCollaborator: projet.nbCollaborator,
-          stackImg: projet.stackImg as [],
-          year: projet.year,
-          thumbnail: workExperienceImgs,
-        },
-      });
+      const result = await this.projectRepository.createProject(projet, workExperienceImgs);
       return plainToInstance(Project, result);
     }
   
@@ -116,11 +97,7 @@ export class ProjectService {
 
   async deleteProject(idProject: number): Promise<Project> {
       await this.findProjectByIdOrThrow(idProject);
-      const result = await this.prisma.project.delete({
-        where: {
-          id: idProject,
-        },
-      });
+      const result = await this.projectRepository.deleteProject(idProject);
       return plainToInstance(Project, result);
     }
   
@@ -128,21 +105,7 @@ export class ProjectService {
   async updateProject(idProject: number, project: UpdateProjectDto, workExperienceImgs: string[]):Promise<Project> {
       await this.findProjectByIdOrThrow(idProject);
       
-      const result = await this.prisma.project.update({
-        where: {
-          id: idProject,
-        },
-        data: {
-          content: project.content,
-          description: project.description,
-          linkGithub: project.linkGithub,
-          name: project.name,
-          nbCollaborator: project.nbCollaborator,
-          stackImg: project.stackImg as [],
-          thumbnail: workExperienceImgs,
-          year: project.year,
-        },
-      });
+      const result = await this.projectRepository.updateProject(idProject,project,workExperienceImgs);
       return plainToInstance(Project, result);
     }
   }

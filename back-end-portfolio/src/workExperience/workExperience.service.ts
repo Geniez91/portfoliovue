@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
 import { WorkExperience } from './entity/workExperience.entity';
 import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
+import { WorkExperienceRepository } from './repository/workExperience.repository';
 
 @Injectable()
 export class WorkExperienceService {
@@ -15,8 +16,8 @@ export class WorkExperienceService {
   private readonly logger = new Logger(WorkExperienceService.name);
 
   constructor(
-    private prisma: PrismaService,
     private configService: ConfigService,
+    private workExperienceRepository:WorkExperienceRepository;
   ) {
     this.supabase = createClient(
       this.configService.get<string>('SUPABASE_URL')!,
@@ -25,11 +26,7 @@ export class WorkExperienceService {
   }
 
   async getAllWorkExperience(): Promise<WorkExperience[]> {
-      const result = await this.prisma.workExperience.findMany({
-        orderBy: {
-          startDate: 'desc',
-        },
-      });
+      const result = await this.workExperienceRepository.findAll();
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.GetAllWorkExperience}`,
       );
@@ -37,11 +34,7 @@ export class WorkExperienceService {
     }
 
     async findWorkExperienceByIdOrThrow(idWorkExperience: number): Promise<WorkExperience> {
-      const result = await this.prisma.workExperience.findUnique({
-        where: {
-          id: idWorkExperience,
-        },
-      });
+      const result = await this.workExperienceRepository.findById(idWorkExperience);
       
       if (!result) {
         this.logger.warn(
@@ -57,11 +50,7 @@ export class WorkExperienceService {
     workExperienceImg: string,
     workExperience: CreateWorkExperienceDto,
   ): Promise<WorkExperience> {
-      const existingWorkExperience = await this.prisma.workExperience.findFirst({
-        where: {
-          nameCompany: workExperience.nameCompany,
-        },
-      });
+      const existingWorkExperience = await this.workExperienceRepository.findByNameCompany(workExperience.nameCompany);
       
       if (existingWorkExperience) {
         this.logger.warn(
@@ -70,18 +59,7 @@ export class WorkExperienceService {
         throw new ConflictException(`WorkExperience with nameCompany ${workExperience.nameCompany} already exists`);
       }
 
-      const result = await this.prisma.workExperience.create({
-        data: {
-          content: workExperience.content,
-          endDate: workExperience.endDate,
-          nameCompany: workExperience.nameCompany,
-          job: workExperience.job,
-          stack: workExperience.stack as [],
-          tasks: workExperience.tasks,
-          startDate: workExperience.startDate,
-          srcImg: workExperienceImg,
-        },
-      });
+      const result = await this.workExperienceRepository.createWorkExperience(workExperience, workExperienceImg);
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.AddWorkExperience} with workExperienceImg ${workExperienceImg} and workExperience ${workExperience}`,
       );
@@ -91,15 +69,11 @@ export class WorkExperienceService {
     }
   
 
-  async deleteWorkExperience(idSkills: number): Promise<WorkExperience> {
-      await this.findWorkExperienceByIdOrThrow(idSkills);
-      const result = await this.prisma.workExperience.delete({
-        where: {
-          id: idSkills,
-        },
-      });
+  async deleteWorkExperience(idWorkExperience: number): Promise<WorkExperience> {
+      await this.findWorkExperienceByIdOrThrow(idWorkExperience);
+      const result = await this.workExperienceRepository.deleteWorkExperience(idWorkExperience);
       this.logger.log(
-        `${ELoggerContext.WorkExperienceService.DeleteWorkExperience} with ${idSkills}`,
+        `${ELoggerContext.WorkExperienceService.DeleteWorkExperience} with ${idWorkExperience}`,
       );
       return plainToInstance(WorkExperience, result, {
         excludeExtraneousValues: true,
@@ -113,23 +87,9 @@ export class WorkExperienceService {
     workExperienceImg?: string,
   ): Promise<WorkExperience> {
       await this.findWorkExperienceByIdOrThrow(idWorkExperience);
-      const result = await this.prisma.workExperience.update({
-        data: {
-          endDate: workExperience.endDate,
-          job: workExperience.job,
-          nameCompany: workExperience.nameCompany,
-          srcImg: workExperienceImg,
-          startDate: workExperience.startDate,
-          tasks: workExperience.tasks,
-          content: workExperience.content,
-          stack: workExperience.stack as [],
-        },
-        where: {
-          id: idWorkExperience,
-        },
-      });
+      const result = await this.workExperienceRepository.updateWorkExperience(idWorkExperience, workExperience, workExperienceImg);
       this.logger.log(
-        `${ELoggerContext.WorkExperienceService.UpdateWorkExperience} with idSkills ${idWorkExperience}`,
+        `${ELoggerContext.WorkExperienceService.UpdateWorkExperience} with idWorkExperience ${idWorkExperience}`,
       );
       return plainToInstance(WorkExperience, result, {
         excludeExtraneousValues: true,

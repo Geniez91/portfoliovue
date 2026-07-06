@@ -9,6 +9,7 @@ import { Prisma } from '@prisma/client';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { Skills } from './entity/skill.entity';
+import { SkillRepository } from './repository/skill.repository';
 
 @Injectable()
 export class SkillsService {
@@ -16,8 +17,8 @@ export class SkillsService {
   private readonly logger = new Logger(SkillsService.name);
 
   constructor(
-    private prisma: PrismaService,
     private configService: ConfigService,
+    private skillRepository:SkillRepository
   ) {
     this.supabase = createClient(
       this.configService.get<string>('SUPABASE_URL')!,
@@ -26,35 +27,21 @@ export class SkillsService {
   }
 
   async getAllSkills(): Promise<Skills[]> {
-      const result = await this.prisma.skills.findMany();
+      const result = await this.skillRepository.findAll();
       return plainToInstance(Skills, result, {
         excludeExtraneousValues: true,
       });
   }
 
   async addSkills(file: string, skills: CreateSkillDto): Promise<Skills> {
-      const existingSkill = await this.prisma.skills.findFirst({
-        where: {
-          language: skills.language
-        }
-      });
+      const existingSkill = await this.skillRepository.findByLanguage(skills.language);
 
       if (existingSkill) {
          this.logger.warn(`${ELoggerContext.SkillsService.AddSkills} language ${skills.language} already exists`)
         throw new ConflictException(`Skill with language ${skills.language} already exists`)
       }
 
-      const result = await this.prisma.skills.create({
-        data: {
-          idType: skills.idType,
-          language: skills.language,
-          usageExperience: skills.usageExperience,
-          yearsExperience: skills.yearsExperience,
-          srcImg: file,
-          level: skills.level,
-          TOIEC: skills.TOIEC,
-        },
-      });
+      const result = await this.skillRepository.createSkill(skills, file);
       this.logger.log(
         `${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`,
       );
@@ -62,11 +49,7 @@ export class SkillsService {
   }
 
   async findSkillByIdOrThrow(idSkills: number): Promise<Skills> {
-    const result = await this.prisma.skills.findUnique({
-      where: {
-        id: idSkills,
-      },
-    });
+    const result = await this.skillRepository.findById(idSkills);
 
     if (!result) {
     this.logger.warn(
@@ -93,12 +76,7 @@ export class SkillsService {
 
     await this.findSkillByIdOrThrow(idSkills);
 
-    const result = await this.prisma.skills.update({
-        data: data,
-        where: {
-          id: idSkills,
-        },
-      });
+    const result = await this.skillRepository.updateSkill(idSkills, data);
       this.logger.log(
         `${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills}`,
       );
@@ -107,11 +85,7 @@ export class SkillsService {
   
   async deleteSkills(idSkills: number): Promise<Skills> {
     await this.findSkillByIdOrThrow(idSkills);
-      const result = await this.prisma.skills.delete({
-        where: {
-          id: idSkills,
-        },
-      });
+    const result = await this.skillRepository.deleteSkill(idSkills);
       this.logger.log(
         `${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills}`,
       );
