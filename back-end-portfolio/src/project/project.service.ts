@@ -1,14 +1,13 @@
 import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
-import { plainToInstance } from 'class-transformer';
 import { ELoggerContext } from '@/logger/constant';
 import { v4 as uuidv4 } from 'uuid';
 import { Project } from './entity/project.entity.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ProjectRepository } from './repository/project.repository';
+import { ProjectMapper } from './mapper/project.mapper';
 
 @Injectable()
 export class ProjectService {
@@ -28,7 +27,7 @@ export class ProjectService {
   async getAllProject(): Promise<Project[]> {
       const result = await this.projectRepository.findAll();
       this.logger.log(`${ELoggerContext.ProjectService.GetAllProject}`);
-      return plainToInstance(Project, result);
+      return ProjectMapper.toEntities(result);
   }
 
   async findProjectByIdOrThrow(idProject: number): Promise<Project> {
@@ -40,7 +39,7 @@ export class ProjectService {
       );
       throw new NotFoundException(`Project with id ${idProject} not found`);
     }
-    return plainToInstance(Project, result);
+    return ProjectMapper.toEntity(result);
   }
 
   async addProject(projet: CreateProjectDto,workExperienceImgs: string[]): Promise<Project> {
@@ -52,8 +51,9 @@ export class ProjectService {
         throw new ConflictException(`Project with name ${projet.name} already exists`);
       }
 
-      const result = await this.projectRepository.createProject(projet, workExperienceImgs);
-      return plainToInstance(Project, result);
+      const createInput = ProjectMapper.toCreateInput(projet, workExperienceImgs);
+      const result = await this.projectRepository.createProject(createInput);
+      return ProjectMapper.toEntity(result);
     }
   
 
@@ -98,15 +98,16 @@ export class ProjectService {
   async deleteProject(idProject: number): Promise<Project> {
       await this.findProjectByIdOrThrow(idProject);
       const result = await this.projectRepository.deleteProject(idProject);
-      return plainToInstance(Project, result);
+      return ProjectMapper.toEntity(result);
     }
   
 
   async updateProject(idProject: number, project: UpdateProjectDto, workExperienceImgs: string[]):Promise<Project> {
       await this.findProjectByIdOrThrow(idProject);
       
-      const result = await this.projectRepository.updateProject(idProject,project,workExperienceImgs);
-      return plainToInstance(Project, result);
+      const updateInput = ProjectMapper.toUpdateInput(project, workExperienceImgs);
+      const result = await this.projectRepository.updateProject(idProject, updateInput);
+      return ProjectMapper.toEntity(result);
     }
   }
 

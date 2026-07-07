@@ -1,6 +1,7 @@
 import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { UpdateWorkExperienceDto } from "../dto/update-workExperience.dto";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class WorkExperienceRepository {
@@ -27,18 +28,9 @@ export class WorkExperienceRepository {
         },
       });
 }
-    async createWorkExperience(workExperience:any, workExperienceImg:string){
+    async createWorkExperience(data:Prisma.workExperienceCreateInput){
        return await this.prisma.workExperience.create({
-        data: {
-          content: workExperience.content,
-          endDate: workExperience.endDate,
-          nameCompany: workExperience.nameCompany,
-          job: workExperience.job,
-          stack: workExperience.stack as [],
-          tasks: workExperience.tasks,
-          startDate: workExperience.startDate,
-          srcImg: workExperienceImg,
-        },
+        data: data
 })}
 
     async deleteWorkExperience(idWorkExperience:number){
@@ -48,22 +40,12 @@ export class WorkExperienceRepository {
         },
       });
 }
-    async updateWorkExperience(idWorkExperience:number, workExperience: UpdateWorkExperienceDto,workExperienceImg?: string){
+    async updateWorkExperience(idWorkExperience:number, workExperience: Prisma.workExperienceUpdateInput){
        return await this.prisma.workExperience.update({
-        data: {
-          endDate: workExperience.endDate,
-          job: workExperience.job,
-          nameCompany: workExperience.nameCompany,
-          srcImg: workExperienceImg,
-          startDate: workExperience.startDate,
-          tasks: workExperience.tasks,
-          content: workExperience.content,
-          stack: workExperience.stack as [],
-        },
+        data: workExperience,
         where: {
           id: idWorkExperience,
         },
       });
-
 }
 }

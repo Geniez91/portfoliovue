@@ -16,6 +16,7 @@ export namespace ELoggerContext {
     UpdateWorkExperience = 'WorkExperienceService.UpdateWorkExperience',
     GetAllWorkExperience = 'WorkExperienceService.GetAllWorkExperience',
     FindWorkExperienceByIdOrThrow = 'WorkExperienceService.FindWorkExperienceByIdOrThrow',
+    UploadImage = 'WorkExperienceService.UploadImage',
   }
   export enum ProjectService {
     GetAllProject = 'ProjectService.GetAllProject',

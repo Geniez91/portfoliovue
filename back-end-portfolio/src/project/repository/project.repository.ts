@@ -2,6 +2,7 @@ import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { CreateProjectDto } from "../dto/create-project.dto";
 import { UpdateProjectDto } from "../dto/update-project.dto";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 
@@ -26,18 +27,9 @@ export class ProjectRepository {
         },
       });
 }
-    async createProject(projet:CreateProjectDto, workExperienceImgs:string[]){
+    async createProject(data:Prisma.projectCreateInput){
         return await this.prisma.project.create({
-        data: {
-          content: projet.content,
-          linkGithub: projet.linkGithub,
-          description: projet.description,
-          name: projet.name,
-          nbCollaborator: projet.nbCollaborator,
-          stackImg: projet.stackImg as [],
-          year: projet.year,
-          thumbnail: workExperienceImgs,
-        },
+        data
       });
 }
    async deleteProject(idProject:number){
@@ -48,21 +40,12 @@ export class ProjectRepository {
       });
 }
 
-  async updateProject(idProject:number, project:UpdateProjectDto, workExperienceImgs:string[]){
+  async updateProject(idProject:number, data:Prisma.projectUpdateInput){
     return await this.prisma.project.update({
         where: {
           id: idProject,
         },
-        data: {
-          content: project.content,
-          description: project.description,
-          linkGithub: project.linkGithub,
-          name: project.name,
-          nbCollaborator: project.nbCollaborator,
-          stackImg: project.stackImg as [],
-          thumbnail: workExperienceImgs,
-          year: project.year,
-        },
+        data
       });
 }
 }

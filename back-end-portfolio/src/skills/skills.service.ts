@@ -1,6 +1,4 @@
 import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { plainToInstance } from 'class-transformer';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ConfigService } from '@nestjs/config';
 import { ELoggerContext } from '@/logger/constant';
@@ -10,6 +8,7 @@ import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { Skills } from './entity/skill.entity';
 import { SkillRepository } from './repository/skill.repository';
+import { SkillMapper } from './mapper/skill.mapper';
 
 @Injectable()
 export class SkillsService {
@@ -18,7 +17,7 @@ export class SkillsService {
 
   constructor(
     private configService: ConfigService,
-    private skillRepository:SkillRepository
+    private skillRepository:SkillRepository,
   ) {
     this.supabase = createClient(
       this.configService.get<string>('SUPABASE_URL')!,
@@ -28,9 +27,7 @@ export class SkillsService {
 
   async getAllSkills(): Promise<Skills[]> {
       const result = await this.skillRepository.findAll();
-      return plainToInstance(Skills, result, {
-        excludeExtraneousValues: true,
-      });
+      return SkillMapper.toEntities(result);
   }
 
   async addSkills(file: string, skills: CreateSkillDto): Promise<Skills> {
@@ -41,11 +38,12 @@ export class SkillsService {
         throw new ConflictException(`Skill with language ${skills.language} already exists`)
       }
 
-      const result = await this.skillRepository.createSkill(skills, file);
+      const createInput = SkillMapper.toCreateInput(skills, file);
+      const result = await this.skillRepository.createSkill(createInput);
       this.logger.log(
         `${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`,
       );
-      return plainToInstance(Skills, result, { excludeExtraneousValues: true });
+      return SkillMapper.toEntity(result);
   }
 
   async findSkillByIdOrThrow(idSkills: number): Promise<Skills> {
@@ -60,7 +58,7 @@ export class SkillsService {
       `Skill ${idSkills} not found`,
     );
   }
-    return plainToInstance(Skills, result, { excludeExtraneousValues: true });
+    return SkillMapper.toEntity(result);
   }
 
   async updateSkills(
@@ -69,18 +67,20 @@ export class SkillsService {
     file?: Express.Multer.File,
   ): Promise<Skills> {
     const data: Prisma.skillsUpdateInput = {...skills,};
-    
+    let srcImg: string | undefined;
+
     if (file) {
-         data.srcImg =await this.uploadImage(file);
+         srcImg =await this.uploadImage(file);
     }
 
     await this.findSkillByIdOrThrow(idSkills);
+    const updateInput = SkillMapper.toUpdateInput(skills, srcImg);
 
-    const result = await this.skillRepository.updateSkill(idSkills, data);
+    const result = await this.skillRepository.updateSkill(idSkills, updateInput);
       this.logger.log(
         `${ELoggerContext.SkillsService.UpdateSkills} with idSkills ${idSkills}`,
       );
-      return plainToInstance(Skills, result, { excludeExtraneousValues: true });
+      return SkillMapper.toEntity(result);
     }
   
   async deleteSkills(idSkills: number): Promise<Skills> {
@@ -89,7 +89,7 @@ export class SkillsService {
       this.logger.log(
         `${ELoggerContext.SkillsService.DeleteSkills} with idSkills ${idSkills}`,
       );
-      return plainToInstance(Skills, result, { excludeExtraneousValues: true });
+      return SkillMapper.toEntity(result);
     } 
   
   async uploadImage(file: Express.Multer.File): Promise<string> {

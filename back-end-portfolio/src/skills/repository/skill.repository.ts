@@ -1,6 +1,5 @@
 import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
-import { CreateSkillDto } from "../dto/create-skill.dto";
 import { Prisma } from "@prisma/client";
 
 @Injectable()
@@ -19,17 +18,9 @@ export class SkillRepository {
         });
     }
 
-    async createSkill(skills:CreateSkillDto,file: string){
+    async createSkill(data: Prisma.skillsCreateInput){
         return await this.prisma.skills.create({
-        data: {
-          idType: skills.idType,
-          language: skills.language,
-          usageExperience: skills.usageExperience,
-          yearsExperience: skills.yearsExperience,
-          srcImg: file,
-          level: skills.level,
-          TOIEC: skills.TOIEC,
-        },
+        data
       });
     }
 

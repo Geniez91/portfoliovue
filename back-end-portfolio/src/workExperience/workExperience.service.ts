@@ -1,14 +1,13 @@
-import { PrismaService } from '@/prisma/prisma.service';
 import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { plainToInstance } from 'class-transformer';
 import { ELoggerContext } from '@/logger/constant';
 import { v4 as uuidv4 } from 'uuid';
 import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
 import { WorkExperience } from './entity/workExperience.entity';
 import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
 import { WorkExperienceRepository } from './repository/workExperience.repository';
+import { WorkExperienceMapper } from './mapper/workExperience.mapper';
 
 @Injectable()
 export class WorkExperienceService {
@@ -30,7 +29,7 @@ export class WorkExperienceService {
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.GetAllWorkExperience}`,
       );
-      return plainToInstance(WorkExperience, result);
+      return WorkExperienceMapper.toEntities(result);
     }
 
     async findWorkExperienceByIdOrThrow(idWorkExperience: number): Promise<WorkExperience> {
@@ -42,7 +41,7 @@ export class WorkExperienceService {
         );
         throw new NotFoundException(`WorkExperience with id ${idWorkExperience} not found`);
       }
-      return plainToInstance(WorkExperience, result);
+      return WorkExperienceMapper.toEntity(result);
     }
 
 
@@ -59,13 +58,12 @@ export class WorkExperienceService {
         throw new ConflictException(`WorkExperience with nameCompany ${workExperience.nameCompany} already exists`);
       }
 
-      const result = await this.workExperienceRepository.createWorkExperience(workExperience, workExperienceImg);
+      const createInput = WorkExperienceMapper.toCreateInput(workExperience, workExperienceImg);
+      const result = await this.workExperienceRepository.createWorkExperience(createInput);
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.AddWorkExperience} with workExperienceImg ${workExperienceImg} and workExperience ${workExperience}`,
       );
-      return plainToInstance(WorkExperience, result, {
-        excludeExtraneousValues: true,
-      });
+      return WorkExperienceMapper.toEntity(result);
     }
   
 
@@ -75,9 +73,7 @@ export class WorkExperienceService {
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.DeleteWorkExperience} with ${idWorkExperience}`,
       );
-      return plainToInstance(WorkExperience, result, {
-        excludeExtraneousValues: true,
-      });
+      return WorkExperienceMapper.toEntity(result);
     }
   
 
@@ -87,13 +83,12 @@ export class WorkExperienceService {
     workExperienceImg?: string,
   ): Promise<WorkExperience> {
       await this.findWorkExperienceByIdOrThrow(idWorkExperience);
-      const result = await this.workExperienceRepository.updateWorkExperience(idWorkExperience, workExperience, workExperienceImg);
+      const updateInput = WorkExperienceMapper.toUpdateInput(workExperience, workExperienceImg);
+      const result = await this.workExperienceRepository.updateWorkExperience(idWorkExperience, updateInput);
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.UpdateWorkExperience} with idWorkExperience ${idWorkExperience}`,
       );
-      return plainToInstance(WorkExperience, result, {
-        excludeExtraneousValues: true,
-      });
+      return WorkExperienceMapper.toEntity(result);
     }
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
@@ -114,12 +109,12 @@ export class WorkExperienceService {
         .from('workexperience')
         .getPublicUrl(fileName);
       this.logger.log(
-        `${ELoggerContext.SkillsService.UploadImage} with file ${file}`,
+        `${ELoggerContext.WorkExperienceService.UploadImage} with file ${file}`,
       );
       return publicUrlData.publicUrl;
     } catch (error) {
       this.logger.error(
-        `${ELoggerContext.SkillsService.UploadImage} with file ${file} with an error ${error}`,
+        `${ELoggerContext.WorkExperienceService.UploadImage} with file ${file} with an error ${error}`,
       );
       throw error;
     }
