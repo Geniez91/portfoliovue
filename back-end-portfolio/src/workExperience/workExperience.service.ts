@@ -17,7 +17,7 @@ export class WorkExperienceService {
 
   constructor(
     private configService: ConfigService,
-    private workExperienceRepository:WorkExperienceRepository;
+    private workExperienceRepository:WorkExperienceRepository
   ) {
     this.supabase = createClient(
       this.configService.get<string>('SUPABASE_URL')!,
