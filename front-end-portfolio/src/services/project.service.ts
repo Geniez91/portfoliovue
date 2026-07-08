@@ -8,7 +8,7 @@ const urldeleteProject = 'https://portfoliovue-back-end-production.up.railway.ap
 export async function getAllProject(): Promise<IProject3[]> {
   try {
     const result = await axios.get(urlProject)
-    return result.data
+    return result.data.data
   } catch (error) {
     throw error
   }
