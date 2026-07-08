@@ -11,6 +11,9 @@ import { WorkExperienceService } from './workExperience/workExperience.service';
 import { ProjectService } from './project/project.service';
 import { ProjectModule } from './project/project.module';
 import { AuthService } from './auth/auth.service';
+import { ProjectRepository } from './project/repository/project.repository';
+import { WorkExperienceRepository } from './workExperience/repository/workExperience.repository';
+import { SkillRepository } from './skills/repository/skill.repository';
 
 @Module({
   imports: [
@@ -24,6 +27,6 @@ import { AuthService } from './auth/auth.service';
     ProjectModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SkillsService, WorkExperienceService, ProjectService,AuthService],
+  providers: [AppService, SkillsService, WorkExperienceService, ProjectService,AuthService, SkillRepository, WorkExperienceRepository, ProjectRepository],
 })
 export class AppModule {}
