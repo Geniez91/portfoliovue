@@ -15,6 +15,7 @@ async function bootstrap() {
     .setDescription('API CRUD de mon portfolio')
     .setVersion('1.0')
     .addTag('Portfolio')
+    .addBearerAuth()
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
