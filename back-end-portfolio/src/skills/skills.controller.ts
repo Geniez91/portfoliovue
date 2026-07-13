@@ -42,8 +42,7 @@ export class SkillsController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateSkillDto,
   ): Promise<Skills> {
-    const skillsImg = await this.skillService.uploadImage(file);
-    return this.skillService.addSkills(skillsImg, body);
+    return this.skillService.addSkills(file, body);
   }
 
   @ApiBody({ type: UpdateSkillDto })

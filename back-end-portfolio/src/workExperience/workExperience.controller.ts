@@ -18,6 +18,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { WorkExperience } from './entity/workExperience.entity';
 import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
 import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
+import { StorageService } from '@/common/storage.service';
 
 @Controller('workExperience')
 export class WorkExperienceController {
@@ -35,8 +36,7 @@ export class WorkExperienceController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateWorkExperienceDto,
   ): Promise<WorkExperience> {
-    const workExperienceImg = await this.workExperienceService.uploadImage(file);
-    return await this.workExperienceService.addWorkExperience(workExperienceImg,body);
+    return await this.workExperienceService.addWorkExperience(file,body);
   }
 
   @Delete(':id')
@@ -55,10 +55,6 @@ export class WorkExperienceController {
     @Body() body: UpdateWorkExperienceDto,
     @UploadedFile() file?: Express.Multer.File,
   ): Promise<WorkExperience> {
-    let workExperienceImg: string | undefined = undefined;
-    if (file) {
-      workExperienceImg = await this.workExperienceService.uploadImage(file);
-    }
-    return this.workExperienceService.updateWorkExperience(id, body, workExperienceImg);
+    return this.workExperienceService.updateWorkExperience(id, body, file);
   }
 }

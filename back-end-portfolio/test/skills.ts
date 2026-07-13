@@ -1,4 +1,5 @@
-import { AddSkills, Skills } from '@/skills/skills.interface';
+import { CreateSkillDto } from "@/skills/dto/create-skill.dto";
+import { Skills } from "@/skills/entity/skill.entity";
 
 export const ALL_SKILLS_TRANSFORMED: Skills[] = [
   {
@@ -46,10 +47,9 @@ export const ALL_SKILLS = [
   },
 ];
 
-export const ADD_SKILL: AddSkills = {
+export const ADD_SKILL: CreateSkillDto = {
   idType: 'test',
   language: 'langage',
-  srcImg: 'img',
   level: 'Intermediaire',
   TOIEC: 805,
   usageExperience: new Date('2025-05-16'),

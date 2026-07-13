@@ -1,4 +1,5 @@
-import { Project } from '@/project/project.interface';
+import { Project } from "@/project/entity/project.entity.dto";
+
 
 export const ALL_PROJECT = [
   {

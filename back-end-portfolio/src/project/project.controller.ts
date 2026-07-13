@@ -7,8 +7,6 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  Query,
-  UploadedFile,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -40,8 +38,7 @@ export class ProjectController {
     @UploadedFiles() files: Express.Multer.File[],
     @Body() body: CreateProjectDto,
   ): Promise<Project> {
-    const workExperienceImgs = await this.projetService.uploadImages(files);
-    return await this.projetService.addProject(body,workExperienceImgs);
+    return await this.projetService.addProject(body,files);
   }
 
   @Delete(':id')
@@ -60,7 +57,6 @@ export class ProjectController {
     @Body() body: UpdateProjectDto,
     @UploadedFiles() files: Express.Multer.File[],
   ): Promise<Project> {
-    const workExperienceImgs = await this.projetService.uploadImages(files);
-    return await this.projetService.updateProject(id, body, workExperienceImgs);
+    return await this.projetService.updateProject(id, body, files);
   }
 }

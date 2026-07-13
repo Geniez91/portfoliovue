@@ -1,28 +1,21 @@
 import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { ConfigService } from '@nestjs/config';
 import { ELoggerContext } from '@/logger/constant';
-import { v4 as uuidv4 } from 'uuid';
 import { Project } from './entity/project.entity.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ProjectRepository } from './repository/project.repository';
 import { ProjectMapper } from './mapper/project.mapper';
+import { StorageService } from '@/common/storage.service';
+import { EStorageBucket } from '@/common/storage.enum';
 
 @Injectable()
 export class ProjectService {
-  private supabase: SupabaseClient;
   private readonly logger = new Logger(ProjectService.name);
 
   constructor(
-    private configService: ConfigService,
-    private projectRepository:ProjectRepository
-  ) {
-    this.supabase = createClient(
-      this.configService.get<string>('SUPABASE_URL')!,
-      this.configService.get<string>('SUPABASE_ANON_KEY')!,
-    );
-  }
+    private projectRepository:ProjectRepository,
+    private storageService: StorageService
+  ) {}
 
   async getAllProject(): Promise<Project[]> {
       const result = await this.projectRepository.findAll();
@@ -42,7 +35,8 @@ export class ProjectService {
     return ProjectMapper.toEntity(result);
   }
 
-  async addProject(projet: CreateProjectDto,workExperienceImgs: string[]): Promise<Project> {
+  async addProject(projet: CreateProjectDto, files: Express.Multer.File[]): Promise<Project> {
+      const workExperienceImgs = await this.storageService.uploadManyFiles(EStorageBucket.Projects, files);
       const existingProject = await this.projectRepository.findByName(projet.name);
       if (existingProject) {
         this.logger.warn(
@@ -55,45 +49,6 @@ export class ProjectService {
       const result = await this.projectRepository.createProject(createInput);
       return ProjectMapper.toEntity(result);
     }
-  
-
-  async uploadImage(file: Express.Multer.File): Promise<string> {
-    const fileName = `${uuidv4()}_${file.originalname}`;
-    try {
-      const { data, error } = await this.supabase.storage
-        .from('projet')
-        .upload(fileName, file.buffer, {
-          contentType: file.mimetype,
-          cacheControl: '3600',
-          upsert: true,
-        });
-      if (error) {
-        console.log(error);
-        throw new Error('Error getting public URL');
-      }
-      const { data: publicUrlData } = await this.supabase.storage
-        .from('projet')
-        .getPublicUrl(fileName);
-      this.logger.log(
-        `${ELoggerContext.SkillsService.UploadImage} with file ${file}`,
-      );
-      return publicUrlData.publicUrl;
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.SkillsService.UploadImage} with file ${file} with an error ${error}`,
-      );
-      throw error;
-    }
-  }
-
-  async uploadImages(files: Express.Multer.File[]): Promise<string[]> {
-    const urls: string[] = [];
-    for (const file of files) {
-      const url = await this.uploadImage(file);
-      urls.push(url);
-    }
-    return urls;
-  }
 
   async deleteProject(idProject: number): Promise<Project> {
       await this.findProjectByIdOrThrow(idProject);
@@ -102,7 +57,8 @@ export class ProjectService {
     }
   
 
-  async updateProject(idProject: number, project: UpdateProjectDto, workExperienceImgs: string[]):Promise<Project> {
+  async updateProject(idProject: number, project: UpdateProjectDto, files: Express.Multer.File[]):Promise<Project> {
+      const workExperienceImgs = await this.storageService.uploadManyFiles(EStorageBucket.Projects, files);
       await this.findProjectByIdOrThrow(idProject);
       
       const updateInput = ProjectMapper.toUpdateInput(project, workExperienceImgs);

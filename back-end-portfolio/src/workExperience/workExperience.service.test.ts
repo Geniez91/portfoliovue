@@ -1,104 +1,146 @@
-import { Prisma } from '@prisma/client';
 import { WorkExperienceService } from './workExperience.service';
-import { PrismaService } from '@/prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import {
   ADD_EXPERIENCE,
   ALL_WORK_EXPERIENCES,
   ALL_WORK_EXPERIENCES_TRANSFORMED,
-  DELETE_EXPERIENCE,
+  DELETE_EXPERIENCE
 } from '../../test/workExperience';
-import { Logger } from '@nestjs/common';
+
+import {MOCK_FILE} from '../../test/common'
+import { ConflictException, NotFoundException } from '@nestjs/common';
+import { WorkExperienceRepository } from './repository/workExperience.repository';
+import { Test, TestingModule } from '@nestjs/testing';
+import { StorageService } from '@/common/storage.service';
+import { WorkExperienceMapper } from './mapper/workExperience.mapper';
 
 describe('workExperienceService', () => {
-  let prisma = new PrismaService();
-  let configService = new ConfigService();
-  let workExperienceService = new WorkExperienceService(prisma, configService);
+ let service: WorkExperienceService;
+ let repository:WorkExperienceRepository;
+ let module: TestingModule;
+
+   const repositoryMock = {
+    findAll: jest.fn(),
+    findById: jest.fn(),
+    findByNameCompany:jest.fn(),
+    createWorkExperience: jest.fn(),
+    deleteWorkExperience: jest.fn(),
+    updateWorkExperience: jest.fn(),
+  }
+
+  const storageMock={
+    uploadFile: jest.fn(),
+  }
+
+    const configMock = {
+    get: jest.fn(),
+  };
+
+  beforeEach(async () => {
+    module = await Test.createTestingModule({
+      providers: [
+        WorkExperienceService,
+        {
+          provide: WorkExperienceRepository,
+          useValue: repositoryMock,
+        },
+        {
+          provide: ConfigService,
+          useValue: configMock,
+        },
+        {
+          provide: StorageService,
+          useValue: storageMock,
+        }
+      ],
+    }).compile();
+  
+    service = module.get<WorkExperienceService>(WorkExperienceService);
+    repository = module.get<WorkExperienceRepository>(WorkExperienceRepository);
+    jest.clearAllMocks();
+  });
+
+
 
   describe('getAllWorkExperience', () => {
     it('should return all the workExperiences', async () => {
-      prisma.workExperience.findMany = jest
-        .fn()
-        .mockResolvedValue(ALL_WORK_EXPERIENCES);
+      repositoryMock.findAll.mockResolvedValue(ALL_WORK_EXPERIENCES);
 
-      const result = await workExperienceService.getAllWorkExperience();
+      const result = await service.getAllWorkExperience();
 
       expect(result).toEqual(ALL_WORK_EXPERIENCES_TRANSFORMED);
+      expect(repositoryMock.findAll).toHaveBeenCalled();
     });
 
     it('should return an error', async () => {
-      prisma.workExperience.findMany = jest.fn().mockRejectedValue(new Error());
+      repositoryMock.findAll.mockRejectedValue(new Error());
 
       await expect(
-        workExperienceService.getAllWorkExperience(),
+        service.getAllWorkExperience(),
       ).rejects.toThrow();
     });
   });
 
   describe('addWorkExperience', () => {
     it('should add work experiences', async () => {
-      prisma.workExperience.create = jest
-        .fn()
-        .mockResolvedValue(ADD_EXPERIENCE);
+      storageMock.uploadFile.mockResolvedValue('img');
+      repositoryMock.findByNameCompany.mockResolvedValue(null);
+      repositoryMock.createWorkExperience.mockResolvedValue(ADD_EXPERIENCE);
 
-      await workExperienceService.addWorkExperience('img', ADD_EXPERIENCE);
+      const result = await service.addWorkExperience(MOCK_FILE, ADD_EXPERIENCE);
 
-      expect(prisma.workExperience.create).toHaveBeenCalledWith({
-        data: ADD_EXPERIENCE,
-      });
+      expect(storageMock.uploadFile).toHaveBeenCalled();
+      expect(repositoryMock.createWorkExperience).toHaveBeenCalled();
+      expect(result).toEqual(WorkExperienceMapper.toEntity(ADD_EXPERIENCE));
+
+
     });
 
-    it('should return an error', async () => {
-      prisma.workExperience.create = jest.fn().mockRejectedValue(new Error());
+    it('should return an conflict exception', async () => {
+      repositoryMock.findByNameCompany.mockResolvedValue(ADD_EXPERIENCE);
 
       await expect(
-        workExperienceService.addWorkExperience('img', ADD_EXPERIENCE),
-      ).rejects.toThrow();
+        service.addWorkExperience(MOCK_FILE, ADD_EXPERIENCE),
+      ).rejects.toThrow(ConflictException);
     });
   });
 
   describe('deleteWorkExperience', () => {
     it('should delete work experience', async () => {
-      prisma.workExperience.delete = jest
-        .fn()
-        .mockResolvedValue(DELETE_EXPERIENCE);
+      repositoryMock.findById.mockResolvedValue(ADD_EXPERIENCE);
+      repositoryMock.deleteWorkExperience.mockResolvedValue(DELETE_EXPERIENCE);
 
-      await workExperienceService.deleteWorkExperience(1);
+      await service.deleteWorkExperience(1);
 
-      expect(prisma.workExperience.delete).toHaveBeenCalledWith({
-        where: { id: 1 },
-      });
+      expect(repositoryMock.deleteWorkExperience).toHaveBeenCalledWith(1);
     });
 
-    it('should throw an erro', async () => {
-      prisma.workExperience.delete = jest.fn().mockRejectedValue(new Error());
+    it('should throw an exception not found', async () => {
+      repositoryMock.findById.mockResolvedValue(null)
 
       await expect(
-        workExperienceService.deleteWorkExperience(1),
-      ).rejects.toThrow();
+        service.deleteWorkExperience(1),
+      ).rejects.toThrow(NotFoundException);
     });
   });
 
   describe('updateWorkExperience', () => {
     it('should update work experience', async () => {
-      prisma.workExperience.update = jest
-        .fn()
-        .mockResolvedValue(ADD_EXPERIENCE);
+      repositoryMock.findById.mockResolvedValue(ADD_EXPERIENCE);
+      repositoryMock.updateWorkExperience.mockResolvedValue(ADD_EXPERIENCE);
 
-      await workExperienceService.updateWorkExperience(1, ADD_EXPERIENCE);
+      await service.updateWorkExperience(1, ADD_EXPERIENCE);
 
-      expect(prisma.workExperience.update).toHaveBeenCalledWith({
-        where: { id: 1 },
-        data: ADD_EXPERIENCE,
-      });
+      expect(repositoryMock.updateWorkExperience).toHaveBeenCalledWith(1, ADD_EXPERIENCE);
     });
 
-    it('should throw an error', async () => {
-      prisma.workExperience.update = jest.fn().mockRejectedValue(new Error());
+    it('should throw an exception not found', async () => {
+      repositoryMock.findById.mockResolvedValue(null);
+      repositoryMock.updateWorkExperience.mockRejectedValue(new NotFoundException());
 
       await expect(
-        workExperienceService.updateWorkExperience(1, ADD_EXPERIENCE),
-      ).rejects.toThrow();
+        service.updateWorkExperience(1, ADD_EXPERIENCE),
+      ).rejects.toThrow(NotFoundException);
     });
   });
 });

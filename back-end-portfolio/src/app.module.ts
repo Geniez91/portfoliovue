@@ -27,6 +27,6 @@ import { SkillRepository } from './skills/repository/skill.repository';
     ProjectModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SkillsService, WorkExperienceService, ProjectService,AuthService, SkillRepository, WorkExperienceRepository, ProjectRepository],
+  providers: [AppService],
 })
 export class AppModule {}

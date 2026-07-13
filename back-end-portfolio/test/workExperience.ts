@@ -1,4 +1,4 @@
-import { WorkExperience } from '@/workExperience/workExperience.interface';
+import { WorkExperience } from "@/workExperience/entity/workExperience.entity";
 
 export const ALL_WORK_EXPERIENCES_TRANSFORMED: WorkExperience[] = [
   {

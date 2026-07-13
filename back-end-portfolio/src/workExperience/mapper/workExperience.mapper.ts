@@ -17,14 +17,14 @@ export class WorkExperienceMapper {
     static toCreateInput(dto:any,workExperienceImg:string):any{
         return {
             ...dto,
-            workExperienceImg
+            srcImg:workExperienceImg
         }
     }
 
     static toUpdateInput(dto:any,workExperienceImg?:string):any{
          return {
             ...dto,
-            ...(workExperienceImg && {workExperienceImg})
+            ...(workExperienceImg && {srcImg: workExperienceImg})
          }
     }
 }

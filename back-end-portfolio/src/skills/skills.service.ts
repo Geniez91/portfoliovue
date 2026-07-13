@@ -1,28 +1,22 @@
 import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { ConfigService } from '@nestjs/config';
 import { ELoggerContext } from '@/logger/constant';
-import { v4 as uuidv4 } from 'uuid';
 import { Prisma } from '@prisma/client';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { Skills } from './entity/skill.entity';
 import { SkillRepository } from './repository/skill.repository';
 import { SkillMapper } from './mapper/skill.mapper';
+import { StorageService } from '@/common/storage.service';
+import { EStorageBucket } from '@/common/storage.enum';
 
 @Injectable()
 export class SkillsService {
-  private supabase: SupabaseClient;
   private readonly logger = new Logger(SkillsService.name);
 
   constructor(
-    private configService: ConfigService,
     private skillRepository:SkillRepository,
+    private storageService: StorageService
   ) {
-    this.supabase = createClient(
-      this.configService.get<string>('SUPABASE_URL')!,
-      this.configService.get<string>('SUPABASE_ANON_KEY')!,
-    );
   }
 
   async getAllSkills(): Promise<Skills[]> {
@@ -30,7 +24,8 @@ export class SkillsService {
       return SkillMapper.toEntities(result);
   }
 
-  async addSkills(file: string, skills: CreateSkillDto): Promise<Skills> {
+  async addSkills(file: Express.Multer.File, skills: CreateSkillDto): Promise<Skills> {
+      const skillsImg = await this.storageService.uploadFile(EStorageBucket.Skills, file);
       const existingSkill = await this.skillRepository.findByLanguage(skills.language);
 
       if (existingSkill) {
@@ -38,7 +33,7 @@ export class SkillsService {
         throw new ConflictException(`Skill with language ${skills.language} already exists`)
       }
 
-      const createInput = SkillMapper.toCreateInput(skills, file);
+      const createInput = SkillMapper.toCreateInput(skills, skillsImg);
       const result = await this.skillRepository.createSkill(createInput);
       this.logger.log(
         `${ELoggerContext.SkillsService.AddSkills} with  file : ${file} and language : ${skills.language}`,
@@ -70,7 +65,7 @@ export class SkillsService {
     let srcImg: string | undefined;
 
     if (file) {
-         srcImg =await this.uploadImage(file);
+         srcImg =await this.storageService.uploadFile(EStorageBucket.Skills, file);
     }
 
     await this.findSkillByIdOrThrow(idSkills);
@@ -92,32 +87,5 @@ export class SkillsService {
       return SkillMapper.toEntity(result);
     } 
   
-  async uploadImage(file: Express.Multer.File): Promise<string> {
-    const fileName = `${uuidv4()}_${file.originalname}`;
-    try {
-      const { data, error } = await this.supabase.storage
-        .from('skills')
-        .upload(fileName, file.buffer, {
-          contentType: file.mimetype,
-          cacheControl: '3600',
-          upsert: true,
-        });
-      if (error) {
-        console.log(error);
-        throw new Error('Error getting public URL');
-      }
-      const { data: publicUrlData } = await this.supabase.storage
-        .from('skills')
-        .getPublicUrl(fileName);
-      this.logger.log(
-        `${ELoggerContext.SkillsService.UploadImage} with file ${file}`,
-      );
-      return publicUrlData.publicUrl;
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.SkillsService.UploadImage} with file ${file} with an error ${error}`,
-      );
-      throw error;
-    }
-  }
+
 }

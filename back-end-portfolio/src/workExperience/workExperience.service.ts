@@ -1,27 +1,21 @@
 import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ELoggerContext } from '@/logger/constant';
-import { v4 as uuidv4 } from 'uuid';
 import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
 import { WorkExperience } from './entity/workExperience.entity';
 import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
 import { WorkExperienceRepository } from './repository/workExperience.repository';
 import { WorkExperienceMapper } from './mapper/workExperience.mapper';
+import { StorageService } from '@/common/storage.service';
+import { EStorageBucket } from '@/common/storage.enum';
 
 @Injectable()
 export class WorkExperienceService {
-  private supabase: SupabaseClient;
   private readonly logger = new Logger(WorkExperienceService.name);
 
   constructor(
-    private configService: ConfigService,
-    private workExperienceRepository:WorkExperienceRepository
+    private workExperienceRepository:WorkExperienceRepository,
+    private storageService: StorageService
   ) {
-    this.supabase = createClient(
-      this.configService.get<string>('SUPABASE_URL')!,
-      this.configService.get<string>('SUPABASE_ANON_KEY')!,
-    );
   }
 
   async getAllWorkExperience(): Promise<WorkExperience[]> {
@@ -46,9 +40,11 @@ export class WorkExperienceService {
 
 
   async addWorkExperience(
-    workExperienceImg: string,
+    file: Express.Multer.File,
     workExperience: CreateWorkExperienceDto,
   ): Promise<WorkExperience> {
+      const workExperienceImg = await this.storageService.uploadFile(EStorageBucket.WorkExperience, file);
+
       const existingWorkExperience = await this.workExperienceRepository.findByNameCompany(workExperience.nameCompany);
       
       if (existingWorkExperience) {
@@ -80,10 +76,14 @@ export class WorkExperienceService {
   async updateWorkExperience(
     idWorkExperience: number,
     workExperience: UpdateWorkExperienceDto,
-    workExperienceImg?: string,
+    file?: Express.Multer.File,
   ): Promise<WorkExperience> {
+      let imgUrl: string | undefined;
+        if (file) {
+      imgUrl = await this.storageService.uploadFile(EStorageBucket.WorkExperience, file);
+    }
       await this.findWorkExperienceByIdOrThrow(idWorkExperience);
-      const updateInput = WorkExperienceMapper.toUpdateInput(workExperience, workExperienceImg);
+      const updateInput = WorkExperienceMapper.toUpdateInput(workExperience, imgUrl);
       const result = await this.workExperienceRepository.updateWorkExperience(idWorkExperience, updateInput);
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.UpdateWorkExperience} with idWorkExperience ${idWorkExperience}`,
@@ -91,32 +91,5 @@ export class WorkExperienceService {
       return WorkExperienceMapper.toEntity(result);
     }
 
-  async uploadImage(file: Express.Multer.File): Promise<string> {
-    const fileName = `${uuidv4()}_${file.originalname}`;
-    try {
-      const { data, error } = await this.supabase.storage
-        .from('workexperience')
-        .upload(fileName, file.buffer, {
-          contentType: file.mimetype,
-          cacheControl: '3600',
-          upsert: true,
-        });
-      if (error) {
-        console.log(error);
-        throw new Error('Error getting public URL');
-      }
-      const { data: publicUrlData } = await this.supabase.storage
-        .from('workexperience')
-        .getPublicUrl(fileName);
-      this.logger.log(
-        `${ELoggerContext.WorkExperienceService.UploadImage} with file ${file}`,
-      );
-      return publicUrlData.publicUrl;
-    } catch (error) {
-      this.logger.error(
-        `${ELoggerContext.WorkExperienceService.UploadImage} with file ${file} with an error ${error}`,
-      );
-      throw error;
-    }
-  }
+
 }
