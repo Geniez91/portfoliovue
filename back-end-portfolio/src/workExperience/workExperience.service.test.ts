@@ -126,20 +126,22 @@ describe('workExperienceService', () => {
 
   describe('updateWorkExperience', () => {
     it('should update work experience', async () => {
+      storageMock.uploadFile.mockResolvedValue('img');
       repositoryMock.findById.mockResolvedValue(ADD_EXPERIENCE);
       repositoryMock.updateWorkExperience.mockResolvedValue(ADD_EXPERIENCE);
 
-      await service.updateWorkExperience(1, ADD_EXPERIENCE);
+      await service.updateWorkExperience(1, ADD_EXPERIENCE,MOCK_FILE);
 
       expect(repositoryMock.updateWorkExperience).toHaveBeenCalledWith(1, ADD_EXPERIENCE);
     });
 
     it('should throw an exception not found', async () => {
+      storageMock.uploadFile.mockResolvedValue('img');
       repositoryMock.findById.mockResolvedValue(null);
       repositoryMock.updateWorkExperience.mockRejectedValue(new NotFoundException());
 
       await expect(
-        service.updateWorkExperience(1, ADD_EXPERIENCE),
+        service.updateWorkExperience(1, ADD_EXPERIENCE, MOCK_FILE),
       ).rejects.toThrow(NotFoundException);
     });
   });
