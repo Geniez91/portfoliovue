@@ -38,7 +38,11 @@ jobs:
       - name: Run tests
         run: npm test
         working-directory: front-end-portfolio
-
+      
+      - name: Run backend tests
+        run: npm test -- --runInBand
+        working-directory: back-end-portfolio
+        
       - name: Clear npm cache
         run: npm cache clean --force
         working-directory: back-end-portfolio
