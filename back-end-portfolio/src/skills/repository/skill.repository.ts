@@ -1,3 +1,4 @@
+import { PaginationDto } from "@/common/dto/pagination.dto";
 import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
@@ -6,8 +7,15 @@ import { Prisma } from "@prisma/client";
 export class SkillRepository {
     constructor(private prisma:PrismaService) {}
 
-    async findAll(){
-        return this.prisma.skills.findMany();
+    async findAll(skip?:number, take?:number){
+       return this.prisma.skills.findMany({
+         skip,
+         take,
+       });
+    }
+
+    async countAll(){
+        return this.prisma.skills.count();
     }
 
     async findByLanguage(language:string){

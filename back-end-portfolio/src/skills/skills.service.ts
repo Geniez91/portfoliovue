@@ -8,6 +8,8 @@ import { SkillRepository } from './repository/skill.repository';
 import { SkillMapper } from './mapper/skill.mapper';
 import { StorageService } from '@/common/storage.service';
 import { EStorageBucket } from '@/common/storage.enum';
+import { PaginatedResult } from '@/common/dto/pagination.interface';
+import { PaginationDto } from '@/common/dto/pagination.dto';
 
 @Injectable()
 export class SkillsService {
@@ -19,9 +21,18 @@ export class SkillsService {
   ) {
   }
 
-  async getAllSkills(): Promise<Skills[]> {
-      const result = await this.skillRepository.findAll();
-      return SkillMapper.toEntities(result);
+  async getAllSkills(pagination: PaginationDto): Promise<PaginatedResult<Skills>> {
+      const {page,limit}=pagination;
+      const skip = (page - 1) * limit;
+
+      const result = await this.skillRepository.findAll(skip, limit);
+      return {
+        data: SkillMapper.toEntities(result),
+        page,
+        limit,
+        totalCount: await this.skillRepository.countAll(),
+        totalPages: Math.ceil(await this.skillRepository.countAll() / limit),
+      };
   }
 
   async addSkills(file: Express.Multer.File, skills: CreateSkillDto): Promise<Skills> {

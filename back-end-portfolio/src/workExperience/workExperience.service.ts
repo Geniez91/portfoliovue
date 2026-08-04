@@ -7,6 +7,8 @@ import { WorkExperienceRepository } from './repository/workExperience.repository
 import { WorkExperienceMapper } from './mapper/workExperience.mapper';
 import { StorageService } from '@/common/storage.service';
 import { EStorageBucket } from '@/common/storage.enum';
+import { PaginatedResult } from '@/common/dto/pagination.interface';
+import { PaginationDto } from '@/common/dto/pagination.dto';
 
 @Injectable()
 export class WorkExperienceService {
@@ -18,12 +20,25 @@ export class WorkExperienceService {
   ) {
   }
 
-  async getAllWorkExperience(): Promise<WorkExperience[]> {
-      const result = await this.workExperienceRepository.findAll();
+  async getAllWorkExperience(pagination: PaginationDto): Promise<PaginatedResult<WorkExperience>> {
+      const {page,limit}=pagination;
+      const skip = (page - 1) * limit;
+      
+      const [result, totalCount] = await Promise.all([
+        this.workExperienceRepository.findAll( skip, limit),
+        this.workExperienceRepository.countAll(),
+      ]);
+
       this.logger.log(
         `${ELoggerContext.WorkExperienceService.GetAllWorkExperience}`,
       );
-      return WorkExperienceMapper.toEntities(result);
+      return {
+        data: WorkExperienceMapper.toEntities(result),
+        totalCount,
+        totalPages: Math.ceil(totalCount / limit),
+        page,
+        limit
+      };
     }
 
     async findWorkExperienceByIdOrThrow(idWorkExperience: number): Promise<WorkExperience> {

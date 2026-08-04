@@ -10,14 +10,17 @@ import {
   UploadedFiles,
   UseGuards,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ProjectService } from './project.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from '@/auth/auth.guard';
 import { Project } from './entity/project.entity.dto';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { PaginationDto } from '@/common/dto/pagination.dto';
+import { PaginatedResult } from '@/common/dto/pagination.interface';
 
 @ApiTags('Projects')
 @Controller('project')
@@ -33,9 +36,11 @@ export class ProjectController {
     type: Project,
     isArray: true,
   })
+  @ApiQuery({name:'page',required:false,example:1,type:Number})
+  @ApiQuery({name:'limit',required:false,example:10,type:Number})
   @Get()
-  async findAllProject(): Promise<Project[]> {
-    return this.projetService.getAllProject();
+  async findAllProject(@Query() pagination: PaginationDto): Promise<PaginatedResult<Project>> {
+    return this.projetService.getAllProject(pagination);
   }
 
   @ApiBearerAuth()

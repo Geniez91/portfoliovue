@@ -22,6 +22,7 @@ describe('SkillService', () => {
 
   const repositoryMock = {
     findAll: jest.fn(),
+    countAll: jest.fn(),
     findByLanguage: jest.fn(),
     createSkill:jest.fn(),
     findById: jest.fn(),
@@ -64,17 +65,24 @@ beforeEach(async () => {
   describe('getAllSkills', () => {
     it('should return all the skills', async () => {
       repositoryMock.findAll.mockResolvedValue(ALL_SKILLS);
-      
-      const result = await skillService.getAllSkills();
+      repositoryMock.countAll.mockResolvedValue(ALL_SKILLS.length);
+
+      const result = await skillService.getAllSkills({ page: 1, limit: 10 });
 
       expect(repositoryMock.findAll).toHaveBeenCalled();
-      expect(result).toEqual(ALL_SKILLS_TRANSFORMED);
+      expect(result).toEqual({
+        data: ALL_SKILLS_TRANSFORMED,
+        page: 1,
+        limit: 10,
+        totalCount: ALL_SKILLS.length,
+        totalPages: Math.ceil(ALL_SKILLS.length / 10),
+      });
     });
 
     it('should throw an error', async () => {
       repositoryMock.findAll.mockRejectedValue(new Error());
 
-      await expect(skillService.getAllSkills).rejects.toThrow();
+      await expect(skillService.getAllSkills({ page: 1, limit: 10 })).rejects.toThrow();
     });
   });
 

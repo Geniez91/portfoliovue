@@ -9,8 +9,15 @@ import { Prisma } from "@prisma/client";
 export class ProjectRepository {
     constructor(private readonly prisma:PrismaService) {}
 
-    async findAll(){
-        return this.prisma.project.findMany();
+    async findAll(skip?:number, take?:number){
+        return this.prisma.project.findMany({
+          skip,
+          take,
+        });
+    }
+
+    async countAll(){
+        return this.prisma.project.count();
     }
 
     async findById(idProject:number){

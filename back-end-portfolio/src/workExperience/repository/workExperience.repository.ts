@@ -7,13 +7,19 @@ import { Prisma } from "@prisma/client";
 export class WorkExperienceRepository {
     constructor(private readonly prisma:PrismaService) {}
 
-    async findAll(){
+    async findAll(skip:number, take:number){
         return this.prisma.workExperience.findMany({
         orderBy: {
           startDate: 'desc',
         },
+        skip,
+        take,
       });
 }
+  async countAll(){
+    return this.prisma.workExperience.count();
+  }
+  
     async findById(idWorkExperience:number){
         return await this.prisma.workExperience.findUnique({
         where: {

@@ -21,6 +21,7 @@ describe('workExperienceService', () => {
 
    const repositoryMock = {
     findAll: jest.fn(),
+    countAll: jest.fn(),
     findById: jest.fn(),
     findByNameCompany:jest.fn(),
     createWorkExperience: jest.fn(),
@@ -65,10 +66,17 @@ describe('workExperienceService', () => {
   describe('getAllWorkExperience', () => {
     it('should return all the workExperiences', async () => {
       repositoryMock.findAll.mockResolvedValue(ALL_WORK_EXPERIENCES);
+      repositoryMock.countAll.mockResolvedValue(ALL_WORK_EXPERIENCES.length);
 
-      const result = await service.getAllWorkExperience();
+      const result = await service.getAllWorkExperience({ page: 1, limit: 10 });
 
-      expect(result).toEqual(ALL_WORK_EXPERIENCES_TRANSFORMED);
+      expect(result).toEqual({
+        data: ALL_WORK_EXPERIENCES_TRANSFORMED,
+        page: 1,
+        limit: 10,
+        totalCount: ALL_WORK_EXPERIENCES.length,
+        totalPages: Math.ceil(ALL_WORK_EXPERIENCES.length / 10),
+      });
       expect(repositoryMock.findAll).toHaveBeenCalled();
     });
 
@@ -76,7 +84,7 @@ describe('workExperienceService', () => {
       repositoryMock.findAll.mockRejectedValue(new Error());
 
       await expect(
-        service.getAllWorkExperience(),
+        service.getAllWorkExperience({ page: 1, limit: 10 }),
       ).rejects.toThrow();
     });
   });

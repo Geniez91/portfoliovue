@@ -26,6 +26,7 @@ describe('ProjectService', () => {
     updateProject: jest.fn(),
     findByName: jest.fn(),
     findById:jest.fn(),
+    countAll: jest.fn(),
   }
 
   const configMock = {
@@ -64,14 +65,23 @@ describe('ProjectService', () => {
   describe('getAllProject', () => {
     it('should return all the project', async () => {
       repositoryMock.findAll.mockResolvedValue(ALL_PROJECT);
-      const result = await service.getAllProject();
-      expect(result).toEqual(ALL_PROJECT_TRANSFORMED);
+      repositoryMock.countAll.mockResolvedValue(ALL_PROJECT.length);
+
+      const result = await service.getAllProject({page: 1, limit: 10});
+      
+      expect(result).toEqual({
+        data: ALL_PROJECT_TRANSFORMED,
+        page: 1,
+        limit: 10,
+        totalCount: ALL_PROJECT.length,
+        totalPages: Math.ceil(ALL_PROJECT.length / 10),
+      });
     });
 
     it('should throw an error', async () => {
       repositoryMock.findAll.mockRejectedValue(new Error());
 
-      await expect(service.getAllProject).rejects.toThrow();
+      await expect(service.getAllProject({page: 1, limit: 10})).rejects.toThrow();
     });
   });
 

@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -14,10 +15,12 @@ import {
 import { SkillsService } from './skills.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { Skills } from './entity/skill.entity';
+import { PaginationDto } from '@/common/dto/pagination.dto';
+import { PaginatedResult } from '@/common/dto/pagination.interface';
 
 @ApiTags('Skills')
 @Controller('skills')
@@ -34,8 +37,10 @@ export class SkillsController {
     type: Skills,
     isArray: true,
   })
-  async findAllSkills(): Promise<Skills[]> {
-    return this.skillService.getAllSkills();
+  @ApiQuery({name:'page',required:false,example:1,type:Number})
+  @ApiQuery({name:'limit',required:false,example:10,type:Number})
+  async findAllSkills(@Query() pagination : PaginationDto): Promise<PaginatedResult<Skills>> {
+    return this.skillService.getAllSkills(pagination);
   }
 
   @Get(':id')

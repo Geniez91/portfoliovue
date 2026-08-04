@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -18,6 +19,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { WorkExperience } from './entity/workExperience.entity';
 import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
 import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
+import { PaginationDto } from '@/common/dto/pagination.dto';
+import { PaginatedResult } from '@/common/dto/pagination.interface';
 
 @ApiTags('Work Experience')
 @Controller('workExperience')
@@ -34,8 +37,8 @@ export class WorkExperienceController {
     isArray: true,
   })
   @Get()
-  async findAllWorkExperience(): Promise<WorkExperience[]> {
-    return this.workExperienceService.getAllWorkExperience();
+  async findAllWorkExperience(@Query() pagination: PaginationDto): Promise<PaginatedResult<WorkExperience>> {
+    return this.workExperienceService.getAllWorkExperience(pagination);
   }
 
   @ApiBody({ type: CreateWorkExperienceDto })

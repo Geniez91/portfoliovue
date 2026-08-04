@@ -7,6 +7,8 @@ import { ProjectRepository } from './repository/project.repository';
 import { ProjectMapper } from './mapper/project.mapper';
 import { StorageService } from '@/common/storage.service';
 import { EStorageBucket } from '@/common/storage.enum';
+import { PaginationDto } from '@/common/dto/pagination.dto';
+import { PaginatedResult } from '@/common/dto/pagination.interface';
 
 @Injectable()
 export class ProjectService {
@@ -17,10 +19,23 @@ export class ProjectService {
     private storageService: StorageService
   ) {}
 
-  async getAllProject(): Promise<Project[]> {
-      const result = await this.projectRepository.findAll();
+  async getAllProject(pagination:PaginationDto): Promise<PaginatedResult<Project>> {
+      const {page,limit}=pagination;
+
+      const skip = (page - 1) * limit;
+      const [projects, totalCount] = await Promise.all([
+        this.projectRepository.findAll(skip, limit),
+        this.projectRepository.countAll(),
+      ]);
+
       this.logger.log(`${ELoggerContext.ProjectService.GetAllProject}`);
-      return ProjectMapper.toEntities(result);
+      return {
+        data: ProjectMapper.toEntities(projects),
+        page,
+        limit,
+        totalCount,
+        totalPages: Math.ceil(totalCount / limit),
+      };  
   }
 
   async findProjectByIdOrThrow(idProject: number): Promise<Project> {
