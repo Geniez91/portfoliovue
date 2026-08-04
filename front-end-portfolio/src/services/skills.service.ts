@@ -46,7 +46,7 @@ export async function addSkills(
 export async function getAllSkills(): Promise<ISkills[]> {
   try {
     const result = await axios.get(urlSkills)
-    return result.data.data
+    return result.data.data.data
   } catch (error) {
     throw error
   }
