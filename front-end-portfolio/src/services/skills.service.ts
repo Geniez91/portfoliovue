@@ -2,7 +2,7 @@ import type { ISkills, TSkills } from '@/interfaces/interfaces'
 import axios from 'axios'
 import { addHeaders } from './connexion.service'
 
-const urlSkills = 'https://portfoliovue-back-end-production.up.railway.app/skills'
+const urlSkills = 'https://portfoliovue-back-end-production.up.railway.app/skills?page=1&limit=30'
 const urlDeleteSkills = 'https://portfoliovue-back-end-production.up.railway.app/skills?id='
 
 export async function addSkills(
