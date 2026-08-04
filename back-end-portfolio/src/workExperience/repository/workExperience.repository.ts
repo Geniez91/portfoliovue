@@ -6,7 +6,7 @@ import { Prisma } from "@prisma/client";
 export class WorkExperienceRepository {
     constructor(private readonly prisma:PrismaService) {}
 
-    async findAll(skip:number, take:number, search?:string, sortBy?: 'nameCompany' | 'job' | 'startDate' | 'endDate', order?: 'asc' | 'desc'){
+    async findAll(skip:number, take:number, search?:string, sortBy?: 'nameCompany' | 'job' | 'startDate' | 'endDate', order?: 'asc' | 'desc',startDate?:string){
         return this.prisma.workExperience.findMany({
           where: {...(search && {
             OR: [
@@ -23,6 +23,10 @@ export class WorkExperienceRepository {
                 },
               },
             ],
+          }), ...(startDate && {
+            startDate: {
+              equals: new Date(startDate),
+            },
           })},
     orderBy: sortBy
   ? {

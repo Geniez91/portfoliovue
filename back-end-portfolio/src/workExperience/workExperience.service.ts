@@ -22,11 +22,11 @@ export class WorkExperienceService {
   }
 
   async getAllWorkExperience(query: WorkExperienceQueryDto): Promise<PaginatedResult<WorkExperience>> {
-      const {page,limit,search,sortBy,order} = query;
+      const {page,limit,search,sortBy,order,startDate} = query;
       const skip = (page - 1) * limit;
       
       const [result, totalCount] = await Promise.all([
-        this.workExperienceRepository.findAll(skip, limit, search, sortBy, order),
+        this.workExperienceRepository.findAll(skip, limit, search, sortBy, order, startDate),
         this.workExperienceRepository.countAll(),
       ]);
 

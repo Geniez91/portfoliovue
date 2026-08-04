@@ -13,4 +13,7 @@ export class WorkExperienceQueryDto extends PaginationDto {
     @IsOptional()
     @IsString()
     order?: 'asc' | 'desc';
+
+    @IsOptional()
+    startDate?: string;
 }
