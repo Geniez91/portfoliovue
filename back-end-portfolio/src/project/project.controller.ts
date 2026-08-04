@@ -21,6 +21,8 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
+import { query } from 'express';
+import { ProjectQueryDto } from './dto/project-query.dto';
 
 @ApiTags('Projects')
 @Controller('project')
@@ -38,9 +40,12 @@ export class ProjectController {
   })
   @ApiQuery({name:'page',required:false,example:1,type:Number})
   @ApiQuery({name:'limit',required:false,example:10,type:Number})
+  @ApiQuery({name:'search',required:false,example:'example',type:String})
+  @ApiQuery({name:'sortBy',required:false,example:'name',type:String})
+  @ApiQuery({name:'order',required:false,example:'asc',type:String})
   @Get()
-  async findAllProject(@Query() pagination: PaginationDto): Promise<PaginatedResult<Project>> {
-    return this.projetService.getAllProject(pagination);
+  async findAllProject(@Query() query: ProjectQueryDto): Promise<PaginatedResult<Project>> {
+    return this.projetService.getAllProject(query);
   }
 
   @ApiBearerAuth()

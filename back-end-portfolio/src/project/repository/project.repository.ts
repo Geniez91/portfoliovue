@@ -9,12 +9,24 @@ import { Prisma } from "@prisma/client";
 export class ProjectRepository {
     constructor(private readonly prisma:PrismaService) {}
 
-    async findAll(skip?:number, take?:number){
+    async findAll(skip?:number, take?:number, search?:string,   sortBy?: 'name' | 'year', order?: 'asc' | 'desc'){
         return this.prisma.project.findMany({
           skip,
           take,
-        });
+where: {
+  ...(search && {
+    name: {
+      contains: search,
+      mode: 'insensitive',
+    },
+    })},
+    orderBy: sortBy
+  ? {
+      [sortBy]: order,
     }
+  : undefined,
+})
+  }
 
     async countAll(){
         return this.prisma.project.count();

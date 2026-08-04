@@ -7,10 +7,16 @@ import { Prisma } from "@prisma/client";
 export class SkillRepository {
     constructor(private prisma:PrismaService) {}
 
-    async findAll(skip?:number, take?:number){
+    async findAll(skip?:number, take?:number, search?:string, sortBy?: 'language' | 'level', order?: 'asc' | 'desc'){
        return this.prisma.skills.findMany({
          skip,
          take,
+         where: {
+           ...(search && { language: { contains: search } })
+         },
+         orderBy: {
+           ...(sortBy && { [sortBy]: order || 'asc' })
+         }
        });
     }
 

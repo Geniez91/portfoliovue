@@ -9,6 +9,7 @@ import { StorageService } from '@/common/storage.service';
 import { EStorageBucket } from '@/common/storage.enum';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
+import { ProjectQueryDto } from './dto/project-query.dto';
 
 @Injectable()
 export class ProjectService {
@@ -19,12 +20,12 @@ export class ProjectService {
     private storageService: StorageService
   ) {}
 
-  async getAllProject(pagination:PaginationDto): Promise<PaginatedResult<Project>> {
-      const {page,limit}=pagination;
+  async getAllProject(query: ProjectQueryDto): Promise<PaginatedResult<Project>> {
+      const {page,limit,search,sortBy,order} = query;
 
       const skip = (page - 1) * limit;
       const [projects, totalCount] = await Promise.all([
-        this.projectRepository.findAll(skip, limit),
+        this.projectRepository.findAll(skip, limit,search,sortBy,order),
         this.projectRepository.countAll(),
       ]);
 

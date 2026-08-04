@@ -10,6 +10,7 @@ import { StorageService } from '@/common/storage.service';
 import { EStorageBucket } from '@/common/storage.enum';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
 import { PaginationDto } from '@/common/dto/pagination.dto';
+import { SkillQueryDto } from './dto/skill-query.dto';
 
 @Injectable()
 export class SkillsService {
@@ -21,11 +22,11 @@ export class SkillsService {
   ) {
   }
 
-  async getAllSkills(pagination: PaginationDto): Promise<PaginatedResult<Skills>> {
-      const {page,limit}=pagination;
+  async getAllSkills(query: SkillQueryDto): Promise<PaginatedResult<Skills>> {
+      const {page,limit,search,sortBy,order}=query;
       const skip = (page - 1) * limit;
 
-      const result = await this.skillRepository.findAll(skip, limit);
+      const result = await this.skillRepository.findAll(skip, limit,search,sortBy,order);
       return {
         data: SkillMapper.toEntities(result),
         page,

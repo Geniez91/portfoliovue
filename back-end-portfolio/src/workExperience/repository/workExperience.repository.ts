@@ -1,25 +1,42 @@
 import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
-import { UpdateWorkExperienceDto } from "../dto/update-workExperience.dto";
 import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class WorkExperienceRepository {
     constructor(private readonly prisma:PrismaService) {}
 
-    async findAll(skip:number, take:number){
+    async findAll(skip:number, take:number, search?:string, sortBy?: 'nameCompany' | 'job' | 'startDate' | 'endDate', order?: 'asc' | 'desc'){
         return this.prisma.workExperience.findMany({
-        orderBy: {
-          startDate: 'desc',
-        },
-        skip,
-        take,
+          where: {...(search && {
+            OR: [
+              {
+                nameCompany: {
+                  contains: search,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                job: {
+                  contains: search,
+                  mode: 'insensitive',
+                },
+              },
+            ],
+          })},
+    orderBy: sortBy
+  ? {
+      [sortBy]: order,
+    }
+  : undefined,
+          skip,
+          take,
       });
 }
   async countAll(){
     return this.prisma.workExperience.count();
   }
-  
+
     async findById(idWorkExperience:number){
         return await this.prisma.workExperience.findUnique({
         where: {

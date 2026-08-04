@@ -13,7 +13,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { WorkExperienceService } from './workExperience.service';
-import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthGuard } from '@/auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { WorkExperience } from './entity/workExperience.entity';
@@ -21,6 +21,7 @@ import { CreateWorkExperienceDto } from './dto/create-workExperience.dto';
 import { UpdateWorkExperienceDto } from './dto/update-workExperience.dto';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
+import { WorkExperienceQueryDto } from './dto/workExperience-query.dto';
 
 @ApiTags('Work Experience')
 @Controller('workExperience')
@@ -36,9 +37,14 @@ export class WorkExperienceController {
     type: WorkExperience,
     isArray: true,
   })
+  @ApiQuery({name:'page',required:false,example:1,type:Number})
+  @ApiQuery({name:'limit',required:false,example:10,type:Number})
+  @ApiQuery({name:'search',required:false,example:'example',type:String})
+  @ApiQuery({name:'sortBy',required:false,example:'company',type:String})
+  @ApiQuery({name:'order',required:false,example:'asc',type:String})
   @Get()
-  async findAllWorkExperience(@Query() pagination: PaginationDto): Promise<PaginatedResult<WorkExperience>> {
-    return this.workExperienceService.getAllWorkExperience(pagination);
+  async findAllWorkExperience(@Query() query: WorkExperienceQueryDto): Promise<PaginatedResult<WorkExperience>> {
+    return this.workExperienceService.getAllWorkExperience(query);
   }
 
   @ApiBody({ type: CreateWorkExperienceDto })

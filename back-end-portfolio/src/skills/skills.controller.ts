@@ -21,6 +21,7 @@ import { CreateSkillDto } from './dto/create-skill.dto';
 import { Skills } from './entity/skill.entity';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
+import { SkillQueryDto } from './dto/skill-query.dto';
 
 @ApiTags('Skills')
 @Controller('skills')
@@ -39,8 +40,11 @@ export class SkillsController {
   })
   @ApiQuery({name:'page',required:false,example:1,type:Number})
   @ApiQuery({name:'limit',required:false,example:10,type:Number})
-  async findAllSkills(@Query() pagination : PaginationDto): Promise<PaginatedResult<Skills>> {
-    return this.skillService.getAllSkills(pagination);
+  @ApiQuery({name:'search',required:false,example:'example',type:String})
+  @ApiQuery({name:'sortBy',required:false,example:'name',type:String})
+  @ApiQuery({name:'order',required:false,example:'asc',type:String})
+  async findAllSkills(@Query() query : SkillQueryDto): Promise<PaginatedResult<Skills>> {
+    return this.skillService.getAllSkills(query);
   }
 
   @Get(':id')

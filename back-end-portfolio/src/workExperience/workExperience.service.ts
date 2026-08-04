@@ -9,6 +9,7 @@ import { StorageService } from '@/common/storage.service';
 import { EStorageBucket } from '@/common/storage.enum';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
 import { PaginationDto } from '@/common/dto/pagination.dto';
+import { WorkExperienceQueryDto } from './dto/workExperience-query.dto';
 
 @Injectable()
 export class WorkExperienceService {
@@ -20,12 +21,12 @@ export class WorkExperienceService {
   ) {
   }
 
-  async getAllWorkExperience(pagination: PaginationDto): Promise<PaginatedResult<WorkExperience>> {
-      const {page,limit}=pagination;
+  async getAllWorkExperience(query: WorkExperienceQueryDto): Promise<PaginatedResult<WorkExperience>> {
+      const {page,limit,search,sortBy,order} = query;
       const skip = (page - 1) * limit;
       
       const [result, totalCount] = await Promise.all([
-        this.workExperienceRepository.findAll( skip, limit),
+        this.workExperienceRepository.findAll(skip, limit, search, sortBy, order),
         this.workExperienceRepository.countAll(),
       ]);
 
