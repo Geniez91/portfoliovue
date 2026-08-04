@@ -33,7 +33,7 @@ export async function addWorkExperience(workExperience: IWorkExperience1, token:
 export async function getAllWorkExperience() {
   try {
     const result = await axios.get(urlWorkExperience)
-    return result.data.data
+    return result.data.data.data
   } catch (error) {
     throw error
   }
