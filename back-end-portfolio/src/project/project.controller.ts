@@ -21,7 +21,6 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { PaginatedResult } from '@/common/dto/pagination.interface';
-import { query } from 'express';
 import { ProjectQueryDto } from './dto/project-query.dto';
 
 @ApiTags('Projects')
