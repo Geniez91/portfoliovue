@@ -20,8 +20,8 @@ export class ProjectService {
     private storageService: StorageService
   ) {}
 
-  async getAllProject(query: ProjectQueryDto): Promise<PaginatedResult<Project>> {
-      const {page,limit,search,sortBy,order} = query;
+    async getAllProject(query: ProjectQueryDto): Promise<PaginatedResult<Project>> {
+      const { page = 1, limit = 10, search, sortBy, order } = query ?? {};
 
       const skip = (page - 1) * limit;
       const [projects, totalCount] = await Promise.all([

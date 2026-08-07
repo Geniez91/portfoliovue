@@ -1,62 +1,34 @@
 import { AppModule } from "@/app.module";
 import { PrismaService } from "@/prisma/prisma.service";
 import { INestApplication } from "@nestjs/common";
-import { Test } from "@nestjs/testing";
 import request from 'supertest';
-import { ResponseInterceptor } from "@/interceptor/response.interceptor";
-import { JwtService } from "@nestjs/jwt";
-import { StorageService } from "@/common/storage.service";
-import { GlobalExceptionFilter } from "@/filters/globalException";
-import { PrismaExceptionFilter } from "@/filters/prismaExceptionFilter";
+import { bootstrapTestApp, closeTestApp, seedTypeSkills, defaultStorageMock } from './e2e.setup';
 
 let app: INestApplication;
 let prisma: PrismaService;
 let accessToken: string;
 
 beforeAll(async () => {
-  const module = await Test.createTestingModule({
-    imports: [AppModule],
-  })
-    .overrideProvider(StorageService)
-    .useValue({
-      uploadFile: jest.fn().mockResolvedValue('https://cdn.local/test-image.png'),
-    })
-    .compile();
-
-app = module.createNestApplication({
-  logger: ['error', 'warn', 'log', 'debug'],
-});
-app.useGlobalInterceptors(new ResponseInterceptor());
-app.useGlobalFilters(new GlobalExceptionFilter(), new PrismaExceptionFilter());
-    prisma = app.get(PrismaService);
-    const jwtService = app.get(JwtService);
-    accessToken = await jwtService.signAsync({
-      sub: 'e2e-user',
-      email: 'e2e@portfolio.local',
-    });
-
-  await app.init();
+  const res = await bootstrapTestApp({ storageMock: defaultStorageMock });
+  app = res.app;
+  prisma = res.prisma;
+  accessToken = res.accessToken;
 });
 
 afterAll(async () => {
-  await prisma.$disconnect();
-  await app.close();
+  await closeTestApp(app, prisma);
 });
 
 beforeEach(async () => {
-  await prisma.typeSkills.upsert({
-    where: { type: 'portfolio' },
-    update: {},
-    create: { type: 'portfolio' },
-  });
+  await seedTypeSkills(prisma);
 
   await prisma.skills.deleteMany();
-   await prisma.skills.create({
+  await prisma.skills.create({
     data: {
       language: 'TypeScript',
       srcImg: 'img.png',
     },
-  })
+  });
 });
 
 describe('GET /skills', () => {
