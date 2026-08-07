@@ -19,6 +19,7 @@ import { SkillRepository } from './skills/repository/skill.repository';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath:process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
     }),
     PrismaModule,
     SkillsModule,

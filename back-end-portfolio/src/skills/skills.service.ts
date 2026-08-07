@@ -23,7 +23,7 @@ export class SkillsService {
   }
 
   async getAllSkills(query: SkillQueryDto): Promise<PaginatedResult<Skills>> {
-      const {page,limit,search,sortBy,order}=query;
+      const { page = 1, limit = 10, search, sortBy, order } = query ?? {};
       const skip = (page - 1) * limit;
 
       const result = await this.skillRepository.findAll(skip, limit,search,sortBy,order);
