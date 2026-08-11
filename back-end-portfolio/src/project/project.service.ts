@@ -21,7 +21,7 @@ export class ProjectService {
   ) {}
 
     async getAllProject(query: ProjectQueryDto): Promise<PaginatedResult<Project>> {
-      const { page = 1, limit = 10, search, sortBy, order } = query ?? {};
+      const { page = 1, limit = 30, search, sortBy, order } = query ?? {};
 
       const skip = (page - 1) * limit;
       const [projects, totalCount] = await Promise.all([
