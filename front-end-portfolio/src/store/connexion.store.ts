@@ -11,8 +11,8 @@ export const useConnexionStore = defineStore('connexion', () => {
     errorMessage.value = ''
     try {
       const { data } = await Connexion(email, password)
-      token.value = data.access_token
-      localStorage.setItem('access_token', data.access_token)
+      token.value = data.data.access_token
+      localStorage.setItem('access_token', data.data.access_token)
       router.push('/')
     } catch (error) {
       console.error('Erreur lors de la connexion :', error)

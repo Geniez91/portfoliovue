@@ -6,6 +6,7 @@ const urlConnexion = 'https://portfoliovue-back-end-production.up.railway.app/au
 export async function Connexion(email: string, password: string) {
   try {
     const result = await axios.post(urlConnexion, { email, password })
+    console.log('Connexion réussie :', result)
     return result
   } catch (error) {
     console.error('Erreur lors de la connexion :', error)
