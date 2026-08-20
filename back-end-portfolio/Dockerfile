@@ -11,4 +11,4 @@ COPY package*.json ./
 RUN npm i --only=production
 COPY --from=build /app/dist ./dist
 EXPOSE 8080
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/src/main.js"]
